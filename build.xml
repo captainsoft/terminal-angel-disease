@@ -1,0 +1,115 @@
+<project name="tad4jn">
+
+	<taskdef resource="proguard/ant/task.properties"
+	         classpath="E:/captainsoft/TAD_dev/tad_java/lib/proguard4.10/proguard4.10/lib/proguard.jar" />
+	
+	<!-- ********** properties ********** -->
+
+	<property name="src.dir" value="src" />
+	<property name="output.dir" value="output" />
+	<property name="class.dir" value="${output.dir}/ant_bin" />
+	<property name="jar.dir" value="${output.dir}/jar" />
+	<property name="jar.file" value="${jar.dir}/tad_source.jar" />
+	<property name="jar.file_defox" value="${jar.dir}/tad.jar" />
+	<property name="product.dir" value="${output.dir}/product" />	
+	<property name="files.dir" value="files_en" /> <!-- need to be "files", "files_en" for German, English packaging,
+	                                                     add the _DEMO suffix for demo version -->
+
+	<path id="lib.dir">
+		<pathelement location="." />
+	</path>
+
+	<!-- ********** targets ********** -->
+
+	<target name="clean">
+		<delete dir="${class.dir}" />
+		<delete dir="${jar.dir}" />
+	</target>
+
+	<!--
+	   Compiles all *necesseary* source files!
+	-->
+	<target name="compile" depends="clean">
+		<mkdir dir="${class.dir}" />
+		<javac sourcepath="" srcdir="${src.dir}" 
+			    destdir="${class.dir}" encoding="utf-8"
+			    debug="true" debuglevel="lines,vars,source"
+			    target="1.5" source="1.5">
+
+			<include name="**/*.java" />
+			<exclude name="com/captainsoft/TADn/**" />
+			<exclude name="com/captainsoft/TADtest/**" />
+			<exclude name="com/captainsoft/backup/**" />
+			<exclude name="com/captainsoft/tools/**" />
+			<exclude name="com/captainsoft/TADr/engine/debug/OggPlayer.java" />			
+		</javac>
+	</target>
+
+	<!--
+	   Packages the class files int a jar file.
+	 -->
+	<target name="jar" depends="compile">
+		<mkdir dir="${jar.dir}" />
+		<jar destfile="${jar.file}">
+			<fileset dir="${class.dir}" />
+			<manifest>
+				<attribute name="Built-By" value="captainsoft" />
+				<attribute name="Implementation-Vendor" value="captainsoft" />
+				<attribute name="Implementation-Title" value="TAD" />
+				<attribute name="Implementation-Version" value="1.0" />
+				<section name="com/captainsoft/TADr/TAD.class">
+					<attribute name="Sealed" value="false" />
+				</section>
+				<attribute name="Main-Class" value="com.captainsoft.TADr.TAD" />
+				
+			</manifest>
+		</jar>
+		<echo>Jar is created in ${jar.file}!</echo>
+	</target>
+	
+	<!--
+      Creates an *obfuscated* jar file!
+    -->
+    <target name="obfus" depends="jar">
+        <proguard>
+          -libraryjars ${java.home}/lib/rt.jar
+          -injars      ${jar.file}
+          -outjars     ${jar.file_defox}
+    
+          -keepclasseswithmembers public class * {
+              public static void main(java.lang.String[]);
+          }
+        </proguard>
+        <delete file="${jar.file}" />
+    </target>
+
+	<!--
+	   Creates that stuff code complete, copies that stuff includes resource files, everything!!
+	-->
+	<target name="product_deploy_complete" depends="obfus">
+		<mkdir dir="${product.dir}" />
+		<delete includeemptydirs="true">
+			<fileset dir="${product.dir}" includes="**/*" />
+		</delete>
+		<copy file="${jar.file_defox}" todir="${product.dir}" />		
+		<copy todir="${product.dir}/${files.dir}">
+			<fileset dir="${files.dir}">
+				<include name="*.png" />
+			</fileset>
+		</copy>					
+		<copy todir="${product.dir}/${files.dir}/dat">
+			<fileset dir="${files.dir}/dat">
+			</fileset>
+		</copy>
+		<copy todir="${product.dir}/${files.dir}/res">
+			<fileset dir="${files.dir}/res">
+			</fileset>
+		</copy>				
+		<mkdir dir="${product.dir}/${files.dir}/sav" />	
+		<zip destfile="${product.dir}/tad.zip"
+		       basedir="${product.dir}"
+		  />
+		<echo>OK. everything deployed, look for ${product.dir} for result!</echo>
+	</target>	
+
+</project>
