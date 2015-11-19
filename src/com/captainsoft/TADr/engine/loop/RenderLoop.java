@@ -116,7 +116,7 @@ public final class RenderLoop {
 		animations.add(a);
 	}
 	
-	public void clear() {
+	public synchronized void clear() {
 		command = null;
 		nextCommand = null;
 		walkAnimationsStack.stop();

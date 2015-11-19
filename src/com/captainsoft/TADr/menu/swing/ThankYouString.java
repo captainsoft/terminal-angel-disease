@@ -29,7 +29,7 @@ final class ThankYouString {
                 "Painkilla & GameDev Page * Tobias Bürkle - the special customer * " +
                 "Arun and Steffi for hosting me in Cologne during Gamescon * " +
                 "A MAZE. festival Berlin * Lorenzo + Talk & Play * " +
-                "All the Testers: Mike Droste, EgonOlsen, Karl Wessel, Thorsten Lüders, Bene Heying, Carsten Evers, Pawel Gdula * "+
+                "All the Testers: Mike Droste, EgonOlsen, Karl Wessel, Thorsten Lüders, Bene Heying, Carsten Evers, Pawel Gdula, EtmosCode * "+
                 "IndieDB * Java Gaming Community * TIGF * Gamejolt * " +
                 "Supertopic * Kultpower.de * " +
                 "ProGuard * ProDj * WebAudio DrumMachine * IntelliJ * " +

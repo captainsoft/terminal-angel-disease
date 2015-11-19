@@ -29,6 +29,9 @@ public final class ChiefMouseWheelController implements MouseWheelListener {
     public void mouseWheelMoved(MouseWheelEvent e) {
 
         PartyMember currentMember = GameEngine.instance().mainViewer().currentMember();
+        if (currentMember == null) {
+            return;
+        }
         int scrollToNr;
 
         int notches = e.getWheelRotation();

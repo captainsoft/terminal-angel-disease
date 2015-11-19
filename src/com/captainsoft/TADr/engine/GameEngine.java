@@ -121,6 +121,7 @@ public final class GameEngine {
 		renderLoop.setMapAnimations(mainViewer.currentAnimations());
 		sayRnd("gameload.welcome");
 		renderLoop.accept(true);
+        mainViewer().keyState.enabled(true);
         Log.end("startGame");
 	}
 		
@@ -130,6 +131,7 @@ public final class GameEngine {
 		levelMap = null;	
 		mainViewer.itemCursor(null);
 		renderLoop.clear();
+        mainViewer.keyState.clear();
 		closeWindows();
 	}	
 	
@@ -205,8 +207,8 @@ public final class GameEngine {
 
 
     public void pollMoveKeys() {
-        int keyCode = mainViewer.keyState.firstKeyCode();
 
+        int keyCode = mainViewer.keyState.firstKeyCode();
         mvic.keyPress(keyCode);
     }
 
@@ -374,7 +376,7 @@ public final class GameEngine {
 	}	
 	
 	public void showOutro() {
-		mainViewer.showOutro();			
+		mainViewer.showOutro();
 	}
 	
 	public void sayRnd(String trKey, String ... data) {		

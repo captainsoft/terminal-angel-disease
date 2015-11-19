@@ -245,6 +245,7 @@ public final class MainViewer {
 
     private void showCutScene(ShowCutSceneCommand cmd) {
         keyInputChain.set(new CutSceneKeyInputController(cmd));
+        this.keyState.enabled(false);
         cmd.execute();
     }
 
@@ -350,7 +351,7 @@ public final class MainViewer {
 	}
 
 	public boolean windowShown() {
-		return mainWindowManager.windowShown();		
+		return is(mainWindowManager) && mainWindowManager.windowShown();
 	}
 
 	public void updatePartyName(String name) {
@@ -366,6 +367,9 @@ public final class MainViewer {
 	}
 
 	public Item itemInHand() {
+        if (not(itemCursor)) {
+            return null;
+        }
 		return itemCursor.item();
 	}
 

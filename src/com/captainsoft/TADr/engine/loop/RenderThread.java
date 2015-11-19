@@ -5,6 +5,7 @@
 package com.captainsoft.TADr.engine.loop;
 
 import com.captainsoft.TADr.TadExceptionHandler;
+import com.captainsoft.spark.utils.Log;
 
 /**
  * Always running thread that spins the render loop.
@@ -56,6 +57,8 @@ public final class RenderThread extends Thread {
 					try {
 						renderLoop.update(delta);
 					} catch (Exception e) {
+                        Log.force("ERROR");
+                        renderLoop.clear();
 						TadExceptionHandler.errorMessageAndMenu("An error during the game occurred! We are sorry...", e);
 					}
 				}

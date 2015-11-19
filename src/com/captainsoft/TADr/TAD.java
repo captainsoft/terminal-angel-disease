@@ -28,7 +28,7 @@ public final class TAD {
 	// constants
 	
 	public final static TadAppType Type = TadAppType.Production;
-	public final static String Version = "1.0";
+	public final static String Version = "1.01";
 	public final static String Copyright = "2010 - 2015";
 
 	// constructors
