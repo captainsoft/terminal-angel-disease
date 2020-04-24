@@ -63,14 +63,5 @@ public final class WindowColors {
 		title_bg = new Color(76, 76, 156);
         title_fnt = new Font(Fonts.Verdana, Font.BOLD, 12);
 	}
-	
-	/*
-	public static void someOtherColors() {
-		b_dk = new Color(32, 32, 72);
-		b_br = new Color(65, 105, 117);
-		b_bg = new Color(91, 147, 164);
-		txt = new Color(229, 229, 229);
-	}
-	*/
 
 }
