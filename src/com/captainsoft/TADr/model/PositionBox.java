@@ -13,13 +13,13 @@ import com.captainsoft.spark.utils.PointBox;
  */
 public class PositionBox extends PointBox<Position> {
 
-	public PositionBox(Position left, int width, int height) {
-		super(left, width, height);		
-	}
-	
-	@Override
-	protected final Position createPoint(int x, int y) {
-		return new Position(x, y);
-	}
-	
+    public PositionBox(Position left, int width, int height) {
+        super(left, width, height);
+    }
+
+    @Override
+    protected final Position createPoint(int x, int y) {
+        return new Position(x, y);
+    }
+
 }
