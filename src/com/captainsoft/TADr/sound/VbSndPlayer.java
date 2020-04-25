@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.sound;
 
@@ -22,125 +22,125 @@ import com.captainsoft.spark.utils.Log;
 
 /**
  * Sound player that reads the old vb file format.
- * 
+ *
  * @author mathias fringes
  */
 public final class VbSndPlayer implements SndPlayer {
 
-	// fields
+    // fields
 
-	private final Cache<CacheKey, Clip> cache;
-	private final ClipSoundManager clipSoundManager = new ClipSoundManager();
-	
-	private boolean playSound = true;
+    private final Cache<CacheKey, Clip> cache;
+    private final ClipSoundManager clipSoundManager = new ClipSoundManager();
 
-	// constructors
+    private boolean playSound = true;
 
-	public VbSndPlayer() {
-		super();
-		//
-		cache = new Cache<CacheKey, Clip>(new ClipCacheEntryCreator(), 10);
-		cache.name = "SndCache";
-		cache.onRemove(new ParamCommand<Clip>() {			
+    // constructors
 
-			public void execute(Clip clip) {				
-				clip.stop();
-				clip.flush();
-				clip.close();
-			}
-		});
-	}
+    public VbSndPlayer() {
+        super();
+        //
+        cache = new Cache<CacheKey, Clip>(new ClipCacheEntryCreator(), 10);
+        cache.name = "SndCache";
+        cache.onRemove(new ParamCommand<Clip>() {
 
-	// private
+            public void execute(Clip clip) {
+                clip.stop();
+                clip.flush();
+                clip.close();
+            }
+        });
+    }
 
-	private Clip loadClip(String filename, int id) {
-		//
-		byte[] sndData = loadSoundData(filename, id);
-		//
-		Clip clip = null;
-		try {
-			clip = clipSoundManager.createClip(sndData);
-		} catch (Exception e) {
-			throw new GameDataIoException("error creating sound clip: " + filename + " " + id, e);
-		}
-		//
-		return clip;
-	}
-	
-	private byte[] loadSoundData(String filename, int id) {
-		byte[] sndData = null;
-		VbFile file = null;
-		try {
-			file = new VbFile(filename, VbFile.R);
-			file.seekPosition((id * 8) - 1);			
-			//
-			int filePos = file.readInt();
-			int fileLen = file.readInt();
-			//
-			file.seekPosition(filePos - 1);
-			sndData = file.readBytes(fileLen);			
-		} catch (Exception e) {			
-			throw new GameDataIoException("error extracting: " + filename + " " + id, e);
-		} finally {
-			FileUtils.close(file);
-		}
-		return sndData;
-	}
+    // private
 
-	// SndPlayer
+    private Clip loadClip(String filename, int id) {
+        //
+        byte[] sndData = loadSoundData(filename, id);
+        //
+        Clip clip = null;
+        try {
+            clip = clipSoundManager.createClip(sndData);
+        } catch (Exception e) {
+            throw new GameDataIoException("error creating sound clip: " + filename + " " + id, e);
+        }
+        //
+        return clip;
+    }
 
-	public synchronized void playSound(String type, int id) {
-		if (!playSound) {
-			return;
-		}
-		//
-		// special mapping
-		if ((type.equals("smat")) && (id == 1 || id == 2)) {
-			id = 99;
-		}
-		//
-		// get or create the sound in the cache and play...
-		CacheKey key = new CacheKey(type, id);
-		Log.info("Playing sound " + key);
-		//
-		// ATTENTION: will not play the sound a second time if already a sound is played!! (Some Java problem)
-		Clip clip = cache.get(key);		
-		clipSoundManager.playClip(clip);
-		Log.info("Start playing sound " + key);
-	}
+    private byte[] loadSoundData(String filename, int id) {
+        byte[] sndData = null;
+        VbFile file = null;
+        try {
+            file = new VbFile(filename, VbFile.R);
+            file.seekPosition((id * 8) - 1);
+            //
+            int filePos = file.readInt();
+            int fileLen = file.readInt();
+            //
+            file.seekPosition(filePos - 1);
+            sndData = file.readBytes(fileLen);
+        } catch (Exception e) {
+            throw new GameDataIoException("error extracting: " + filename + " " + id, e);
+        } finally {
+            FileUtils.close(file);
+        }
+        return sndData;
+    }
 
-	public void enabled(boolean enabled) {
-		this.playSound = enabled;
-	}
+    // SndPlayer
 
-	//
-	// private classes
+    public synchronized void playSound(String type, int id) {
+        if (!playSound) {
+            return;
+        }
+        //
+        // special mapping
+        if ((type.equals("smat")) && (id == 1 || id == 2)) {
+            id = 99;
+        }
+        //
+        // get or create the sound in the cache and play...
+        CacheKey key = new CacheKey(type, id);
+        Log.info("Playing sound " + key);
+        //
+        // ATTENTION: will not play the sound a second time if already a sound is played!! (Some Java problem)
+        Clip clip = cache.get(key);
+        clipSoundManager.playClip(clip);
+        Log.info("Start playing sound " + key);
+    }
 
-	/**
-	 * Creates cache keys for sound files.
-	 * 
-	 * @author mathias fringes
-	 */
-	private final class ClipCacheEntryCreator implements CacheEntryCreator<CacheKey, Clip> {
+    public void enabled(boolean enabled) {
+        this.playSound = enabled;
+    }
 
-		private Map<String, String> files = new HashMap<String, String>();
+    //
+    // private classes
 
-		public ClipCacheEntryCreator() {
-			String folder = TadLang.folder();
-			files.put("sifc", folder + "res/iface.srs");
-			files.put("smat", folder + "res/monatt.srs");
-			files.put("smpr", folder + "res/monprep.srs");
-			files.put("sscl", folder + "res/sclsnd.srs");
-		}
+    /**
+     * Creates cache keys for sound files.
+     *
+     * @author mathias fringes
+     */
+    private final class ClipCacheEntryCreator implements CacheEntryCreator<CacheKey, Clip> {
 
-		public Clip create(CacheKey key) {
-			String filename = files.get(key.type);
-			if (filename == null) {
-				throw new IllegalArgumentException("No file found for type: " + key.type);
-			}
-			return VbSndPlayer.this.loadClip(filename, key.id);
-		}
+        private Map<String, String> files = new HashMap<String, String>();
 
-	}
+        public ClipCacheEntryCreator() {
+            String folder = TadLang.folder();
+            files.put("sifc", folder + "res/iface.srs");
+            files.put("smat", folder + "res/monatt.srs");
+            files.put("smpr", folder + "res/monprep.srs");
+            files.put("sscl", folder + "res/sclsnd.srs");
+        }
+
+        public Clip create(CacheKey key) {
+            String filename = files.get(key.type);
+            if (filename == null) {
+                throw new IllegalArgumentException("No file found for type: " + key.type);
+            }
+            return VbSndPlayer.this.loadClip(filename, key.id);
+        }
+
+    }
 
 }

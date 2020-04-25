@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.gui.boxes.inv;
 
@@ -19,23 +19,23 @@ public final class PointsBarBox extends BarBox {
 
     // fields
 
-	private static final Color colDefault = new Color(83, 153, 89);
-	
-	public PartyMember member = null;	
-	
-	public PointsBarBox() {
-		super();
-		color = colDefault;
-		size(82, 10);
-	}
+    private static final Color colDefault = new Color(83, 153, 89);
+
+    public PartyMember member = null;
+
+    public PointsBarBox() {
+        super();
+        color = colDefault;
+        size(82, 10);
+    }
 
     // overridden
-	
-	@Override
-	protected void draw(Surface s) {
-		cur = member.fun.cur();
-		max = member.fun.max();
-		super.draw(s);
-	}
-	
+
+    @Override
+    protected void draw(Surface s) {
+        cur = member.fun.cur();
+        max = member.fun.max();
+        super.draw(s);
+    }
+
 }

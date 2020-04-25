@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.loader.vb;
 
@@ -17,27 +17,27 @@ import java.io.File;
 
 /**
  * Loads and saves maps from the old VisualBasic format.
- * 
+ *
  * @author mathias fringes
  */
 public final class VbMapLoader implements MapLoader {
-	
-	// static
-	
-	private static final int MapFileRecordSize = 99 * 99 * 4;
 
-	private static final String ToggleMapFileName = "sav/tadmap.tgl";
-	
-	// constructors
-	
-	public VbMapLoader() {
-		super();
-	}
-	
-	// private
-	
-	private void applyFixes(LevelMap map) {
-        switch(map.nr()) {
+    // static
+
+    private static final int MapFileRecordSize = 99 * 99 * 4;
+
+    private static final String ToggleMapFileName = "sav/tadmap.tgl";
+
+    // constructors
+
+    public VbMapLoader() {
+        super();
+    }
+
+    // private
+
+    private void applyFixes(LevelMap map) {
+        switch (map.nr()) {
             case 2:
                 map.tile(6, 28).set(1, 21);
                 break;
@@ -56,7 +56,7 @@ public final class VbMapLoader implements MapLoader {
                 break;
             case 7:
                 // there is a black tile at that position. put some grass over it.
-                map.tile(46,25).set(1, 100);
+                map.tile(46, 25).set(1, 100);
                 break;
             case 9:
                 map.tile(16, 18).set(1, 32);
@@ -78,45 +78,45 @@ public final class VbMapLoader implements MapLoader {
             default:
                 break;
         }
-	}
-	
-	// public
-		
-	public LevelMap loadMap(String filename, int number) {
-		Log.info("loading map number: " + number);
-		//
-		LevelMap levelMap = new LevelMap(number);
-		VbFile file = null;		
-		try {			
-			file = new VbFile(filename, VbFile.R);
-			file.setRecordSize(MapFileRecordSize);
-			file.setChunkSize(1);
-			file.seekRecord(1, number);	      
-	        //
-	        for (int y = 1; y < 100; y++) {
-	        	for (int x = 1; x < 100; x++) {	        		
-	        		int v1 = file.readByte();
-	                int v2 = file.readByte();
-	                int v3 = file.readByte();
-	                int v4 = file.readByte();	                
-	                //
-	                Tile t = new Tile(v1, v2, v3, v4);                  	                
-	                levelMap.setTileAt(x, y, t);   	               	                           
-	        	}               
-	        }	        	    	      
-		} catch (Exception e) {
-			throw new GameDataIoException("Cannot load from map file: " + file, e);
-		} finally {
-			FileUtils.close(file);			
-		}
-		//
-		levelMap.setSecondOverlayStart(levelMap.tile(2, 1).value(4));
-	    levelMap.tileset(levelMap.tile(1, 1).value(4));
+    }
+
+    // public
+
+    public LevelMap loadMap(String filename, int number) {
+        Log.info("loading map number: " + number);
         //
-	    applyFixes(levelMap);
-	    //
-	    return levelMap;
-	}
+        LevelMap levelMap = new LevelMap(number);
+        VbFile file = null;
+        try {
+            file = new VbFile(filename, VbFile.R);
+            file.setRecordSize(MapFileRecordSize);
+            file.setChunkSize(1);
+            file.seekRecord(1, number);
+            //
+            for (int y = 1; y < 100; y++) {
+                for (int x = 1; x < 100; x++) {
+                    int v1 = file.readByte();
+                    int v2 = file.readByte();
+                    int v3 = file.readByte();
+                    int v4 = file.readByte();
+                    //
+                    Tile t = new Tile(v1, v2, v3, v4);
+                    levelMap.setTileAt(x, y, t);
+                }
+            }
+        } catch (Exception e) {
+            throw new GameDataIoException("Cannot load from map file: " + file, e);
+        } finally {
+            FileUtils.close(file);
+        }
+        //
+        levelMap.setSecondOverlayStart(levelMap.tile(2, 1).value(4));
+        levelMap.tileset(levelMap.tile(1, 1).value(4));
+        //
+        applyFixes(levelMap);
+        //
+        return levelMap;
+    }
 
     public void save(LevelMap map, String filename) {
         Log.info("saving map number: " + map.nr());
@@ -144,15 +144,15 @@ public final class VbMapLoader implements MapLoader {
             FileUtils.close(file);
         }
     }
-	
-	// MapLoader
 
-	public LevelMap load(int number) {		
-		return loadMap(TadLang.file(ToggleMapFileName), number);
-	}
+    // MapLoader
+
+    public LevelMap load(int number) {
+        return loadMap(TadLang.file(ToggleMapFileName), number);
+    }
 
     public void save(LevelMap map) {
         save(map, ToggleMapFileName);
     }
-	
+
 }

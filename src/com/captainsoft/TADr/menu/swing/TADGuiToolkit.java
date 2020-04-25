@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.menu.swing;
 
@@ -24,14 +24,14 @@ import com.captainsoft.spark.utils.Log;
  */
 public final class TADGuiToolkit {
 
-	// fields
-	
+    // fields
+
     public static final String LS = System.getProperty("line.separator");
-        
+
     private static ArrayList<Image> iconImages = null;
 
     // constructors
-    
+
     private TADGuiToolkit() {
         super();
     }
@@ -40,9 +40,9 @@ public final class TADGuiToolkit {
 
     public static void centerFrame(Window frame) {
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-        frame.setLocation((d.width - frame.getSize().width) / 2, (d.height - frame.getSize().height) / 2);      
-    }     
-     
+        frame.setLocation((d.width - frame.getSize().width) / 2, (d.height - frame.getSize().height) / 2);
+    }
+
     public static java.util.List<Image> getIconImages() {
         if (iconImages == null) {
             iconImages = new ArrayList<Image>();
@@ -50,10 +50,10 @@ public final class TADGuiToolkit {
                 iconImages.add(ImageIO.read(new File(TadLang.folder() + "icon_big.png")));
                 iconImages.add(ImageIO.read(new File(TadLang.folder() + "icon_sm.png")));
             } catch (IOException e) {
-            	Log.error(e);    			
+                Log.error(e);
             }
         }
         return iconImages;
     }
-    
+
 }

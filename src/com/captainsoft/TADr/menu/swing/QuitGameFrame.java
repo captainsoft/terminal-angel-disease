@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.menu.swing;
 
@@ -28,15 +28,15 @@ import com.captainsoft.spark.ui_swing.SwingBoxPanel;
  */
 @SuppressWarnings("serial")
 public final class QuitGameFrame extends BasicMenuDialog {
-        
+
     // fields
 
     private JButton btnYes = null;
-	private MenuController menuController;
-    
+    private MenuController menuController;
+
     // constructors
 
-    public QuitGameFrame(Window owner, MenuController menuController ) {
+    public QuitGameFrame(Window owner, MenuController menuController) {
         super(owner, "Frage");
         this.menuController = menuController;
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -47,16 +47,16 @@ public final class QuitGameFrame extends BasicMenuDialog {
     }
 
     // private
-        
+
     private void init() {
-    	//
-    	setLayout(new FlowLayout());
-    	setModal(true);      
-        setSize(300, 130);        
-        addWindowListener(new CloseWindowAdapter());    
+        //
+        setLayout(new FlowLayout());
+        setModal(true);
+        setSize(300, 130);
+        addWindowListener(new CloseWindowAdapter());
         //
         // label        
-        UiBoxContainer uc = new UiBoxContainer(0, 0, 260, 100);        
+        UiBoxContainer uc = new UiBoxContainer(0, 0, 260, 100);
         uc.createSurface();
         uc.backgroundColor(Color.WHITE);
         TextBox box = new TextBox(260, 60);
@@ -66,16 +66,16 @@ public final class QuitGameFrame extends BasicMenuDialog {
         uc.add(box);
         uc.update();
         SwingBoxPanel label = new SwingBoxPanel(uc);
-                
-        label.setPreferredSize(new Dimension(260, 60));        
+
+        label.setPreferredSize(new Dimension(260, 60));
         add(label);
         //
         // buttons
         JButton btnNo = new JButton(menuController.trans.word("menu.button.no"));
-        btnNo.setPreferredSize(new Dimension(120, 25));      
+        btnNo.setPreferredSize(new Dimension(120, 25));
         add(btnNo);
         //        
-        btnYes = new JButton(menuController.trans.word("menu.button.yes"));      
+        btnYes = new JButton(menuController.trans.word("menu.button.yes"));
         btnYes.setPreferredSize(new Dimension(120, 25));
         add(btnYes);
         //
@@ -84,19 +84,19 @@ public final class QuitGameFrame extends BasicMenuDialog {
         btnNo.addActionListener(al);
         btnYes.addActionListener(al);
     }
-    
+
     //
     // nested classes
-    
+
     private final class ButtonActionListener implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent e) {        	
-            if (e.getSource() == QuitGameFrame.this.btnYes) {            	
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == QuitGameFrame.this.btnYes) {
                 QuitGameFrame.this.menuController.quitGame();
-            } else {            	
+            } else {
                 QuitGameFrame.this.setVisible(false);
             }
         }
-    } 
+    }
 
 }

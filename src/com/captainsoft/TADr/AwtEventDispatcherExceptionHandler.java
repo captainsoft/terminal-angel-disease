@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr;
 
@@ -13,25 +13,25 @@ final class AwtEventDispatcherExceptionHandler {
 
     // static
 
-	public static void registerToAwtThread() {		 
-		System.setProperty("sun.awt.exception.handler", AwtEventDispatcherExceptionHandler.class.getName());		
-	}
+    public static void registerToAwtThread() {
+        System.setProperty("sun.awt.exception.handler", AwtEventDispatcherExceptionHandler.class.getName());
+    }
 
     // constructors
-	
-	public AwtEventDispatcherExceptionHandler() {
-		super();
-	}
+
+    public AwtEventDispatcherExceptionHandler() {
+        super();
+    }
 
     // public
-	
-	public void handle(Throwable throwable) {
-		try {
-			TadExceptionHandler.errorMessageAndExit("A fatal error in the AWT thread occurred!", throwable);
-		} catch (Throwable e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
-	}
+
+    public void handle(Throwable throwable) {
+        try {
+            TadExceptionHandler.errorMessageAndExit("A fatal error in the AWT thread occurred!", throwable);
+        } catch (Throwable e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
 
 }

@@ -37,7 +37,7 @@ public class QuestChickenAnimation extends Animation {
     }
 
     private void playSolveAnimation() {
-        switch(step % 4) {
+        switch (step % 4) {
             case 0:
                 questChickenBox.imgIndex = 2;
                 break;
@@ -75,7 +75,7 @@ public class QuestChickenAnimation extends Animation {
 
         int speed = 150;
 
-        switch(mode) {
+        switch (mode) {
             case 1:
                 playSolveAnimation();
                 break;

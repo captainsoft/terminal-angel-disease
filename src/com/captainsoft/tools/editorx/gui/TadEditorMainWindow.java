@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.tools.editorx.gui;
 
@@ -19,31 +19,30 @@ import com.captainsoft.spark.ui.swing.SingleComponentUpdater;
 import com.captainsoft.spark.ui_swing.SwingBoxPanel;
 
 /**
- * 
  * @author mathias fringes
  */
 @SuppressWarnings("serial")
-public final class TadEditorMainWindow extends JFrame {		
+public final class TadEditorMainWindow extends JFrame {
 
-	public TadEditorMainWindow() {
-		super("TAD EDITOR");		
+    public TadEditorMainWindow() {
+        super("TAD EDITOR");
 
-		// init Interface
-		setSize(880, 600);
-		setBackground(Color.BLUE);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+        // init Interface
+        setSize(880, 600);
+        setBackground(Color.BLUE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		// map panel
-		SingleComponentUpdater mapPnlUpdater = new SingleComponentUpdater(null);
-	    
-	    final MapEditViewController mec = new MapEditViewController(mapPnlUpdater);
-		
-		// map panel ...swing
-		SwingBoxPanel mapPnl = new SwingBoxPanel(mec.getBox());
-		mapPnl.addMouseListener(new AwtBoxMouseClickAdapter(mec.getCommandManager()));		
-		mapPnl.setBackground(Color.GREEN);
-		
-		mapPnlUpdater.component(mapPnl);
+        // map panel
+        SingleComponentUpdater mapPnlUpdater = new SingleComponentUpdater(null);
+
+        final MapEditViewController mec = new MapEditViewController(mapPnlUpdater);
+
+        // map panel ...swing
+        SwingBoxPanel mapPnl = new SwingBoxPanel(mec.getBox());
+        mapPnl.addMouseListener(new AwtBoxMouseClickAdapter(mec.getCommandManager()));
+        mapPnl.setBackground(Color.GREEN);
+
+        mapPnlUpdater.component(mapPnl);
 
 
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
@@ -71,22 +70,22 @@ public final class TadEditorMainWindow extends JFrame {
                 }
             }
         });
-		
-		
-		// other panels
-		
-		MainMenuBarController mc = new MainMenuBarController(mec);
-		JPanel mnuPnl = new MainMenuBarView(mc);
-		JPanel tolPnl = new ToolPanel();
-		
-		Layouter layout = new Layouter(getContentPane(), 2, 1);
-				
-		layout.set(mnuPnl, 0, 0, 2, 1, 100, 0);
-		layout.set(tolPnl, 0, 1, 1, 1, 0, 100);
-		layout.set(mapPnl, 1, 1, 1, 1, 100, 100);
-		setLocation(100, 20);
-	
-		pack();	
-	}
+
+
+        // other panels
+
+        MainMenuBarController mc = new MainMenuBarController(mec);
+        JPanel mnuPnl = new MainMenuBarView(mc);
+        JPanel tolPnl = new ToolPanel();
+
+        Layouter layout = new Layouter(getContentPane(), 2, 1);
+
+        layout.set(mnuPnl, 0, 0, 2, 1, 100, 0);
+        layout.set(tolPnl, 0, 1, 1, 1, 0, 100);
+        layout.set(mapPnl, 1, 1, 1, 1, 100, 100);
+        setLocation(100, 20);
+
+        pack();
+    }
 
 }

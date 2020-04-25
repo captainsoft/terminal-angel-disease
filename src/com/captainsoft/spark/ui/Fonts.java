@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.ui;
 
@@ -14,15 +14,15 @@ import java.awt.Font;
 public final class Fonts {
 
     // fields
-	
-	public static final String Times = Font.SERIF;	
-	public static final String Verdana = Font.SANS_SERIF;
-	public static final String Courier = Font.MONOSPACED;
+
+    public static final String Times = Font.SERIF;
+    public static final String Verdana = Font.SANS_SERIF;
+    public static final String Courier = Font.MONOSPACED;
 
     // constructors
 
-	private Fonts() {
-		super();
-	}
+    private Fonts() {
+        super();
+    }
 
 }

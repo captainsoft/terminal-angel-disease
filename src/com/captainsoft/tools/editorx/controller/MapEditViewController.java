@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.tools.editorx.controller;
 
@@ -21,63 +21,62 @@ import com.captainsoft.spark.ui.mouse.BoxCommandManager;
 import com.captainsoft.spark.ui.mouse.ClickCommand;
 
 /**
- * 
  * @author mathias fringes
  */
-public final class MapEditViewController {	
+public final class MapEditViewController {
 
-	private UiBoxContainer mapBox;
-	private BoxCommandManager mapCommandManager;
-	
-	private EditorModel model = new EditorModel();
-	private EditorMapDrawer drawer;
-	private MapTileView mtv;
-	private BoxUpdater boxUpdateManager;
+    private UiBoxContainer mapBox;
+    private BoxCommandManager mapCommandManager;
+
+    private EditorModel model = new EditorModel();
+    private EditorMapDrawer drawer;
+    private MapTileView mtv;
+    private BoxUpdater boxUpdateManager;
 
     private static final String MapFilename = "dat/tadmap.dat";
 
 
-	public MapEditViewController(final BoxUpdater boxUpdateManager) {
-		super();
-		this.boxUpdateManager = boxUpdateManager;
-		
-		model.currentMap = TadEditorRepo.inst.mapLoader.loadMap(TadLang.file(MapFilename), 1);
-		
-		mtv = new MapTileView(30, 18);
-		mtv.topLeft = new Position(1, 1);
-		drawer = new EditorMapDrawer(model);
-		drawer.map(model.currentMap);
-		drawer.init(mtv);
-		
-		// map panel box
-		mapBox = new UiBoxContainer();
-		mapBox.setSurface(drawer.surface);		
-		BoxCommandList mapCommandList = new BoxCommandList();
-		mapCommandManager = new BoxCommandManager(mapBox, mapCommandList);
-		mapCommandList.setClickCmd(mapBox, new ClickCommand() {			
+    public MapEditViewController(final BoxUpdater boxUpdateManager) {
+        super();
+        this.boxUpdateManager = boxUpdateManager;
 
-			public void click(UiBox box, int x, int y, MouseButton button) {
-								 	
-				int tx = x / 40;
-				int ty = y / 40;
-								
-				Position clickOn = mtv.topLeft.add(tx, ty);
+        model.currentMap = TadEditorRepo.inst.mapLoader.loadMap(TadLang.file(MapFilename), 1);
+
+        mtv = new MapTileView(30, 18);
+        mtv.topLeft = new Position(1, 1);
+        drawer = new EditorMapDrawer(model);
+        drawer.map(model.currentMap);
+        drawer.init(mtv);
+
+        // map panel box
+        mapBox = new UiBoxContainer();
+        mapBox.setSurface(drawer.surface);
+        BoxCommandList mapCommandList = new BoxCommandList();
+        mapCommandManager = new BoxCommandManager(mapBox, mapCommandList);
+        mapCommandList.setClickCmd(mapBox, new ClickCommand() {
+
+            public void click(UiBox box, int x, int y, MouseButton button) {
+
+                int tx = x / 40;
+                int ty = y / 40;
+
+                Position clickOn = mtv.topLeft.add(tx, ty);
                 model.selPosition = clickOn;
-				Xlog.l(clickOn, model.currentMap.tile(clickOn));
-				
-				// move map
-				if (button == MouseButton.Right) {
-					mtv.center(clickOn);
-					sanitize(mtv);
-					
-					drawer.drawFullMap();
-					boxUpdateManager.update(mapBox);	
-				}
-				
-			}
-		});
-		
-	}
+                Xlog.l(clickOn, model.currentMap.tile(clickOn));
+
+                // move map
+                if (button == MouseButton.Right) {
+                    mtv.center(clickOn);
+                    sanitize(mtv);
+
+                    drawer.drawFullMap();
+                    boxUpdateManager.update(mapBox);
+                }
+
+            }
+        });
+
+    }
 
     public void removeDanger() {
         Tile tile = model.currentMap.tile(model.selPosition);
@@ -92,45 +91,45 @@ public final class MapEditViewController {
         drawer.drawFullMap();
         boxUpdateManager.update(mapBox);
     }
-	
-	public void loadMap(int map) {	
-		if (model.currentMap.nr() == map) {
-			return;
-		}
-		model.currentMap = TadEditorRepo.inst.mapLoader.loadMap(TadLang.file(MapFilename), map);
-		//
-		drawer.map(model.currentMap);		
-		drawer.drawFullMap();
-		boxUpdateManager.update(mapBox);
-	}
+
+    public void loadMap(int map) {
+        if (model.currentMap.nr() == map) {
+            return;
+        }
+        model.currentMap = TadEditorRepo.inst.mapLoader.loadMap(TadLang.file(MapFilename), map);
+        //
+        drawer.map(model.currentMap);
+        drawer.drawFullMap();
+        boxUpdateManager.update(mapBox);
+    }
 
     public void saveMap() {
         Xlog.l("Saved map");
         TadEditorRepo.inst.mapLoader.save(model.currentMap, MapFilename);
     }
-	
-	public UiBoxContainer getBox() {
-		return mapBox;		
-	}
 
-	public BoxCommandManager getCommandManager() {
-		return mapCommandManager;
-	}	
-	
-	private void sanitize(MapTileView tv) {
-		if (tv.topLeft.x < 1) {
-			tv.topLeft = tv.topLeft.x(1);
-		}		
-		if (tv.topLeft.y < 1) {
-			tv.topLeft = tv.topLeft.y(1);
-		}
-		//
-		if (tv.btmRight().x > 99) {
-			tv.topLeft = tv.topLeft.x(99 - tv.xspan);
-		}
-		if (tv.btmRight().y > 99) {
-			tv.topLeft = tv.topLeft.y(99 - tv.yspan);
-		}
-	}
+    public UiBoxContainer getBox() {
+        return mapBox;
+    }
+
+    public BoxCommandManager getCommandManager() {
+        return mapCommandManager;
+    }
+
+    private void sanitize(MapTileView tv) {
+        if (tv.topLeft.x < 1) {
+            tv.topLeft = tv.topLeft.x(1);
+        }
+        if (tv.topLeft.y < 1) {
+            tv.topLeft = tv.topLeft.y(1);
+        }
+        //
+        if (tv.btmRight().x > 99) {
+            tv.topLeft = tv.topLeft.x(99 - tv.xspan);
+        }
+        if (tv.btmRight().y > 99) {
+            tv.topLeft = tv.topLeft.y(99 - tv.yspan);
+        }
+    }
 
 }

@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.cuts.ations;
 
@@ -17,34 +17,34 @@ public final class MoveAnimation implements FrameAnimation {
 
     // fields
 
-	private final boolean center;
-	private final CPos movePosition;
-	private final UiBox box;
+    private final boolean center;
+    private final CPos movePosition;
+    private final UiBox box;
 
     // constructors
 
-	public MoveAnimation(UiBox box, CPos movePosition) {
-		this(box, movePosition, true);		
-	}
+    public MoveAnimation(UiBox box, CPos movePosition) {
+        this(box, movePosition, true);
+    }
 
     // public
-	
-	public MoveAnimation(UiBox box, CPos movePosition, boolean center) {
-		super();
-		this.box = box;
-		this.movePosition = movePosition;
-		this.center = center;
-	}
+
+    public MoveAnimation(UiBox box, CPos movePosition, boolean center) {
+        super();
+        this.box = box;
+        this.movePosition = movePosition;
+        this.center = center;
+    }
 
     // FrameAnimation
 
-	@Override
-	public FrameMx play(int step) {
-		if (center) {
-			box.center();
-		}
-		box.move(movePosition.x, movePosition.y);
-		return null;
-	}
+    @Override
+    public FrameMx play(int step) {
+        if (center) {
+            box.center();
+        }
+        box.move(movePosition.x, movePosition.y);
+        return null;
+    }
 
 }

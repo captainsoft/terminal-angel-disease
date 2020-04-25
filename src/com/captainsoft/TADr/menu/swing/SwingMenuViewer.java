@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.menu.swing;
 
@@ -37,20 +37,20 @@ import com.captainsoft.spark.utils.Log;
  */
 @SuppressWarnings("serial")
 public class SwingMenuViewer extends BasicMenuDialog implements MenuViewer {
-	
-	// fields
-	
-	private final Game game;
-	private final MenuController menuController;
-	
-	private CardLayout cl = null;
-	private Container backPanel = null;
-	private MenuPanelCreator panelCreator = null;	
-		
-	// constructors
-	
+
+    // fields
+
+    private final Game game;
+    private final MenuController menuController;
+
+    private CardLayout cl = null;
+    private Container backPanel = null;
+    private MenuPanelCreator panelCreator = null;
+
+    // constructors
+
     public SwingMenuViewer(MenuController menuController, Game game) {
-        super(null, "Captainsoft's The Terminal Angel Disease");        
+        super(null, "Captainsoft's The Terminal Angel Disease");
         //        
         this.menuController = menuController;
         this.game = game;
@@ -59,37 +59,37 @@ public class SwingMenuViewer extends BasicMenuDialog implements MenuViewer {
         init();
         TADGuiToolkit.centerFrame(this);
     }
-    
+
     // private
-        
+
     private void init() {
-    	//
-    	// window
-    	setModal(true);
+        //
+        // window
+        setModal(true);
         setSize(360, 465);
-        setLayout(null);  
+        setLayout(null);
         addWindowListener(new StartUpListener());
         //
         // image
-        Image tadLogoImage = new Surface(TadRepo.inst().ImageLoader().load("ifc", 38)).image();        
+        Image tadLogoImage = new Surface(TadRepo.inst().ImageLoader().load("ifc", 38)).image();
         ImagePanel logoPanel = new ImagePanel(tadLogoImage);
         logoPanel.setBackground(Color.BLACK);
-        logoPanel.grow(1);       
+        logoPanel.grow(1);
         logoPanel.setLocation(50, 18);
-        logoPanel.setRenderStyle(ImagePanel.RENDER_CENTER);        
-        add(logoPanel);             
+        logoPanel.setRenderStyle(ImagePanel.RENDER_CENTER);
+        add(logoPanel);
         //
         // back & variable panels        
         backPanel = panelCreator.createEmptyPanel();
         cl = new CardLayout();
-        backPanel.setLayout(cl);     
+        backPanel.setLayout(cl);
         //
         Container pl = panelCreator.createMainMenuPanel(game);
         cl.addLayoutComponent(pl, "main");
         Container plLoad = panelCreator.createLoadGamePanel();
-        cl.addLayoutComponent(plLoad, "load");        
+        cl.addLayoutComponent(plLoad, "load");
         Container plSave = panelCreator.createSaveGamePanel(game);
-        cl.addLayoutComponent(plSave, "save");        
+        cl.addLayoutComponent(plSave, "save");
         Container plSettings = new SettingsPanel(menuController);
         cl.addLayoutComponent(plSettings, "sett");
         Container plAbout = panelCreator.createAboutPanel();
@@ -103,13 +103,13 @@ public class SwingMenuViewer extends BasicMenuDialog implements MenuViewer {
         add(backPanel);
         //
         // homepage                    
-        JPanel hPanel = new BorderPanel();     
+        JPanel hPanel = new BorderPanel();
         hPanel.setLayout(null);
         hPanel.setBounds(50, 355, logoPanel.getWidth(), 20);
         add(hPanel);
         Label hLabel = new Label(menuController.trans.word("menu.main.link"));
-        hLabel.setAlignment(Label.CENTER);        
-        hLabel.setBounds(1, 2, logoPanel.getWidth()-2, 15);
+        hLabel.setAlignment(Label.CENTER);
+        hLabel.setBounds(1, 2, logoPanel.getWidth() - 2, 15);
         hPanel.add(hLabel);
         if (Desktop.isDesktopSupported()) {
             MouseAdapter ma = new MouseAdapter() {
@@ -138,7 +138,7 @@ public class SwingMenuViewer extends BasicMenuDialog implements MenuViewer {
         add(copyrightLabel);
 
         // version label
-        Label versionLabel = new Label(TAD.Type + " " + TAD.Version);        
+        Label versionLabel = new Label(TAD.Type + " " + TAD.Version);
         versionLabel.setBounds(245, 395, 102, 20);
         versionLabel.setAlignment(Label.RIGHT);
         versionLabel.setFont(smFont);
@@ -146,48 +146,48 @@ public class SwingMenuViewer extends BasicMenuDialog implements MenuViewer {
         //
         // last init and show               
         showMainMenuView();
-    }    
-    
+    }
+
     // nested classes
-    
+
     private final class StartUpListener extends WindowAdapter {
-    	@Override
+        @Override
         public void windowClosing(WindowEvent e) {
-    		if (game == null) {
-    			SwingMenuViewer.this.menuController.quitGame();    			
-    		} else {
-    			close();
-    		}
+            if (game == null) {
+                SwingMenuViewer.this.menuController.quitGame();
+            } else {
+                close();
+            }
         }
     }
-    
+
     // MenuViewer
 
     public void close() {
-    	dispose();
+        dispose();
     }
 
     public void display() {
-    	if (menuController.settings.isNewInstall()) {
-    		menuController.showSettingsView();
-    	}    	
-    	setVisible(true);
+        if (menuController.settings.isNewInstall()) {
+            menuController.showSettingsView();
+        }
+        setVisible(true);
     }
 
     public void showLoadView() {
-    	cl.show(this.backPanel, "load");
+        cl.show(this.backPanel, "load");
     }
 
     public void showMainMenuView() {
-    	cl.show(this.backPanel, "main");
+        cl.show(this.backPanel, "main");
     }
 
     public void showSaveView() {
-    	cl.show(this.backPanel, "save");
+        cl.show(this.backPanel, "save");
     }
 
     public void showSettingsView() {
-    	cl.show(this.backPanel, "sett");
+        cl.show(this.backPanel, "sett");
     }
 
     public void showAboutView() {
@@ -197,5 +197,5 @@ public class SwingMenuViewer extends BasicMenuDialog implements MenuViewer {
     public boolean isShowing() {
         return isVisible();
     }
-    
+
 }

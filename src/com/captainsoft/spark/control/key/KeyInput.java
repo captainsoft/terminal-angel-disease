@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.control.key;
 
@@ -11,6 +11,6 @@ package com.captainsoft.spark.control.key;
  */
 public interface KeyInput {
 
-	boolean keyPress(int keyCode);
+    boolean keyPress(int keyCode);
 
 }

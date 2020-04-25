@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.ui_swing;
 
@@ -19,18 +19,18 @@ public class ExitFrame extends JFrame {
 
     // constructors
 
-	public ExitFrame() {
-		addWindowListener(new ExitWindowListener());
-	}
+    public ExitFrame() {
+        addWindowListener(new ExitWindowListener());
+    }
 
     //
     // nested
-	
-	private final class ExitWindowListener extends WindowAdapter {
-		@Override
-		public void windowClosing(WindowEvent e) {
-			System.exit(0);
-		}
-	}
+
+    private final class ExitWindowListener extends WindowAdapter {
+        @Override
+        public void windowClosing(WindowEvent e) {
+            System.exit(0);
+        }
+    }
 
 }

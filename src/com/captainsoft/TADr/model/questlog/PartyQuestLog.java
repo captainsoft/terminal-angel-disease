@@ -66,7 +66,7 @@ public final class PartyQuestLog {
     // private
 
     private Item findByQuestDescription(QuestDescription questDescription) {
-        for(Item item : items) {
+        for (Item item : items) {
             if (item.questDescription.equals(questDescription)) {
                 return item;
             }

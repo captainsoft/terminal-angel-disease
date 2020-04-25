@@ -1,6 +1,6 @@
 /*
- * Copyright Captainsoft 2010-2012. 
- * All rights reserved.  
+ * Copyright Captainsoft 2010-2012.
+ * All rights reserved.
  */
 package com.captainsoft.spark.cuts.ations;
 
@@ -15,30 +15,30 @@ public final class NullAnimation implements FrameAnimation {
 
     // fields
 
-	private FrameMx length;
+    private FrameMx length;
 
     // constructors
 
-	public NullAnimation() {
-		this(null);	
-	}
+    public NullAnimation() {
+        this(null);
+    }
 
     // public
 
-	public NullAnimation(float length) {
-		this(new FrameMx(length));		
-	}
-	
-	public NullAnimation(FrameMx length) {
-		super();
-		this.length = length;
-	}
+    public NullAnimation(float length) {
+        this(new FrameMx(length));
+    }
+
+    public NullAnimation(FrameMx length) {
+        super();
+        this.length = length;
+    }
 
     // FrameAnimation
-	
-	@Override
-	public FrameMx play(int step) {
-		return (step == 1) ? length : null;
-	}
+
+    @Override
+    public FrameMx play(int step) {
+        return (step == 1) ? length : null;
+    }
 
 }

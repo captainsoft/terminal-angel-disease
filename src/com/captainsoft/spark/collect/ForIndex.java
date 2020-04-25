@@ -24,7 +24,7 @@ public final class ForIndex<T> implements Iterable<T>, Iterator<T> {
 
     // constructors
 
-    public static <T> ForIndex<T> create(T ... list) {
+    public static <T> ForIndex<T> create(T... list) {
         return new ForIndex<T>(list);
     }
 
@@ -32,7 +32,7 @@ public final class ForIndex<T> implements Iterable<T>, Iterator<T> {
         this.list = list;
     }
 
-    public ForIndex(T ... list) {
+    public ForIndex(T... list) {
         this(Arrays.asList(list));
     }
 
@@ -45,7 +45,7 @@ public final class ForIndex<T> implements Iterable<T>, Iterator<T> {
     // Iterable
 
     public boolean hasNext() {
-        return ((index+1) < list.size());
+        return ((index + 1) < list.size());
     }
 
     public T next() {

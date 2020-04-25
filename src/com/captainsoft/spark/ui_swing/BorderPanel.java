@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.ui_swing;
 
@@ -17,23 +17,23 @@ import javax.swing.JPanel;
  */
 @SuppressWarnings("serial")
 public class BorderPanel extends JPanel {
-	
-	private Color borderColor = Color.BLACK;
-	
-	public BorderPanel() {
-		this(null);						
-	}
-	
-	public BorderPanel(LayoutManager layoutManager) {
-		super(layoutManager);				
-		setBackground(Color.WHITE);
-	}
-	
-	@Override
-	public void paint(Graphics g) {	
-		super.paint(g);
-		g.setColor(borderColor);
-		g.drawRect(0, 0, getWidth()-1, getHeight()-1);
-	}		
+
+    private Color borderColor = Color.BLACK;
+
+    public BorderPanel() {
+        this(null);
+    }
+
+    public BorderPanel(LayoutManager layoutManager) {
+        super(layoutManager);
+        setBackground(Color.WHITE);
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        g.setColor(borderColor);
+        g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
+    }
 
 }

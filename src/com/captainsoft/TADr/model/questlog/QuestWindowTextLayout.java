@@ -68,9 +68,9 @@ final class QuestWindowTextLayout {
 
         // check for next page
         if (!stillSpace()) {
-           target.remove(b1);
-           target.remove(b2);
-           return false;
+            target.remove(b1);
+            target.remove(b2);
+            return false;
         }
 
 

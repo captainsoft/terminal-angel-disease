@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.model.fight;
 
@@ -23,79 +23,79 @@ import com.captainsoft.spark.ui.mouse.BoxCommandList;
 
 /**
  * Window controller for the party winning screen!
- * 
+ *
  * @author mathias fringes
  */
 final class WinWindowController implements WindowController {
 
-	// fields
-	
-	private Fight fight;
-	private GameEngine gameEngine;
+    // fields
 
-	// constructors
+    private Fight fight;
+    private GameEngine gameEngine;
 
-	public WinWindowController(Fight fight, GameEngine gameEngine) {
-		super();
-		this.fight = fight;
-		this.gameEngine = gameEngine;
-	}
-	
-	// private 
+    // constructors
 
-	private void afterFight() {
-		final Command closeCommand = new Command() {
+    public WinWindowController(Fight fight, GameEngine gameEngine) {
+        super();
+        this.fight = fight;
+        this.gameEngine = gameEngine;
+    }
 
-			public void execute() {
-				fight.executeAfterFight();
-			}		
-		};
-		//
-		Item item = fight.rewardItem;
-		if (item != null) {
-			Chest chest = new Chest(item);
-			ChestWindowController cwc = new ChestWindowController(chest);
-			gameEngine.showWindow(cwc);
-			cwc.setCloseCommand(closeCommand);
-		} else {
-			closeCommand.execute();
-		}
-	}
+    // private
 
-	// WindowController
+    private void afterFight() {
+        final Command closeCommand = new Command() {
 
-	public UiBoxContainer createWindow(BoxCommandList mg) {
-		Surface s = TadRepo.inst().ImageLoader().load("ifc", 32);
+            public void execute() {
+                fight.executeAfterFight();
+            }
+        };
+        //
+        Item item = fight.rewardItem;
+        if (item != null) {
+            Chest chest = new Chest(item);
+            ChestWindowController cwc = new ChestWindowController(chest);
+            gameEngine.showWindow(cwc);
+            cwc.setCloseCommand(closeCommand);
+        } else {
+            closeCommand.execute();
+        }
+    }
 
-		UiBoxContainer winBox = new ImageBox(s);		
-		winBox.pos(225, 95);		
+    // WindowController
 
-		TextBox tx = new TextBox();
-		tx.font = new Font(Fonts.Times, Font.BOLD, 20);
-		tx.size(210, 160);		
+    public UiBoxContainer createWindow(BoxCommandList mg) {
+        Surface s = TadRepo.inst().ImageLoader().load("ifc", 32);
 
-		TrKey winText = new TrKey("fight.win", gameEngine.game().party().name(), fight.monsterParty.allChips);		
-		tx.text = TadRepo.inst().Trans().word(winText);
+        UiBoxContainer winBox = new ImageBox(s);
+        winBox.pos(225, 95);
 
-		winBox.add(tx);
-		tx.center();
+        TextBox tx = new TextBox();
+        tx.font = new Font(Fonts.Times, Font.BOLD, 20);
+        tx.size(210, 160);
 
-		mg.setCmd(winBox, new Command() {
-			public void execute() {
-				gameEngine.closeWindows();
-				afterFight();
-			}
-		});
+        TrKey winText = new TrKey("fight.win", gameEngine.game().party().name(), fight.monsterParty.allChips);
+        tx.text = TadRepo.inst().Trans().word(winText);
 
-		return winBox;
-	}
+        winBox.add(tx);
+        tx.center();
 
-	public boolean isLenientModal() {
-		return true;
-	}
+        mg.setCmd(winBox, new Command() {
+            public void execute() {
+                gameEngine.closeWindows();
+                afterFight();
+            }
+        });
 
-	public void onShow() {
-		gameEngine.addCoins(fight.monsterParty.allChips);
-	}
+        return winBox;
+    }
+
+    public boolean isLenientModal() {
+        return true;
+    }
+
+    public void onShow() {
+        gameEngine.addCoins(fight.monsterParty.allChips);
+    }
 
 }

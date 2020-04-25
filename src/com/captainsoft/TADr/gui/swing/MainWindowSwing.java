@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.gui.swing;
 
@@ -27,56 +27,56 @@ import java.awt.event.WindowEvent;
  */
 public final class MainWindowSwing extends JFrame {
 
-	// fields
-	
-	private static final long serialVersionUID = 1L;
-	
-	private final KeyInput keyInput;
+    // fields
+
+    private static final long serialVersionUID = 1L;
+
+    private final KeyInput keyInput;
 
     private final MovementKeyState keyState;
-	
-	// constructors
-	
-	public MainWindowSwing(KeyInput keyInput, MovementKeyState keyState) {
-		super("Captainsoft's The Terminal Angel Disease");
+
+    // constructors
+
+    public MainWindowSwing(KeyInput keyInput, MovementKeyState keyState) {
+        super("Captainsoft's The Terminal Angel Disease");
         this.keyInput = keyInput;
         this.keyState = keyState;
-		
-		setBackground(Color.BLACK);
-		getContentPane().setBackground(Color.BLACK);
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        setBackground(Color.BLACK);
+        getContentPane().setBackground(Color.BLACK);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setLayout(new GridBagLayout());
-		//
-		// width=971,height=663    win vista
-		// width=963,height=654    win classic
-		Dimension wd = new Dimension(971, 663);		
-		setSize(wd);		
-		setMinimumSize(wd);
-	 	//
-		addKeyListener(new MainFrameKeyListener());		
-		addWindowListener(new MainFrameWindowListener());
+        //
+        // width=971,height=663    win vista
+        // width=963,height=654    win classic
+        Dimension wd = new Dimension(971, 663);
+        setSize(wd);
+        setMinimumSize(wd);
+        //
+        addKeyListener(new MainFrameKeyListener());
+        addWindowListener(new MainFrameWindowListener());
         addMouseWheelListener(new ChiefMouseWheelController());
-	    setIconImages(TADGuiToolkit.getIconImages());
-	}
-	
-	// public
-	
-	public void setMainComponent(Component c) {
-		if (c == null) {
-			return;
-		}
-		if ((getContentPane().getComponentCount() == 1) && (getContentPane().getComponent(0) != c)) {
-			remove(c);
-			getContentPane().removeAll();
-		}
-		if (getContentPane().getComponentCount() == 0) { 
-			add(c);
-		}
-		pack();	
-	}
+        setIconImages(TADGuiToolkit.getIconImages());
+    }
+
+    // public
+
+    public void setMainComponent(Component c) {
+        if (c == null) {
+            return;
+        }
+        if ((getContentPane().getComponentCount() == 1) && (getContentPane().getComponent(0) != c)) {
+            remove(c);
+            getContentPane().removeAll();
+        }
+        if (getContentPane().getComponentCount() == 0) {
+            add(c);
+        }
+        pack();
+    }
 
     //
-	// nested classes
+    // nested classes
 
 
     private final class MainFrameKeyListener extends KeyAdapter {
@@ -106,19 +106,19 @@ public final class MainWindowSwing extends JFrame {
     }
 
     private final class MainFrameWindowListener extends WindowAdapter {
-		
-		@Override
-		public void windowClosing(WindowEvent e) {		
 
-				TadRepo.inst().GameEngine().nextCommand(new GameEngineCommand("show quit game window") {
-					
-					public void execute() {
-						if (gameEngine.canShowDiskMenu()) {
-							new MenuController(gameEngine).showQuitGameFrame();
-						}
-					}
-				});
-			}	
-	}
+        @Override
+        public void windowClosing(WindowEvent e) {
+
+            TadRepo.inst().GameEngine().nextCommand(new GameEngineCommand("show quit game window") {
+
+                public void execute() {
+                    if (gameEngine.canShowDiskMenu()) {
+                        new MenuController(gameEngine).showQuitGameFrame();
+                    }
+                }
+            });
+        }
+    }
 
 }

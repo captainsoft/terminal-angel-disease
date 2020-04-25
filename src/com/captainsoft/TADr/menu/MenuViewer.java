@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.menu;
 
@@ -10,20 +10,20 @@ package com.captainsoft.TADr.menu;
  * @author mathias fringes
  */
 public interface MenuViewer {
-	
-	public void close();
-	
-	public void display();
+
+    public void close();
+
+    public void display();
 
     public boolean isShowing();
-	
-	public void showLoadView();
 
-	public void showMainMenuView();
-	
-	public void showSaveView();	
+    public void showLoadView();
 
-	public void showSettingsView();
+    public void showMainMenuView();
+
+    public void showSaveView();
+
+    public void showSettingsView();
 
     public void showAboutView();
 

@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.ui.swing;
 
@@ -13,41 +13,41 @@ import com.captainsoft.spark.ui.box.UiBox;
 
 /**
  * An updater for a single, specified Java AWT component.
- * 
+ *
  * @author mathias fringes
  */
 public final class SingleComponentUpdater implements BoxUpdater {
 
     // fields
 
-	private Component component;
+    private Component component;
 
     // constructors
-	
-	public SingleComponentUpdater(Component component) {
-		super();
-		this.component = component;
-	}
-	
-	public void component(Component component) {
-		this.component = component;
-	}
+
+    public SingleComponentUpdater(Component component) {
+        super();
+        this.component = component;
+    }
+
+    public void component(Component component) {
+        this.component = component;
+    }
 
     // overridden
 
-	@Override
-	public void update(UiBox box) {
-		box.update();		
-		if (!SwingUtilities.isEventDispatchThread()) {
-			SwingUtilities.invokeLater(new Runnable() {				
-				@Override
-				public void run() {
-					component.repaint();					
-				}
-			});
-		} else {
-			component.repaint();
-		}
-	}
-	
+    @Override
+    public void update(UiBox box) {
+        box.update();
+        if (!SwingUtilities.isEventDispatchThread()) {
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    component.repaint();
+                }
+            });
+        } else {
+            component.repaint();
+        }
+    }
+
 }

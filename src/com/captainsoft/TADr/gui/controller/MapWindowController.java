@@ -15,49 +15,49 @@ import com.captainsoft.spark.ui.mouse.ClickCommand;
 
 /**
  * Controller for the map view (action world).
- * 
+ *
  * @author mathias
  */
 public final class MapWindowController extends BaseWindowController {
 
-	// fields
-	
-	private final GameEngine gameEngine;	
-	private final ActionWorldMouseController actionWorldMouseController;
-	private final SimpleMapView mapBox;
-	private final GameLevelMapDrawer mapDrawer;
+    // fields
 
-	// constructors
-	
-	public MapWindowController(GameEngine gameEngine, GameLevelMapDrawer mapDrawer) {
-		super();
-		this.gameEngine = gameEngine;		
-		this.mapDrawer = mapDrawer;
-		this.actionWorldMouseController = new ActionWorldMouseController(gameEngine);
-		//
-		mapBox = new SimpleMapView(mapDrawer);
-		mapBox.createSurface();
-	}
+    private final GameEngine gameEngine;
+    private final ActionWorldMouseController actionWorldMouseController;
+    private final SimpleMapView mapBox;
+    private final GameLevelMapDrawer mapDrawer;
 
-	// WindowController
+    // constructors
 
-	public UiBoxContainer createWindow(BoxCommandList commandList) {
-		
-		commandList.setClickCmd(mapBox, new ClickCommand() {
+    public MapWindowController(GameEngine gameEngine, GameLevelMapDrawer mapDrawer) {
+        super();
+        this.gameEngine = gameEngine;
+        this.mapDrawer = mapDrawer;
+        this.actionWorldMouseController = new ActionWorldMouseController(gameEngine);
+        //
+        mapBox = new SimpleMapView(mapDrawer);
+        mapBox.createSurface();
+    }
 
-			public void click(final UiBox box, final int x, final int y, final MouseButton button) {
-								
-				gameEngine.nextCommand(new AbstractCommand("click inside the action world (" + x + "/" + y + ")") {
+    // WindowController
 
-					public void execute() {
-						final Position p = mapDrawer.getPosAt(x, y);
-						actionWorldMouseController.clickMapPosition(p, button);
-					}
-				});
-			}
-		});
-		
-		return mapBox;
-	}
+    public UiBoxContainer createWindow(BoxCommandList commandList) {
+
+        commandList.setClickCmd(mapBox, new ClickCommand() {
+
+            public void click(final UiBox box, final int x, final int y, final MouseButton button) {
+
+                gameEngine.nextCommand(new AbstractCommand("click inside the action world (" + x + "/" + y + ")") {
+
+                    public void execute() {
+                        final Position p = mapDrawer.getPosAt(x, y);
+                        actionWorldMouseController.clickMapPosition(p, button);
+                    }
+                });
+            }
+        });
+
+        return mapBox;
+    }
 
 }

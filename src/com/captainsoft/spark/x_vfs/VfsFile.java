@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.x_vfs;
 
@@ -15,40 +15,40 @@ import java.io.RandomAccessFile;
  */
 public final class VfsFile {
 
-	// fields
-	
-	private String name;
-	private int size = 0;
-	
-	// constructors	
-	
-	public VfsFile() {
-		super();
-	}
+    // fields
 
-	// accessors
+    private String name;
+    private int size = 0;
 
-	public String getName() {
-		return name;
-	}
+    // constructors	
 
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public int getSize() {
-		return size;
-	}
-	
-	// public
-	
-	public byte[] read(File file) throws IOException {		
-		RandomAccessFile f = new RandomAccessFile(file, "r");
-		long len = f.length();
-		byte[] content = new byte[(int) len]; // great eh?
-		f.read(content);
-		f.close();
-		return content;				
-	}
-	
+    public VfsFile() {
+        super();
+    }
+
+    // accessors
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    // public
+
+    public byte[] read(File file) throws IOException {
+        RandomAccessFile f = new RandomAccessFile(file, "r");
+        long len = f.length();
+        byte[] content = new byte[(int) len]; // great eh?
+        f.read(content);
+        f.close();
+        return content;
+    }
+
 }

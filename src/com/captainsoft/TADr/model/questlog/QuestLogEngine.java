@@ -54,7 +54,7 @@ public final class QuestLogEngine {
 
     private void fill() {
 
-        add("01-21", "02-70", 1000,"m1.WiseGuys");
+        add("01-21", "02-70", 1000, "m1.WiseGuys");
         add("01-31", "01-37", 100, "m1.EmuEggBradfish");
         add("01-53", "01-52", 100, "m1.TransitAmpel");
         add("01-77", "03-25", 500, "m1.searchForEvidence");
@@ -62,7 +62,7 @@ public final class QuestLogEngine {
 
         add("02-22", "02-48", 150, "m2.NoPassGrimaldi");
         add("02-39", "02-42", 500, "m2.NoPassAtStars");
-        add("02-59", "04-00", 1000,"m2.findJustinCave");
+        add("02-59", "04-00", 1000, "m2.findJustinCave");
         add("02-64", "02-55", 250, "m2.findRingRing");
 
         add("03-38", "18-23", 500, "m3.schulzTelporter");
@@ -72,14 +72,14 @@ public final class QuestLogEngine {
         add("06-49", "06-29", 250, "m6.Waldfgee");
 
         add("07-22", "07-27", 500, "m7.getBook");
-        add("07-29", "12-00", 1000,"m7.toTehDungeon");
+        add("07-29", "12-00", 1000, "m7.toTehDungeon");
 
         add("09-25", "10-00", 500, "m9.Justin1");
         add("09-62", "09-53", 250, "m9.Justin2");
 
 
         add("13-61", "13-02", 250, "m13.cold");
-        add("13-07", "14-01", 1000,"m13.keysToDungeonCells");
+        add("13-07", "14-01", 1000, "m13.keysToDungeonCells");
         add("13-21", "13-27", 250, "m13.FridayGum");
         add("13-39", "01-74", 500, "m13.FindBeweisBunga");
 
@@ -89,7 +89,7 @@ public final class QuestLogEngine {
 
         add("18-10", "18-20", 500, "m18.lattenGame");
 
-        add("19-39", "20-75", 1000,"m19.saltTheChiliKing");
+        add("19-39", "20-75", 1000, "m19.saltTheChiliKing");
 
         add("20-26", "20-28", 500, "m20.toTheOfficeRoom");
 
@@ -158,11 +158,9 @@ public final class QuestLogEngine {
         //
         if (levelMap == 10 && position.equals(12, 38)) {
             solvePossiblePartyQuest(10, 0);
-        }
-        else if (levelMap == 12 && position.equals(56, 46)) {
+        } else if (levelMap == 12 && position.equals(56, 46)) {
             solvePossiblePartyQuest(12, 0);
-        }
-        else if (levelMap == 12 && position.equals(77, 39)) {
+        } else if (levelMap == 12 && position.equals(77, 39)) {
             solvePossiblePartyQuest(12, 0);
         }
         // chest with code wheel

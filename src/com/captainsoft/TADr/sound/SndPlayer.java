@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.sound;
 
@@ -11,8 +11,8 @@ package com.captainsoft.TADr.sound;
  */
 public interface SndPlayer {
 
-	public void enabled(boolean enabled);
+    public void enabled(boolean enabled);
 
-	public void playSound(String type, int id);	
+    public void playSound(String type, int id);
 
 }

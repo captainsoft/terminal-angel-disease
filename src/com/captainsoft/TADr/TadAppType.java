@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr;
 
@@ -13,6 +13,6 @@ enum TadAppType {
 
     Demo,
     Developer,
-	Production,
+    Production,
 
 }

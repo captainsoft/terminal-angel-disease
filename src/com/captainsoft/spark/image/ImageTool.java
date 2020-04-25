@@ -18,38 +18,38 @@ import javax.imageio.stream.MemoryCacheImageInputStream;
 public final class ImageTool {
 
     // fields
-		
-	private static Toolkit tk;	
+
+    private static Toolkit tk;
 
     // static
 
-	static {
-		tk = Toolkit.getDefaultToolkit();       
-	}
+    static {
+        tk = Toolkit.getDefaultToolkit();
+    }
 
     // constructors
-	
-	private ImageTool() {
-		super();
-	}
+
+    private ImageTool() {
+        super();
+    }
 
     // public
-	
-	public static Image createImage(byte[] imageData) throws IOException {
-		return createImage(imageData, 0, 0);
-	}
-	
-	public static Image createImage(byte[] imageData, int width, int height) throws IOException {		
-		if (width != 0 || height != 0) {
-			Image i = ImageIO.read(new MemoryCacheImageInputStream(new ByteArrayInputStream(imageData)));
-			return i.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-		} else {
-			return ImageIO.read(new MemoryCacheImageInputStream(new ByteArrayInputStream(imageData)));
-		}
-	}
 
-	public static Image createFiltered(Image image, ImageFilter filter) {		
-		return tk.createImage(new FilteredImageSource(image.getSource(), filter));		
-	}
+    public static Image createImage(byte[] imageData) throws IOException {
+        return createImage(imageData, 0, 0);
+    }
+
+    public static Image createImage(byte[] imageData, int width, int height) throws IOException {
+        if (width != 0 || height != 0) {
+            Image i = ImageIO.read(new MemoryCacheImageInputStream(new ByteArrayInputStream(imageData)));
+            return i.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        } else {
+            return ImageIO.read(new MemoryCacheImageInputStream(new ByteArrayInputStream(imageData)));
+        }
+    }
+
+    public static Image createFiltered(Image image, ImageFilter filter) {
+        return tk.createImage(new FilteredImageSource(image.getSource(), filter));
+    }
 
 }

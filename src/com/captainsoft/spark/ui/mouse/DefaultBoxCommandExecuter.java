@@ -14,12 +14,12 @@ public final class DefaultBoxCommandExecuter implements BoxCommandExecuter {
 
     // BoxCommandExecuter
 
-	public void execute(Command command) {
-		command.execute();		
-	}
+    public void execute(Command command) {
+        command.execute();
+    }
 
-	public void execute(ClickCommand clickCommand, UiBox box, int x, int y, MouseButton button) {
-		clickCommand.click(box, x, y, button);
-	}
+    public void execute(ClickCommand clickCommand, UiBox box, int x, int y, MouseButton button) {
+        clickCommand.click(box, x, y, button);
+    }
 
 }

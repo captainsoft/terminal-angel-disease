@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.model.puzzle;
 
@@ -10,7 +10,7 @@ package com.captainsoft.TADr.model.puzzle;
  * @author mathias fringes
  */
 public interface Puzzle {
-	
-	public void execute();
+
+    public void execute();
 
 }

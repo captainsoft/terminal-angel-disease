@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.ui.drawing;
 
@@ -12,7 +12,7 @@ import java.awt.*;
  * @author mathias fringes
  */
 public interface Bitimage {
-	
-	public Image image();	
+
+    public Image image();
 
 }

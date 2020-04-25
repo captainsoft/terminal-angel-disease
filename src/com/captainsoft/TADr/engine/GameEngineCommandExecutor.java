@@ -17,32 +17,32 @@ import com.captainsoft.spark.ui.mouse.ClickCommand;
  * @author mathias fringes
  */
 public final class GameEngineCommandExecutor implements BoxCommandExecuter {
-	
-	// constructors
-	
-	public GameEngineCommandExecutor() {
-		super();
-	}
-	
-	// overridden 
 
-	public void execute(Command c) {
-		doExecute(c);
-	}
+    // constructors
 
-	public void execute(final ClickCommand cc, final UiBox box, final int x, final int y, final MouseButton button) {
-		
-	   doExecute(new AbstractCommand() {
-		   public void execute() {
-			   cc.click(box, x, y, button);			
-		   }
-	   	});
-	}
-	
-	// private 
-	
-	private void doExecute(Command c) {
-		TadRepo.inst().GameEngine().directCommand(c);
-	}
-	
+    public GameEngineCommandExecutor() {
+        super();
+    }
+
+    // overridden
+
+    public void execute(Command c) {
+        doExecute(c);
+    }
+
+    public void execute(final ClickCommand cc, final UiBox box, final int x, final int y, final MouseButton button) {
+
+        doExecute(new AbstractCommand() {
+            public void execute() {
+                cc.click(box, x, y, button);
+            }
+        });
+    }
+
+    // private
+
+    private void doExecute(Command c) {
+        TadRepo.inst().GameEngine().directCommand(c);
+    }
+
 }

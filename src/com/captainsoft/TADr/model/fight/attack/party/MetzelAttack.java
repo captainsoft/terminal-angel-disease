@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.model.fight.attack.party;
 
@@ -18,53 +18,53 @@ import com.captainsoft.spark.utils.*;
  */
 public final class MetzelAttack implements PartyAttack {
 
-	// fields
-	
-	private final MonsterParty monsterParty;
-	private final PartyFighter fighter;
-	
-	// constructors
-	
-	public MetzelAttack(PartyFighter fighter, MonsterParty monsterParty) {
-		super();
-		this.fighter = fighter;
-		this.monsterParty = monsterParty;
-	}
+    // fields
 
-	// PartyAttack
+    private final MonsterParty monsterParty;
+    private final PartyFighter fighter;
 
-	public Attack attack() {
-		Attack attack = new Attack();
-		attack.sound = 8;
-		
-		if (fighter.weapon == null) {
-			attack.text = new TrKey("fight.attack.metzel.noWeapon", fighter.name());
-			return attack;
-		}	    
-				
-		for (Monster monster : this.monsterParty) {
-			AttackBash attackBash = new AttackBash();
-			int points = calcAttackPoints(monster);
-			attackBash.monster = monster;
-			attackBash.hit = (points >= 0);
-			attackBash.points = points;
-			attackBash.image = Utils.rndPlus(14, 2);			
-			attack.add(attackBash);			
-		}	    	   
-				
-		if (attack.hitCount() == 0) {
-			attack.text = new TrKey("fight.attack.metzel.fail", fighter.name());
-		} else {
-			attack.text = new TrKey("fight.attack.metzel.hit", fighter.name(), attack.hitCount());
-		}
-		
-		// resting time
-		int restingTime = PartyAttackUtils.calcRestingTime(fighter, 48, 5);		
-        attack.restingTime(restingTime);              
-		
-		// learning
+    // constructors
+
+    public MetzelAttack(PartyFighter fighter, MonsterParty monsterParty) {
+        super();
+        this.fighter = fighter;
+        this.monsterParty = monsterParty;
+    }
+
+    // PartyAttack
+
+    public Attack attack() {
+        Attack attack = new Attack();
+        attack.sound = 8;
+
+        if (fighter.weapon == null) {
+            attack.text = new TrKey("fight.attack.metzel.noWeapon", fighter.name());
+            return attack;
+        }
+
+        for (Monster monster : this.monsterParty) {
+            AttackBash attackBash = new AttackBash();
+            int points = calcAttackPoints(monster);
+            attackBash.monster = monster;
+            attackBash.hit = (points >= 0);
+            attackBash.points = points;
+            attackBash.image = Utils.rndPlus(14, 2);
+            attack.add(attackBash);
+        }
+
+        if (attack.hitCount() == 0) {
+            attack.text = new TrKey("fight.attack.metzel.fail", fighter.name());
+        } else {
+            attack.text = new TrKey("fight.attack.metzel.hit", fighter.name(), attack.hitCount());
+        }
+
+        // resting time
+        int restingTime = PartyAttackUtils.calcRestingTime(fighter, 48, 5);
+        attack.restingTime(restingTime);
+
+        // learning
         attack.hasLearned = PartyAttackUtils.learnSpecial3(fighter.member);
-        if(attack.hasLearned) {
+        if (attack.hasLearned) {
             attack.learnText = new TrKey("fight.learn.special", fighter.member.specialAttackSkill.value()).variant(fighter.member.nr());
         }
 
@@ -101,5 +101,5 @@ public final class MetzelAttack implements PartyAttack {
         }
 
     }
-	
+
 }

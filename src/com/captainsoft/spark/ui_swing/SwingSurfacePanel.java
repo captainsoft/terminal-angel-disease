@@ -44,8 +44,8 @@ public class SwingSurfacePanel extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        synchronized(surface) {
-            g.drawImage(surface.image(), 0,0, this);
+        synchronized (surface) {
+            g.drawImage(surface.image(), 0, 0, this);
         }
     }
 

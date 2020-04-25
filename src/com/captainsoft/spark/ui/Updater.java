@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.ui;
 
@@ -11,6 +11,6 @@ package com.captainsoft.spark.ui;
  */
 public interface Updater {
 
-	public void update();
-	
+    public void update();
+
 }

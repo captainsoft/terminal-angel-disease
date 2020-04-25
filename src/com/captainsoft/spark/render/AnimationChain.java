@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.render;
 
@@ -17,7 +17,7 @@ public final class AnimationChain extends Animation {
     // fields
 
     private List<Animation> animations = new ArrayList<Animation>();
-    
+
     private Animation current;
 
     // constructors
@@ -35,7 +35,7 @@ public final class AnimationChain extends Animation {
         }
         //
         if (current == null) {
-            current = animations.remove(0);            
+            current = animations.remove(0);
         }
         //
         int play = current.play();

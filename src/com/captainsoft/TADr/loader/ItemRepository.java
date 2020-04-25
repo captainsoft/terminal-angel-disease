@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.loader;
 
@@ -14,15 +14,15 @@ import com.captainsoft.spark.ui.drawing.Surface;
  * @author mathias fringes
  */
 public interface ItemRepository {
-	
-	public Item item(int number);
-	
-	public Item item(ItemInstance itemInstance);
-	
-	public Surface getImage(int number);
-	
-	public Surface getImage(Item item);
-		
-	public Surface getCursorImage(Item item);
+
+    public Item item(int number);
+
+    public Item item(ItemInstance itemInstance);
+
+    public Surface getImage(int number);
+
+    public Surface getImage(Item item);
+
+    public Surface getCursorImage(Item item);
 
 }

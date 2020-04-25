@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.sound;
 
@@ -13,30 +13,30 @@ import com.captainsoft.spark.utils.Log;
  * @author mathias fringes
  */
 public final class TadSafeSndPlayer implements SndPlayer {
-	
-	// fields
-	
-	private SndPlayer sndPlayer;
-	
-	// constructors
-	
-	public TadSafeSndPlayer(SndPlayer sndPlayer) {
-		super();
-		this.sndPlayer = sndPlayer;
-	}
 
-	// SndPlayer
+    // fields
 
-	public void playSound(String type, int id) {
-		try {
-			sndPlayer.playSound(type, id);
-		} catch(Exception e) {
-			Log.error("Cannot play sound (" + type + "," + id + ")", e);			
-		}		
-	}
+    private SndPlayer sndPlayer;
 
-	public void enabled(boolean enabled) {
-		sndPlayer.enabled(enabled);
-	}
+    // constructors
+
+    public TadSafeSndPlayer(SndPlayer sndPlayer) {
+        super();
+        this.sndPlayer = sndPlayer;
+    }
+
+    // SndPlayer
+
+    public void playSound(String type, int id) {
+        try {
+            sndPlayer.playSound(type, id);
+        } catch (Exception e) {
+            Log.error("Cannot play sound (" + type + "," + id + ")", e);
+        }
+    }
+
+    public void enabled(boolean enabled) {
+        sndPlayer.enabled(enabled);
+    }
 
 }

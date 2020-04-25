@@ -83,7 +83,7 @@ public final class TextSurfaceDrawer {
         int index = 0;
         int py;
         if (p == null) {
-            py = (int)((height - lines.size() * r.getHeight()) / 2);
+            py = (int) ((height - lines.size() * r.getHeight()) / 2);
             index++;
         } else {
             py = p.y;
@@ -91,7 +91,7 @@ public final class TextSurfaceDrawer {
 
         // draw all text lines
 
-        for(String line : lines) {
+        for (String line : lines) {
             Point pr = p;
             if (p == null) {
                 pr = s.getTextMiddlePos(line, width + 2, height + 2);

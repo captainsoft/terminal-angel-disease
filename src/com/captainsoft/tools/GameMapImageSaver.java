@@ -66,9 +66,9 @@ public class GameMapImageSaver extends JFrame {
 
 
         for (int x = 0; x < 99; x++) {
-            for (int y = 0; y < 99; y++){
-                Surface tile = tilePainter.createTileImage(new Position(x+1, y+1));
-                mapImage.blit(tile, x * 40, y * 40 );
+            for (int y = 0; y < 99; y++) {
+                Surface tile = tilePainter.createTileImage(new Position(x + 1, y + 1));
+                mapImage.blit(tile, x * 40, y * 40);
             }
         }
 
@@ -89,7 +89,7 @@ public class GameMapImageSaver extends JFrame {
 
     public static void main(String args[]) {
         TadLang.toGerman();
-        for (int i = 1; i < 21; i++){
+        for (int i = 1; i < 21; i++) {
             GameMapImageSaver mv = new GameMapImageSaver(i);
             // mv.setVisible(true);
         }

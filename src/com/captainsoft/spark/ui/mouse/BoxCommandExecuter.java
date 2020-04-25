@@ -11,8 +11,8 @@ import com.captainsoft.spark.ui.box.UiBox;
  */
 public interface BoxCommandExecuter {
 
-	void execute(Command c);
+    void execute(Command c);
 
-	void execute(ClickCommand cc, UiBox box, int x, int y, MouseButton button);		
+    void execute(ClickCommand cc, UiBox box, int x, int y, MouseButton button);
 
 }

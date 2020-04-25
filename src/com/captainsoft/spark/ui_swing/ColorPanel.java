@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.ui_swing;
 
@@ -17,14 +17,14 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class ColorPanel extends JPanel {
 
-	public ColorPanel(Color color) {
-		super();
-		this.setBackground(color);
-	}
+    public ColorPanel(Color color) {
+        super();
+        this.setBackground(color);
+    }
 
-	public ColorPanel(Color color, LayoutManager layout) {
-		super(layout);
-		this.setBackground(color);
-	}
-	
+    public ColorPanel(Color color, LayoutManager layout) {
+        super(layout);
+        this.setBackground(color);
+    }
+
 }

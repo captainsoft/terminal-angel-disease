@@ -18,39 +18,39 @@ import com.captainsoft.spark.utils.Log;
  */
 public final class TeleporterPuzzle extends AbstractPuzzle {
 
-	// fields
-	
-	private final Teleporter teleporter;
-	private final Position position;
+    // fields
 
-	// constructors
-	
-	public TeleporterPuzzle(Teleporter t) {
-		super();
-		this.teleporter = t;
-		this.position = gameEngine.party().position();
-	}
-	
-	public TeleporterPuzzle(Position position, PuzzleFileData pd) {
-		super();
-		this.teleporter = new Teleporter(pd);
-		this.position = position;
-	}
+    private final Teleporter teleporter;
+    private final Position position;
 
-	// Puzzle
-	
-	@Override
-	public void execute() {
-		Log.info("executing teleporter puzzle");
-		
-		if (teleporter.playSound) {		
-			SndFacade.teleprismaSound();
-		}
-				
-		if (teleporter.onSameMap()) {
-			gameEngine.updateTile(new TileUpdate(position, teleporter.tileValue));			
-		}
-		gameEngine.teleportParty(teleporter.mapNr, teleporter.position);
-	}
+    // constructors
+
+    public TeleporterPuzzle(Teleporter t) {
+        super();
+        this.teleporter = t;
+        this.position = gameEngine.party().position();
+    }
+
+    public TeleporterPuzzle(Position position, PuzzleFileData pd) {
+        super();
+        this.teleporter = new Teleporter(pd);
+        this.position = position;
+    }
+
+    // Puzzle
+
+    @Override
+    public void execute() {
+        Log.info("executing teleporter puzzle");
+
+        if (teleporter.playSound) {
+            SndFacade.teleprismaSound();
+        }
+
+        if (teleporter.onSameMap()) {
+            gameEngine.updateTile(new TileUpdate(position, teleporter.tileValue));
+        }
+        gameEngine.teleportParty(teleporter.mapNr, teleporter.position);
+    }
 
 }

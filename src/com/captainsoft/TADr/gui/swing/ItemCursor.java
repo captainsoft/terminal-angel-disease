@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.gui.swing;
 
@@ -26,56 +26,56 @@ public final class ItemCursor {
 
     // fields
 
-	private final Component compenent;
-	private final Deque<Item> itemList = new LinkedList<Item>(); 
-	private final ItemRepository itemRepository;
-	private final Toolkit toolkit = Toolkit.getDefaultToolkit();
-	
-	// constructors
-	
-	public ItemCursor(Component component, ItemRepository itemRepository) {
-		super();
-		this.compenent = component;
-		this.itemRepository = itemRepository;
+    private final Component compenent;
+    private final Deque<Item> itemList = new LinkedList<Item>();
+    private final ItemRepository itemRepository;
+    private final Toolkit toolkit = Toolkit.getDefaultToolkit();
+
+    // constructors
+
+    public ItemCursor(Component component, ItemRepository itemRepository) {
+        super();
+        this.compenent = component;
+        this.itemRepository = itemRepository;
         item(null);
-	}
-		
-	// public
-		
-	public void add(Item item) {
+    }
+
+    // public
+
+    public void add(Item item) {
         Cursor cursor;
-		if (item == null) {
+        if (item == null) {
             Surface c = itemRepository.getImage(251);
             cursor = toolkit.createCustomCursor(c.image(), new Point(1, 1), "tad");
-		} else {
-			itemList.addLast(item);
-			//
-			Surface s = new Surface(itemRepository.getCursorImage(item), true);
+        } else {
+            itemList.addLast(item);
+            //
+            Surface s = new Surface(itemRepository.getCursorImage(item), true);
             s.color(new Color(177, 177, 177));
-			s.line(1, 1, 4, 1);
-			s.line(1, 1, 4, 4);
-			s.line(1, 1, 1, 4);
-			Image cursorImage = s.image();
-			//
-			cursor = toolkit.createCustomCursor(cursorImage, new Point(1, 1), "tad");
-		}
-		compenent.setCursor(cursor);
-	}
-		
-	public void item(Item item) {
-		itemList.pollLast();
-		if (item == null) {
-			item = itemList.pollLast();
-		}
-		add(item);		
-	}
-	
-	public Item item() {
-		return itemList.peekLast();
-	}
+            s.line(1, 1, 4, 1);
+            s.line(1, 1, 4, 4);
+            s.line(1, 1, 1, 4);
+            Image cursorImage = s.image();
+            //
+            cursor = toolkit.createCustomCursor(cursorImage, new Point(1, 1), "tad");
+        }
+        compenent.setCursor(cursor);
+    }
 
-	public boolean hasItem() {
-		return (itemList.size() > 0);
-	}
-	
+    public void item(Item item) {
+        itemList.pollLast();
+        if (item == null) {
+            item = itemList.pollLast();
+        }
+        add(item);
+    }
+
+    public Item item() {
+        return itemList.peekLast();
+    }
+
+    public boolean hasItem() {
+        return (itemList.size() > 0);
+    }
+
 }

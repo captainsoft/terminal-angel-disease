@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.gui.windows;
 
@@ -24,7 +24,7 @@ import java.awt.*;
 
 /**
  * Captainsoft Info Window!
- * 
+ *
  * @author mathias
  */
 public final class CaptainsoftInfoWindow extends BaseWindowController {
@@ -37,74 +37,74 @@ public final class CaptainsoftInfoWindow extends BaseWindowController {
 
     // WindowController
 
-	public UiBoxContainer createWindow(BoxCommandList mg) {
+    public UiBoxContainer createWindow(BoxCommandList mg) {
 
-		CaptainsoftInfoWindowBox windowBox = new CaptainsoftInfoWindowBox();
-		mg.setCmd(windowBox, new Integer[] {KeyCodes.F3, KeyCodes.Space, KeyCodes.Enter}, new Command() {
-			public void execute() {
-				TadRepo.inst().GameEngine().closeWindows();				
-			}
-		});
-		return windowBox;
-	}
+        CaptainsoftInfoWindowBox windowBox = new CaptainsoftInfoWindowBox();
+        mg.setCmd(windowBox, new Integer[]{KeyCodes.F3, KeyCodes.Space, KeyCodes.Enter}, new Command() {
+            public void execute() {
+                TadRepo.inst().GameEngine().closeWindows();
+            }
+        });
+        return windowBox;
+    }
 
-	@Override
-	public boolean isLenientModal() {
-		return true;
-	}
+    @Override
+    public boolean isLenientModal() {
+        return true;
+    }
 
-	//
-	// nested classes
-	
-	private final class CaptainsoftInfoWindowBox extends MxWindow {
-		
-		public CaptainsoftInfoWindowBox() {
-			super();
-			set(155, 35, 410, 340);
-			createSurface();
-			
-			title = "Information";						
-			//
-			Font f = new Font(Fonts.Verdana, Font.PLAIN, 9);
-			Font fc = new Font(Fonts.Courier, Font.PLAIN, 12);
-					
-			String text = TadRepo.inst().Trans().word("infoWindow", TAD.Type, TAD.Version); 
-			String[] texts = text.split(GuiMessages.sep);
-			
-			MxTopDownFlexLayout grid = new MxTopDownFlexLayout(this);
-			grid.side_margin = 10;
-			grid.def_gap = 4;
-			grid.next_y = 20;
-			grid.gap(10);
-						
-			for (String s : texts) {
-				
-				boolean courier = s.startsWith("*");
-				if (courier) {
-					s = s.substring(1);
-				}
-				
-				TextBox b = new TextBox();
-				b.text = s;
-				int c = s.split(GuiMessages.br).length;
-								
-				b.font = courier ? fc : f;
-								
-				b.color(WindowColors.txt);				
-				b.size(width - 20, 15 * c);
-				b.height += courier ? 5 : 0; 
-				b.alignCenter();
-				
-				grid.add(b);
-				if (courier) {
-					UiBox ms = new MxSeparator(30);
-					ms.height = 20;
-					grid.add(ms);
-				}							
-			}
-		}
-		
-	}
+    //
+    // nested classes
+
+    private final class CaptainsoftInfoWindowBox extends MxWindow {
+
+        public CaptainsoftInfoWindowBox() {
+            super();
+            set(155, 35, 410, 340);
+            createSurface();
+
+            title = "Information";
+            //
+            Font f = new Font(Fonts.Verdana, Font.PLAIN, 9);
+            Font fc = new Font(Fonts.Courier, Font.PLAIN, 12);
+
+            String text = TadRepo.inst().Trans().word("infoWindow", TAD.Type, TAD.Version);
+            String[] texts = text.split(GuiMessages.sep);
+
+            MxTopDownFlexLayout grid = new MxTopDownFlexLayout(this);
+            grid.side_margin = 10;
+            grid.def_gap = 4;
+            grid.next_y = 20;
+            grid.gap(10);
+
+            for (String s : texts) {
+
+                boolean courier = s.startsWith("*");
+                if (courier) {
+                    s = s.substring(1);
+                }
+
+                TextBox b = new TextBox();
+                b.text = s;
+                int c = s.split(GuiMessages.br).length;
+
+                b.font = courier ? fc : f;
+
+                b.color(WindowColors.txt);
+                b.size(width - 20, 15 * c);
+                b.height += courier ? 5 : 0;
+                b.alignCenter();
+
+                grid.add(b);
+                if (courier) {
+                    UiBox ms = new MxSeparator(30);
+                    ms.height = 20;
+                    grid.add(ms);
+                }
+            }
+        }
+
+    }
 
 }
 

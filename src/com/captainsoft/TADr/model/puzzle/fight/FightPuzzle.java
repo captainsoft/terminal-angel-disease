@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.model.puzzle.fight;
 
@@ -24,62 +24,62 @@ import com.captainsoft.spark.utils.Log;
  */
 public final class FightPuzzle implements Puzzle {
 
-	// fields
-	
-	private final GameEngine gameEngine;
-	private final Fight fight;
-	private final PuzzleFileData data;
-	private final Position position;
-	
-	// constructors
-	
-	public FightPuzzle(GameEngine gameEngine, Position p, PuzzleFileData data) {
-		super();
-		this.gameEngine = gameEngine;		
-		this.fight = new Fight(gameEngine.party(), p, 0, data.value(2), data.value(1), data.value(3));
-		this.data = data;
-		this.position = p;
-	}	
-	
-	// Puzzle
+    // fields
 
-	public void execute() {		
-		if (data.value(6) > 0) {
-			fight.rewardItem = TadRepo.inst().ItemRepo().item(data.value(6));
-		} else {
-			fight.rewardItem = null;
-		}
-		
-		//
-		FightWindowController fw = new FightWindowController(gameEngine, fight);
-		gameEngine.showWindow(fw);		
-			
-		// 
-		// after fight		
-		fight.afterFightCommand = new Command() {
+    private final GameEngine gameEngine;
+    private final Fight fight;
+    private final PuzzleFileData data;
+    private final Position position;
 
-			public void execute() {
-								
-				for (int i = 0; i < 3; i++) {
-					int ed = data.value(7+i); 
-					if (ed > 0) {
-						Log.info("executing fight event " + ed);
-						new EventPuzzle(position).executeEvent(ed);						
-					}
-				}
-						
-				// update this position
-				TileValues tv = new TileValues();
-				tv.set(1, data.value(4));
-				tv.set(3, data.value(5));
-				if (tv.active()) {
-					gameEngine.updateTile(new TileUpdate(position, tv));
-					gameEngine.puzzleEngine().executePassivePuzzle(position);
-				}							
-			}			
-		};
-		
-		fw.beginFight();	
-	}
+    // constructors
+
+    public FightPuzzle(GameEngine gameEngine, Position p, PuzzleFileData data) {
+        super();
+        this.gameEngine = gameEngine;
+        this.fight = new Fight(gameEngine.party(), p, 0, data.value(2), data.value(1), data.value(3));
+        this.data = data;
+        this.position = p;
+    }
+
+    // Puzzle
+
+    public void execute() {
+        if (data.value(6) > 0) {
+            fight.rewardItem = TadRepo.inst().ItemRepo().item(data.value(6));
+        } else {
+            fight.rewardItem = null;
+        }
+
+        //
+        FightWindowController fw = new FightWindowController(gameEngine, fight);
+        gameEngine.showWindow(fw);
+
+        // 
+        // after fight		
+        fight.afterFightCommand = new Command() {
+
+            public void execute() {
+
+                for (int i = 0; i < 3; i++) {
+                    int ed = data.value(7 + i);
+                    if (ed > 0) {
+                        Log.info("executing fight event " + ed);
+                        new EventPuzzle(position).executeEvent(ed);
+                    }
+                }
+
+                // update this position
+                TileValues tv = new TileValues();
+                tv.set(1, data.value(4));
+                tv.set(3, data.value(5));
+                if (tv.active()) {
+                    gameEngine.updateTile(new TileUpdate(position, tv));
+                    gameEngine.puzzleEngine().executePassivePuzzle(position);
+                }
+            }
+        };
+
+        fw.beginFight();
+    }
 
 }

@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.render;
 
@@ -13,9 +13,9 @@ public final class NullAnimation extends Animation {
 
     // Animation
 
-	@Override
-	public int play() {
-		return -1;
-	}
+    @Override
+    public int play() {
+        return -1;
+    }
 
 }

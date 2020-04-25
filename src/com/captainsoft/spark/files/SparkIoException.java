@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.files;
 
@@ -12,8 +12,8 @@ import java.io.IOException;
 @SuppressWarnings("serial")
 public final class SparkIoException extends RuntimeException {
 
-	public SparkIoException(String message, IOException e) {
-		super(message, e);
-	}
+    public SparkIoException(String message, IOException e) {
+        super(message, e);
+    }
 
 }

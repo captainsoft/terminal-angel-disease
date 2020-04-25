@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.engine.excp;
 
@@ -12,12 +12,12 @@ package com.captainsoft.TADr.engine.excp;
 @SuppressWarnings("serial")
 public final class GameStateException extends RuntimeException {
 
-	public GameStateException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    public GameStateException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-	public GameStateException(String message) {
-		super(message);
-	}
+    public GameStateException(String message) {
+        super(message);
+    }
 
 }

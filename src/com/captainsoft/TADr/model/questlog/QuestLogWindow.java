@@ -25,7 +25,7 @@ public final class QuestLogWindow implements WindowController {
 
     // fields
 
-    private final Integer[] KeyList = new Integer[] {KeyCodes.F2, KeyCodes.Space, KeyCodes.Enter};
+    private final Integer[] KeyList = new Integer[]{KeyCodes.F2, KeyCodes.Space, KeyCodes.Enter};
 
     // WindowController
 
@@ -74,7 +74,7 @@ public final class QuestLogWindow implements WindowController {
 
             QuestWindowTextLayout layout = null;
 
-            for(PartyQuestLog.Item questLogItem : questLog.items()) {
+            for (PartyQuestLog.Item questLogItem : questLog.items()) {
 
                 if (layout == null || layout.add(questLogItem.solved, questLogItem.questDescription.text) == false) {
 

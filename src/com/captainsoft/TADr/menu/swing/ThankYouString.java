@@ -20,37 +20,37 @@ final class ThankYouString {
 
     public static String thankYouString() {
         return
-        "Captainsoft would like to thank (at least) the following:\r\n" +
-                "All Fringes family * All Münster friends * All Berlin friends * All London heads * " +
-                "All people I met on my travels * GM * " +
-                "Sana Gesundheitszentrum * " +
-                "FH Trier * University of Westminster * " +
-                "Alex Krug und Deutsche Untergrund Spiele * Developia * " +
-                "Painkilla & GameDev Page * Tobias Bürkle - the special customer * " +
-                "Arun and Steffi for hosting me in Cologne during Gamescon * " +
-                "A MAZE. festival Berlin * Lorenzo + Talk & Play * " +
-                "All the Testers: Mike Droste, EgonOlsen, Karl Wessel, Thorsten Lüders, Bene Heying, Carsten Evers, Pawel Gdula, EtmosCode * "+
-                "IndieDB * Java Gaming Community * TIGF * Gamejolt * " +
-                "Supertopic * Kultpower.de * " +
-                "ProGuard * ProDj * WebAudio DrumMachine * IntelliJ * " +
-                "Deutsche Bahn * BVG * Karstadt am Ostbahnhof * Galeria Kaufhof Alexanderplatz * " +
-                "Wizardry 7 - (I stole most of the stuff from this game) * Indiana Jones and the fate of Atlantis * Doom * Ultima 7 & 8 * " +
-                "Pizza XXL * Edeka Frankfurter Allee * Giancarlo * " +
-                "PC Player * Powerplay * PC Games * " +
-                "Burger King * Pepsi Cola * Heineken * " +
-                "Superfit * " +
-                "Robert DeNiro * Al Pacino * Jeff Hanneman * " +
-                "Harald Schmidt * " +
-                "At the Gates (because I stole the title) * " +
-                "Mercedes-Benz * MUJI * " +
-                "VisualBasic * Ulead for PhotoImpact * Freesound.org * Adobe Flash * " +
-                "YouTube * Facebook * " +
-                "Berghain * Tempo90 Trier * " +
-                "P+C Tauenzien * " +
-                "Replay Perfums * DIESEL * Wolfgang Joop * Brixton Hats * Minimum * Asics Tiger * " +
-                "Jackson Guitars * " +
-                "Kottbusser Tor * all Spätis in Berlin who sell me beer * all restaurants I ever went to * chocolate in general * " +
-                "\r\n...and all the people, things, and stuff I have forgotten to mention! Peace, out."
+                "Captainsoft would like to thank (at least) the following:\r\n" +
+                        "All Fringes family * All Münster friends * All Berlin friends * All London heads * " +
+                        "All people I met on my travels * GM * " +
+                        "Sana Gesundheitszentrum * " +
+                        "FH Trier * University of Westminster * " +
+                        "Alex Krug und Deutsche Untergrund Spiele * Developia * " +
+                        "Painkilla & GameDev Page * Tobias Bürkle - the special customer * " +
+                        "Arun and Steffi for hosting me in Cologne during Gamescon * " +
+                        "A MAZE. festival Berlin * Lorenzo + Talk & Play * " +
+                        "All the Testers: Mike Droste, EgonOlsen, Karl Wessel, Thorsten Lüders, Bene Heying, Carsten Evers, Pawel Gdula, EtmosCode * " +
+                        "IndieDB * Java Gaming Community * TIGF * Gamejolt * " +
+                        "Supertopic * Kultpower.de * " +
+                        "ProGuard * ProDj * WebAudio DrumMachine * IntelliJ * " +
+                        "Deutsche Bahn * BVG * Karstadt am Ostbahnhof * Galeria Kaufhof Alexanderplatz * " +
+                        "Wizardry 7 - (I stole most of the stuff from this game) * Indiana Jones and the fate of Atlantis * Doom * Ultima 7 & 8 * " +
+                        "Pizza XXL * Edeka Frankfurter Allee * Giancarlo * " +
+                        "PC Player * Powerplay * PC Games * " +
+                        "Burger King * Pepsi Cola * Heineken * " +
+                        "Superfit * " +
+                        "Robert DeNiro * Al Pacino * Jeff Hanneman * " +
+                        "Harald Schmidt * " +
+                        "At the Gates (because I stole the title) * " +
+                        "Mercedes-Benz * MUJI * " +
+                        "VisualBasic * Ulead for PhotoImpact * Freesound.org * Adobe Flash * " +
+                        "YouTube * Facebook * " +
+                        "Berghain * Tempo90 Trier * " +
+                        "P+C Tauenzien * " +
+                        "Replay Perfums * DIESEL * Wolfgang Joop * Brixton Hats * Minimum * Asics Tiger * " +
+                        "Jackson Guitars * " +
+                        "Kottbusser Tor * all Spätis in Berlin who sell me beer * all restaurants I ever went to * chocolate in general * " +
+                        "\r\n...and all the people, things, and stuff I have forgotten to mention! Peace, out."
                 ;
     }
 

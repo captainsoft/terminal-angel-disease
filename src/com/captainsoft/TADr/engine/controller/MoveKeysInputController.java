@@ -11,7 +11,6 @@ import com.captainsoft.spark.control.key.KeyCodes;
 import com.captainsoft.spark.control.key.KeyInput;
 
 /**
- *
  * @author mathias fringes
  */
 public final class MoveKeysInputController implements KeyInput {
@@ -23,7 +22,7 @@ public final class MoveKeysInputController implements KeyInput {
     }
 
     public boolean keyPress(int keyCode) {
-        switch(keyCode) {
+        switch (keyCode) {
             case KeyCodes.CursorRight:
             case KeyCodes.D:
                 gameEngine.nextCommand(new GoCommand(Direction.East));

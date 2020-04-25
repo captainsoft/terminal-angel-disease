@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.model.puzzle;
 
@@ -15,37 +15,37 @@ import com.captainsoft.TADr.model.Position;
  */
 public final class TileUpdate {
 
-	// fields
-	
-	private final Position position;	
-	private final TileValues tileValues;
-	
-	// constructors
-	
-	public TileUpdate(int x, int y, TileValues tileValues) {
-		this(new Position(x, y), tileValues);		
-	}
-	
-	public TileUpdate(Position position, TileValues tileValues) {
-		this.tileValues = tileValues;
-		this.position = position;
-	}
+    // fields
 
-	// public
-	
-	public Position position() {
-		return position;
-	}
+    private final Position position;
+    private final TileValues tileValues;
 
-	public TileValues values() {
-		return tileValues;
-	}
-	
-	// overridden
-	
-	@Override
-	public String toString() {	
-		return stringer("TileUpdate", position, tileValues);
-	}
-	
+    // constructors
+
+    public TileUpdate(int x, int y, TileValues tileValues) {
+        this(new Position(x, y), tileValues);
+    }
+
+    public TileUpdate(Position position, TileValues tileValues) {
+        this.tileValues = tileValues;
+        this.position = position;
+    }
+
+    // public
+
+    public Position position() {
+        return position;
+    }
+
+    public TileValues values() {
+        return tileValues;
+    }
+
+    // overridden
+
+    @Override
+    public String toString() {
+        return stringer("TileUpdate", position, tileValues);
+    }
+
 }

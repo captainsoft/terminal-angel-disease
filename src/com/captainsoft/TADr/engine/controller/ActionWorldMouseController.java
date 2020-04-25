@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.engine.controller;
 
@@ -33,24 +33,24 @@ import com.captainsoft.spark.utils.Log;
  * @author mathias fringes
  */
 public final class ActionWorldMouseController {
-	
-	// fields
-	
-	private final ItemRepository itemRepo;
-	private final GameEngine gameEngine;
-	private final MainViewer mainViewer;
 
-	// constructors
-	
-	public ActionWorldMouseController(GameEngine gameEngine) {
-		super();
-		this.gameEngine = gameEngine;
-		this.mainViewer = gameEngine.mainViewer();
-		//
-		this.itemRepo = TadRepo.inst().ItemRepo();	
-	}
-	
-	// public
+    // fields
+
+    private final ItemRepository itemRepo;
+    private final GameEngine gameEngine;
+    private final MainViewer mainViewer;
+
+    // constructors
+
+    public ActionWorldMouseController(GameEngine gameEngine) {
+        super();
+        this.gameEngine = gameEngine;
+        this.mainViewer = gameEngine.mainViewer();
+        //
+        this.itemRepo = TadRepo.inst().ItemRepo();
+    }
+
+    // public
 
     public void clickMapPosition(final Position position, final MouseButton button) {
         final LevelMap levelMap = gameEngine.levelMap();
@@ -58,7 +58,7 @@ public final class ActionWorldMouseController {
         //
         gameEngine.stopParty();
         //
-        switch(button) {
+        switch (button) {
 
             case Left:
                 //
@@ -107,7 +107,7 @@ public final class ActionWorldMouseController {
                 if (gameEngine.puzzleEngine().executePassivePuzzle(position)) {
                     return;
                 }
-                if(gameEngine.tileEngine().extraTileClickAction(levelMap, position, partyPosition)) {
+                if (gameEngine.tileEngine().extraTileClickAction(levelMap, position, partyPosition)) {
                     return;
                 }
             }
@@ -120,7 +120,7 @@ public final class ActionWorldMouseController {
 
         if (Debugger.Inst.tileInfo) {
             Tile tile = levelMap.tile(position);
-            gameEngine.sayAsIs(position + " # "+ tile);
+            gameEngine.sayAsIs(position + " # " + tile);
 
             Animation a = mainViewer.mapDrawer.mapAnimations.get(position);
             if (a != null) {
@@ -180,51 +180,50 @@ public final class ActionWorldMouseController {
 
     }
 
-	private boolean takeItemIntoInventory(Item item) {
-		int startMemberNr = mainViewer.currentMember().nr();
-		//
-		List<PartyMember> allFrom = gameEngine.party().allFrom(startMemberNr);		
-		ItemPosition pos = gameEngine.itemEngine().findSuitablePos(allFrom, item);
-		//
-		if (pos != null) {
-			gameEngine.party().inventory().set(pos, item);			
-			mainViewer.toInventory(pos, item);
-			return true;
-		}
-		//
-		return false;
-	}
+    private boolean takeItemIntoInventory(Item item) {
+        int startMemberNr = mainViewer.currentMember().nr();
+        //
+        List<PartyMember> allFrom = gameEngine.party().allFrom(startMemberNr);
+        ItemPosition pos = gameEngine.itemEngine().findSuitablePos(allFrom, item);
+        //
+        if (pos != null) {
+            gameEngine.party().inventory().set(pos, item);
+            mainViewer.toInventory(pos, item);
+            return true;
+        }
+        //
+        return false;
+    }
 
-	private void dropTakeItem(Position position) {
-		
-		LevelMap levelMap = gameEngine.levelMap();
-		
-		Tile tile = levelMap.tile(position);
-		Item cursorItem = mainViewer.itemInHand();
-		
-		Item tileItem = itemRepo.item(tile.item());
-		if (cursorItem != null) {
-			if (tile.dropable()) {					
-				tile.item(cursorItem.id());
-				gameEngine.takeItem(tileItem);									
-				mainViewer.updatePosition(position);				
-			}
-			else if (levelMap.isCoffeeAutomaton(position)) {
-				if (ItemInstance.CoffeeCupEmpty.match(cursorItem)) {
-					gameEngine.takeItem(itemRepo.item(ItemInstance.CoffeeCupFull));
-				}
-			}
-		} else {															
-			if (tileItem != null) {
-				tile.removeItem();
-				gameEngine.takeItem(tileItem);
-				mainViewer.updatePosition(position);				
-			}
-		}
-	}	
-	
-	private boolean isWindowShown() {
-		return (mainViewer.windowShown());
-	}
-	
+    private void dropTakeItem(Position position) {
+
+        LevelMap levelMap = gameEngine.levelMap();
+
+        Tile tile = levelMap.tile(position);
+        Item cursorItem = mainViewer.itemInHand();
+
+        Item tileItem = itemRepo.item(tile.item());
+        if (cursorItem != null) {
+            if (tile.dropable()) {
+                tile.item(cursorItem.id());
+                gameEngine.takeItem(tileItem);
+                mainViewer.updatePosition(position);
+            } else if (levelMap.isCoffeeAutomaton(position)) {
+                if (ItemInstance.CoffeeCupEmpty.match(cursorItem)) {
+                    gameEngine.takeItem(itemRepo.item(ItemInstance.CoffeeCupFull));
+                }
+            }
+        } else {
+            if (tileItem != null) {
+                tile.removeItem();
+                gameEngine.takeItem(tileItem);
+                mainViewer.updatePosition(position);
+            }
+        }
+    }
+
+    private boolean isWindowShown() {
+        return (mainViewer.windowShown());
+    }
+
 }

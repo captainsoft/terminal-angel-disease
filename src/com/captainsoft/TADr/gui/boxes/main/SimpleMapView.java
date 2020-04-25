@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.gui.boxes.main;
 
@@ -15,22 +15,22 @@ import com.captainsoft.spark.ui.drawing.Surface;
  */
 public final class SimpleMapView extends UiBoxContainer {
 
-	// fields
-	
-	private final GameLevelMapDrawer mapDrawer;
-	
-	// constructors
-	
-	public SimpleMapView(GameLevelMapDrawer mapDrawer) {
-		super(0, 0, GameLevelMapDrawer.PX_WIDTH, GameLevelMapDrawer.PX_HEIGHT);
-		this.mapDrawer = mapDrawer;
-	}		
-		
-	// UiBoxContainer
-	
-	@Override
-	protected void draw(Surface s) {		
-		s.blit(mapDrawer.surface(), 0, 0);
-	}
-	
+    // fields
+
+    private final GameLevelMapDrawer mapDrawer;
+
+    // constructors
+
+    public SimpleMapView(GameLevelMapDrawer mapDrawer) {
+        super(0, 0, GameLevelMapDrawer.PX_WIDTH, GameLevelMapDrawer.PX_HEIGHT);
+        this.mapDrawer = mapDrawer;
+    }
+
+    // UiBoxContainer
+
+    @Override
+    protected void draw(Surface s) {
+        s.blit(mapDrawer.surface(), 0, 0);
+    }
+
 }

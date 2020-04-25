@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.engine.commands;
 
@@ -19,34 +19,34 @@ public final class QuickSaveCommand extends GameEngineCommand {
 
     // constructors
 
-	public QuickSaveCommand() {
-		super();		
-	}
+    public QuickSaveCommand() {
+        super();
+    }
 
     // Command
 
-	public void execute() {
-		if (!gameEngine.canShowDiskMenu()) {
-			return;
-		}
-		Game game = gameEngine.game();
-		if (game == null) {
-			return;
-		}
-		if (game.isNewGame()) {					
-			gameEngine.sayAnonym("quicksave.cannot.isnew");					
-		} else {
-			GameLoader gameLoader = TadRepo.inst().GameLoader();
-			gameLoader.save(game);
-			gameEngine.sayAnonym("quicksave", game.name());
-		}
-	}
+    public void execute() {
+        if (!gameEngine.canShowDiskMenu()) {
+            return;
+        }
+        Game game = gameEngine.game();
+        if (game == null) {
+            return;
+        }
+        if (game.isNewGame()) {
+            gameEngine.sayAnonym("quicksave.cannot.isnew");
+        } else {
+            GameLoader gameLoader = TadRepo.inst().GameLoader();
+            gameLoader.save(game);
+            gameEngine.sayAnonym("quicksave", game.name());
+        }
+    }
 
     // overridden
-	
-	@Override
-	public String toString() {
-		return stringer("QuickSaveCommand");
-	}
-	
+
+    @Override
+    public String toString() {
+        return stringer("QuickSaveCommand");
+    }
+
 }

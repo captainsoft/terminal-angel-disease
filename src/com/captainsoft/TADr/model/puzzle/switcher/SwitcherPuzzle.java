@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.model.puzzle.switcher;
 
@@ -17,29 +17,29 @@ import com.captainsoft.TADr.sound.SndFacade;
  * @author mathias fringes
  */
 public final class SwitcherPuzzle extends AbstractPuzzle {
-	
-	// fields
-	
-	private final Position position;
-	private final Switcher switcher;
 
-	// constructors
-	
-	public SwitcherPuzzle(Position p, PuzzleFileData data) {
-		super();		
-		this.position = p;
-		this.switcher = new Switcher(data);	
-	}
+    // fields
 
-	// Puzzle
-	
-	@Override
-	public void execute() {
-		SndFacade.switchSound();
-		gameEngine.updateTile(new TileUpdate(position, switcher.tileValue));
-		for(Integer i : switcher.events) {
-			new EventPuzzle(position).executeEvent(i);			
-		}
-	}
+    private final Position position;
+    private final Switcher switcher;
+
+    // constructors
+
+    public SwitcherPuzzle(Position p, PuzzleFileData data) {
+        super();
+        this.position = p;
+        this.switcher = new Switcher(data);
+    }
+
+    // Puzzle
+
+    @Override
+    public void execute() {
+        SndFacade.switchSound();
+        gameEngine.updateTile(new TileUpdate(position, switcher.tileValue));
+        for (Integer i : switcher.events) {
+            new EventPuzzle(position).executeEvent(i);
+        }
+    }
 
 }

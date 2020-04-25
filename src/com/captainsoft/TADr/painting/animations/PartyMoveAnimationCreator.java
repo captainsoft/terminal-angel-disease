@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.painting.animations;
 
@@ -13,33 +13,33 @@ import com.captainsoft.spark.ui.CPos;
 import com.captainsoft.spark.ui.Updater;
 
 /**
- * Creates Animation instances for party and map movement. 
- * 
+ * Creates Animation instances for party and map movement.
+ *
  * @author mathias fringes
  */
 public final class PartyMoveAnimationCreator {
 
-	// fields
+    // fields
 
-	private final GameEngine gameEngine;
+    private final GameEngine gameEngine;
     private final GameLevelMapDrawer mapDrawer;
     private final MapScroller mapScroller;
     private final PartyScroller partyScroller;
-	private final Updater updater;
-		
-	// constructors
+    private final Updater updater;
 
-	public PartyMoveAnimationCreator(GameEngine gameEngine, GameLevelMapDrawer mapDrawer, Updater updater) {
-		super();
-		this.gameEngine = gameEngine;
-		this.mapDrawer = mapDrawer;
-		this.updater = updater;
-		
-		mapScroller = new MapScroller(mapDrawer);
-		partyScroller = new PartyScroller(mapDrawer);
-	}
+    // constructors
 
-	// public
+    public PartyMoveAnimationCreator(GameEngine gameEngine, GameLevelMapDrawer mapDrawer, Updater updater) {
+        super();
+        this.gameEngine = gameEngine;
+        this.mapDrawer = mapDrawer;
+        this.updater = updater;
+
+        mapScroller = new MapScroller(mapDrawer);
+        partyScroller = new PartyScroller(mapDrawer);
+    }
+
+    // public
 
     /**
      * Combines the party and map scroller to provide tile movement animations.
@@ -47,17 +47,17 @@ public final class PartyMoveAnimationCreator {
      * @param newPosition
      * @return
      */
-	public Animation createScrollAnimation(final Position newPosition) {
-					
-		return new Animation() {
-			
-			private boolean mapIsScrolling = false;
+    public Animation createScrollAnimation(final Position newPosition) {
+
+        return new Animation() {
+
+            private boolean mapIsScrolling = false;
             private Direction direction;
             private int partySpeed;
             private Position topLeft;
 
             @Override
-			public int play() {
+            public int play() {
 
                 step++;
 
@@ -69,31 +69,31 @@ public final class PartyMoveAnimationCreator {
                         mapIsScrolling = true;
                     }
                     float factor = gameEngine.settings().scrollFactor;
-                    partySpeed = (int)(50 * factor);
+                    partySpeed = (int) (50 * factor);
                     direction = mapDrawer.partyPosition.findDir(newPosition);
                     topLeft = mapDrawer.tileView.topLeft.apply(direction);
                 }
 
-				boolean doScrollMap = gameEngine.settings().scrollMap;
-				boolean doScrollParty = gameEngine.settings().scrollParty;
+                boolean doScrollMap = gameEngine.settings().scrollMap;
+                boolean doScrollParty = gameEngine.settings().scrollParty;
 
                 //
                 // animation steps
 
-				switch(step) {
-					case 1:
-						mapDrawer.setFaceDirection(newPosition);					
-						mapDrawer.retileParty();
+                switch (step) {
+                    case 1:
+                        mapDrawer.setFaceDirection(newPosition);
+                        mapDrawer.retileParty();
                         updateBox();
-						return 0;						
-					case 2:
-					case 3:
-					case 4:
-					case 5:		
-						if (!mapIsScrolling) {
+                        return 0;
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                        if (!mapIsScrolling) {
                             return 0;
                         }
-                        if(doScrollMap) {
+                        if (doScrollMap) {
                             if (step == 2) {
                                 mapDrawer.setTopLeft(topLeft);
                             }
@@ -109,83 +109,83 @@ public final class PartyMoveAnimationCreator {
                             }
                             return 0;
                         }
-					case 6:
-					case 7:
-					case 8:
-					case 9:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
                         if (mapIsScrolling) {
                             return 0;
                         }
-						if (!doScrollParty) {
+                        if (!doScrollParty) {
                             return 0;
                         }
                         partyScroller.scrollParty(newPosition, (step - 5));
                         updateBox();
                         return partySpeed;
-					case 10:			
-						// finished						
-						mapDrawer.removeParty();
-						mapDrawer.partyOffset = null;																					
-						mapDrawer.partyPosition = newPosition;
-						mapDrawer.retileParty();
-						updateBox();
-						return -1;
-					default:
-						return -1;							
-				}				
-			}			
-		};
-	}
+                    case 10:
+                        // finished						
+                        mapDrawer.removeParty();
+                        mapDrawer.partyOffset = null;
+                        mapDrawer.partyPosition = newPosition;
+                        mapDrawer.retileParty();
+                        updateBox();
+                        return -1;
+                    default:
+                        return -1;
+                }
+            }
+        };
+    }
 
     /**
      * Creates the notorious "I-cannot-walk-I-shake-my-head" animation.
      *
      * @return
      */
-	public Animation createCannotWalkAnimation() {
-		
-		return new Animation() {
-			
-			@Override
-			public int play() {		
-				
-				step++;				
-				int turn = mapDrawer.paintingInfo.getFaceDirection() == Direction.West ? -1 : 1;
-				
-				switch(step) {
-					case 1:
-						mapDrawer.partyOffset = new CPos(-2 * turn, -5);
-						mapDrawer.paintingInfo.turn();
-						mapDrawer.retileParty();
-						updateBox();
-						return 160;
-					case 2:
-						mapDrawer.partyOffset = new CPos( turn, 0);
-					case 3:
-						mapDrawer.partyOffset = new CPos(-turn, 0);
-					case 4:										
-						if (step == 4) {
-							mapDrawer.partyOffset = null;
-						}
-						mapDrawer.paintingInfo.turn();
-						mapDrawer.retileParty();
-						updateBox();
-						if (step != 4) {
-							return 90;
-						} else {
-							return -1;
-						}
-					default:						 
-						return -1;
-				}				
-			}
-		};
-	}
+    public Animation createCannotWalkAnimation() {
 
-	// private
-	
-	private void updateBox() {
-		updater.update();
-	}
-	
+        return new Animation() {
+
+            @Override
+            public int play() {
+
+                step++;
+                int turn = mapDrawer.paintingInfo.getFaceDirection() == Direction.West ? -1 : 1;
+
+                switch (step) {
+                    case 1:
+                        mapDrawer.partyOffset = new CPos(-2 * turn, -5);
+                        mapDrawer.paintingInfo.turn();
+                        mapDrawer.retileParty();
+                        updateBox();
+                        return 160;
+                    case 2:
+                        mapDrawer.partyOffset = new CPos(turn, 0);
+                    case 3:
+                        mapDrawer.partyOffset = new CPos(-turn, 0);
+                    case 4:
+                        if (step == 4) {
+                            mapDrawer.partyOffset = null;
+                        }
+                        mapDrawer.paintingInfo.turn();
+                        mapDrawer.retileParty();
+                        updateBox();
+                        if (step != 4) {
+                            return 90;
+                        } else {
+                            return -1;
+                        }
+                    default:
+                        return -1;
+                }
+            }
+        };
+    }
+
+    // private
+
+    private void updateBox() {
+        updater.update();
+    }
+
 }

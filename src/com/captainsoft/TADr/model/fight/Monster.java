@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.model.fight;
 
@@ -9,15 +9,15 @@ package com.captainsoft.TADr.model.fight;
  *
  * @author mathias fringes
  */
-public final class Monster {	
-		
-	// fields
-	
+public final class Monster {
+
+    // fields
+
     public final int id;
-    
+
     public int agressive;
     public int hitPoints;
-    public int maxHitPoints;   
+    public int maxHitPoints;
     public int strength;
     public int fightIndex;
     public int speed;
@@ -29,81 +29,81 @@ public final class Monster {
     public int image;
     public int ifaceTime;
     public int hitTime;
-    public int lastHitPoints; 
+    public int lastHitPoints;
     public int effectImage;
-    public State state;    
+    public State state;
     public String attackString;
     public String name;
-    
+
     // constructors
-    
+
     public Monster(int id) {
         this.id = id;
-        state = State.Ready;    
+        state = State.Ready;
     }
-    
+
     // public methods 
 
     public void halfSpeed() {
         speed /= 5;
     }
-    
+
     public boolean isDead() {
-    	return (hitPoints <= 0);
+        return (hitPoints <= 0);
     }
-    
-    public void kill() {		    
-    	hitPoints = 0;
+
+    public void kill() {
+        hitPoints = 0;
     }
-    
+
     public void toAttackState() {
-    	state = State.Attack;
-    	ifaceTime = -2;
+        state = State.Attack;
+        ifaceTime = -2;
     }
-    
-	public void hit(int points, int attackWaitFactor) {
-		lastHitPoints = points;
-		state = State.Hit;
-		hitTime = -10 * attackWaitFactor;
-		hitPoints -= points;
-		if (hitPoints <= 0) {			
-			kill();
-		}		
-	}
-    
+
+    public void hit(int points, int attackWaitFactor) {
+        lastHitPoints = points;
+        state = State.Hit;
+        hitTime = -10 * attackWaitFactor;
+        hitPoints -= points;
+        if (hitPoints <= 0) {
+            kill();
+        }
+    }
+
     public boolean tick() {
-    	State s = state; 
-    	boolean changed = false;
-    	if (ifaceTime < 0) {
-    		ifaceTime++;    		
-    		changed = true;
-    	}
-    	if (hitTime < 0) {
-    		hitTime++;
-    		changed = true;
-    	}
-    	if (changed) {
-    		if (ifaceTime == 0 && hitTime == 0) {
-    			state = State.Ready;
-    		}
-    	}
-    	return s != state;    	
+        State s = state;
+        boolean changed = false;
+        if (ifaceTime < 0) {
+            ifaceTime++;
+            changed = true;
+        }
+        if (hitTime < 0) {
+            hitTime++;
+            changed = true;
+        }
+        if (changed) {
+            if (ifaceTime == 0 && hitTime == 0) {
+                state = State.Ready;
+            }
+        }
+        return s != state;
     }
-    
+
     // overridden
-    
+
     @Override
     public String toString() {
-    	return id + " " + name;
+        return id + " " + name;
     }
 
     //
     // nested
-    
+
     static enum State {
-    	Ready,
-    	Attack,
-    	Hit
+        Ready,
+        Attack,
+        Hit
     }
-    
+
 }

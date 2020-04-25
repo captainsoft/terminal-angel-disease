@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.utils;
 
@@ -12,26 +12,26 @@ package com.captainsoft.spark.utils;
 public final class Pair<A, B> {
 
     // fields
-	
-	private final A a;
-	private final B b;
+
+    private final A a;
+    private final B b;
 
     // constructors
-	
+
     public Pair(A a, B b) {
-    	super();    	
-    	this.a = a;
-    	this.b = b;
-	}
+        super();
+        this.a = a;
+        this.b = b;
+    }
 
     // accessors
-    
+
     public A a() {
-		return a;
-	}
-    
+        return a;
+    }
+
     public B b() {
-		return b;
-	}
+        return b;
+    }
 
 }

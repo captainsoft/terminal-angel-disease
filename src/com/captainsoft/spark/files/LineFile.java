@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.files;
 
@@ -23,37 +23,37 @@ public final class LineFile {
 
     // constructors
 
-	private LineFile() {
-		super();
-	}
+    private LineFile() {
+        super();
+    }
 
     // public
 
-	public static List<String> load(String filename) throws IOException {
-		ArrayList<String> res = new ArrayList<String>();
-		BufferedReader reader = null; 
-		try {
-			reader = new BufferedReader(new FileReader(filename));
-			while (reader.ready()) {
-				res.add(reader.readLine());
-			}
-		} finally {
-			close(reader);	
-		}
-		return res;
-	}
-	
-	public static void save(String filename, Iterable<String> data) throws IOException {
-		BufferedWriter writer = null; 
-		try {
-			writer = new BufferedWriter(new FileWriter(filename));	
-			for (String s : data) {
-				writer.write(s);
-				writer.newLine();
-			}
-		} finally {			
-			close(writer);			
-		}
-	}
-	
+    public static List<String> load(String filename) throws IOException {
+        ArrayList<String> res = new ArrayList<String>();
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(filename));
+            while (reader.ready()) {
+                res.add(reader.readLine());
+            }
+        } finally {
+            close(reader);
+        }
+        return res;
+    }
+
+    public static void save(String filename, Iterable<String> data) throws IOException {
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter(filename));
+            for (String s : data) {
+                writer.write(s);
+                writer.newLine();
+            }
+        } finally {
+            close(writer);
+        }
+    }
+
 }

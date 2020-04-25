@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.model.party;
 
@@ -13,40 +13,40 @@ import com.captainsoft.TADr.model.item.Item;
  * @author mathias fringes
  */
 public final class PartyInventory {
-	
-	// fields
-	
-	private final Party party;
-	
-	// constructors
-	
-	public PartyInventory(Party party) {
-		super();
-		this.party = party;
-	}
-	
-	// public
-	
-	public ItemPosition get(int itemNr) {	
-		for (PartyMember member : party.members) {
-			int index = member.inventory().findIndex(itemNr);
-			if (index != Inventory.NO_INDEX) {
-				return new ItemPosition(member, index); 
-			}
-		}		
-		return null;				
-	}
 
-	public void set(ItemPosition itemPosition, Item item) {
+    // fields
+
+    private final Party party;
+
+    // constructors
+
+    public PartyInventory(Party party) {
+        super();
+        this.party = party;
+    }
+
+    // public
+
+    public ItemPosition get(int itemNr) {
+        for (PartyMember member : party.members) {
+            int index = member.inventory().findIndex(itemNr);
+            if (index != Inventory.NO_INDEX) {
+                return new ItemPosition(member, index);
+            }
+        }
+        return null;
+    }
+
+    public void set(ItemPosition itemPosition, Item item) {
         itemPosition.member.inventory().item(itemPosition.index, item);
-	}	
-	
-	public boolean hasItem(int itemNr) {
-		return (get(itemNr) != null);
-	}
+    }
 
-	public void delete(ItemPosition itemPosition) {
+    public boolean hasItem(int itemNr) {
+        return (get(itemNr) != null);
+    }
+
+    public void delete(ItemPosition itemPosition) {
         itemPosition.member.setInventoryItem(itemPosition.index, null);
-	}
+    }
 
 }

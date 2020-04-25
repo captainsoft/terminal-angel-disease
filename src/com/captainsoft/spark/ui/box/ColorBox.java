@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.ui.box;
 
@@ -16,30 +16,30 @@ import com.captainsoft.spark.ui.drawing.*;
 public final class ColorBox extends UiBoxContainer {
 
     // fields
-	
-	public Color color = Color.BLACK;
+
+    public Color color = Color.BLACK;
 
     // constructors
 
-	public ColorBox() {
-		super();
-	}
-	
-	public ColorBox(Color color) {
-		super();
-		this.color = color;
-	}
-	
-	public ColorBox(int width, int height) {
-		super(width, height);
-	}
+    public ColorBox() {
+        super();
+    }
+
+    public ColorBox(Color color) {
+        super();
+        this.color = color;
+    }
+
+    public ColorBox(int width, int height) {
+        super(width, height);
+    }
 
     // overridden
 
-	@Override
-	protected void draw(Surface s) {	
-		s.color(color);
-		s.fill(0, 0, width, height);
-	}
+    @Override
+    protected void draw(Surface s) {
+        s.color(color);
+        s.fill(0, 0, width, height);
+    }
 
 }

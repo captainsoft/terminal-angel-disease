@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.collect.cache;
 
@@ -13,6 +13,6 @@ package com.captainsoft.spark.collect.cache;
  */
 public interface CacheEntryCreator<K, V> {
 
-	public V create(K key);
-	
+    public V create(K key);
+
 }

@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.ui;
 
@@ -13,6 +13,6 @@ import com.captainsoft.spark.ui.box.UiBox;
  */
 public interface BoxUpdater {
 
-	public void update(UiBox box);
-	
+    public void update(UiBox box);
+
 }

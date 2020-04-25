@@ -13,12 +13,12 @@ import com.captainsoft.TADr.engine.TadRepo;
  * @author mathias
  */
 public abstract class AbstractPuzzle implements Puzzle {
-	
-	protected final GameEngine gameEngine;
-	
-	protected AbstractPuzzle() {
-		super();
-		this.gameEngine = TadRepo.inst().GameEngine();
-	}
+
+    protected final GameEngine gameEngine;
+
+    protected AbstractPuzzle() {
+        super();
+        this.gameEngine = TadRepo.inst().GameEngine();
+    }
 
 }

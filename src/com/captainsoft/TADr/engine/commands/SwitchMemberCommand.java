@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.engine.commands;
 
@@ -15,31 +15,31 @@ import static com.captainsoft.spark.utils.Utils.stringer;
  *
  * @author mathias fringes
  */
-public final class SwitchMemberCommand extends AbstractCommand{
+public final class SwitchMemberCommand extends AbstractCommand {
 
     // fields
 
-	private final int partyMemberNo;
+    private final int partyMemberNo;
 
     // constructors
 
-	public SwitchMemberCommand(int partyMemberNo) {
+    public SwitchMemberCommand(int partyMemberNo) {
         super("swithc member to " + partyMemberNo);
-		argIn("partyMemberNo", partyMemberNo, 1, 4);
-		this.partyMemberNo = partyMemberNo;		
-	}
+        argIn("partyMemberNo", partyMemberNo, 1, 4);
+        this.partyMemberNo = partyMemberNo;
+    }
 
     // Command
 
-	public void execute() {
+    public void execute() {
         GameEngine.instance().mainViewer().switchMember(partyMemberNo);
-	}
+    }
 
     // overridden
-	
-	@Override
-	public String toString() {	
-		return stringer("SwitchMemberCommand", partyMemberNo);
-	}
+
+    @Override
+    public String toString() {
+        return stringer("SwitchMemberCommand", partyMemberNo);
+    }
 
 }

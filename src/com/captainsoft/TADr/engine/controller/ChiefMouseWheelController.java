@@ -20,7 +20,7 @@ public final class ChiefMouseWheelController implements MouseWheelListener {
 
     // constructors
 
-    public ChiefMouseWheelController () {
+    public ChiefMouseWheelController() {
         super();
     }
 

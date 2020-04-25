@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.engine;
 
@@ -29,46 +29,46 @@ import com.captainsoft.TADr.sound.TadSafeSndPlayer;
 import com.captainsoft.TADr.sound.VbSndPlayer;
 
 /**
- * Important low level services for the TAD. 
+ * Important low level services for the TAD.
  *
  * @author mathias fringes
  */
 public final class TadRepo {
-	
-	// static
-	
-	private static TadRepo instance;
 
-	public static TadRepo inst() {
-		if (instance == null) {
-			instance = new TadRepo();
-		}
-		return instance;
-	}
-	
-	// fields
-	
-	private GameEngine gameEngine;
-	private GameLoader gl;
-	private ImageLoader imageLoader;
-	private MonsterLoader monsterLoader; 
-	private PuzzleLoader puzzleLoader;
-	private Settings settings;
-	private SndPlayer vbSndPlayer;
-	private TadTranslator translator;
-	private VbItemRepository itemRepo;
-	private VbMapLoader mapLoader;
-	
-	// constructors
-	
-	private TadRepo() {
-		super();		
-	}
-	
-	// public
-	
-	public void setUp() throws IOException {		
-		//
+    // static
+
+    private static TadRepo instance;
+
+    public static TadRepo inst() {
+        if (instance == null) {
+            instance = new TadRepo();
+        }
+        return instance;
+    }
+
+    // fields
+
+    private GameEngine gameEngine;
+    private GameLoader gl;
+    private ImageLoader imageLoader;
+    private MonsterLoader monsterLoader;
+    private PuzzleLoader puzzleLoader;
+    private Settings settings;
+    private SndPlayer vbSndPlayer;
+    private TadTranslator translator;
+    private VbItemRepository itemRepo;
+    private VbMapLoader mapLoader;
+
+    // constructors
+
+    private TadRepo() {
+        super();
+    }
+
+    // public
+
+    public void setUp() throws IOException {
+        //
         settings = new Settings();
         try {
             settings.load();
@@ -76,74 +76,74 @@ public final class TadRepo {
             TadExceptionHandler.errorMessageAndMenu("Cannot load settings!", e);
         }
         //
-		imageLoader = new VbImageLoader();
-		itemRepo = new VbItemRepository(imageLoader);
-		itemRepo.load();		
-		puzzleLoader = new VbPuzzleLoader();
-		monsterLoader = new VbMonsterLoader();
-		vbSndPlayer = new TadSafeSndPlayer(new VbSndPlayer());
+        imageLoader = new VbImageLoader();
+        itemRepo = new VbItemRepository(imageLoader);
+        itemRepo.load();
+        puzzleLoader = new VbPuzzleLoader();
+        monsterLoader = new VbMonsterLoader();
+        vbSndPlayer = new TadSafeSndPlayer(new VbSndPlayer());
         vbSndPlayer.enabled(settings.playSounds);
-		//
-		mapLoader = new VbMapLoader();
-		gl = new JavaGameLoader(mapLoader);
-		//
-		GuiMessages messages = messages();
-		translator = new TadTranslator(messages);
-		gameEngine = GameEngine.instance();				
-		translator.setup(gameEngine);
-	}
-	
-	// accessors	
-	
-	public GameLoader GameLoader() {
-		return gl;
-	}
-	
-	public GameEngine GameEngine() {
-		return gameEngine;
-	}
-	
-	public ItemRepository ItemRepo() {
-		return itemRepo;
-	}	
-	
-	public ImageLoader ImageLoader() {
-		return imageLoader;
-	}
-	
-	public MapLoader MapLoader() {
-		return mapLoader;
-	}
-	
-	public MonsterLoader MonsterLoader() {
-		return monsterLoader;
-	}
-	
-	public PuzzleLoader puzzleLoader() { 
-		return puzzleLoader;
-	}
-	
-	public Settings Settings() {
-		return settings;
-	}
+        //
+        mapLoader = new VbMapLoader();
+        gl = new JavaGameLoader(mapLoader);
+        //
+        GuiMessages messages = messages();
+        translator = new TadTranslator(messages);
+        gameEngine = GameEngine.instance();
+        translator.setup(gameEngine);
+    }
 
-	public SndPlayer SndPlayer() {
-		return vbSndPlayer;
-	}
+    // accessors
 
-	public TadTranslator Trans() {
-		return translator;
-	}	
+    public GameLoader GameLoader() {
+        return gl;
+    }
 
-	// private
+    public GameEngine GameEngine() {
+        return gameEngine;
+    }
 
-	private GuiMessages messages() {
-		if (TadLang.isEnglish()) {
-			return new EnglishMessages();
-		} else {
-			// default
-			return new GermanMessages();	
-		}
-	}
+    public ItemRepository ItemRepo() {
+        return itemRepo;
+    }
+
+    public ImageLoader ImageLoader() {
+        return imageLoader;
+    }
+
+    public MapLoader MapLoader() {
+        return mapLoader;
+    }
+
+    public MonsterLoader MonsterLoader() {
+        return monsterLoader;
+    }
+
+    public PuzzleLoader puzzleLoader() {
+        return puzzleLoader;
+    }
+
+    public Settings Settings() {
+        return settings;
+    }
+
+    public SndPlayer SndPlayer() {
+        return vbSndPlayer;
+    }
+
+    public TadTranslator Trans() {
+        return translator;
+    }
+
+    // private
+
+    private GuiMessages messages() {
+        if (TadLang.isEnglish()) {
+            return new EnglishMessages();
+        } else {
+            // default
+            return new GermanMessages();
+        }
+    }
 
 }

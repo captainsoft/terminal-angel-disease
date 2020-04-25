@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.command;
 
@@ -14,26 +14,26 @@ import java.util.*;
 @SuppressWarnings("serial")
 public final class CommandList extends ArrayList<Command> implements Command {
 
-	// constructors
-	
-	public CommandList() {
-		super();		
-	}
+    // constructors
 
-	public CommandList(Collection<? extends Command> c) {
-		super(c);		
-	}
+    public CommandList() {
+        super();
+    }
 
-	public CommandList(int initialCapacity) {
-		super(initialCapacity);
-	}
-	
-	// Command
-	
-	public void execute() {
-		for (Command c : this) {
-			c.execute();
-		}		
-	}
+    public CommandList(Collection<? extends Command> c) {
+        super(c);
+    }
+
+    public CommandList(int initialCapacity) {
+        super(initialCapacity);
+    }
+
+    // Command
+
+    public void execute() {
+        for (Command c : this) {
+            c.execute();
+        }
+    }
 
 }

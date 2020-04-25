@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
  * @author mathias fringes
  */
 public class ResFileCreatorTESTGraphics {

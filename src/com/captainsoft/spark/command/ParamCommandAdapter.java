@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.command;
 
@@ -11,25 +11,25 @@ package com.captainsoft.spark.command;
  */
 public final class ParamCommandAdapter<T> implements Command {
 
-	// fields
-	
-	private final ParamCommand<T> paramCommand;
-	
-	private final T object;
-	
-	// constructors
-	
-	public ParamCommandAdapter(ParamCommand<T> paramCommand, T object) {
-		super();
-		this.paramCommand = paramCommand;		
-		this.object = object;
-	}
-	
-	// overridden
+    // fields
 
-	public void execute() {
-		paramCommand.execute(object);
-	}
+    private final ParamCommand<T> paramCommand;
+
+    private final T object;
+
+    // constructors
+
+    public ParamCommandAdapter(ParamCommand<T> paramCommand, T object) {
+        super();
+        this.paramCommand = paramCommand;
+        this.object = object;
+    }
+
+    // overridden
+
+    public void execute() {
+        paramCommand.execute(object);
+    }
 
     public String toString() {
         return paramCommand.toString();

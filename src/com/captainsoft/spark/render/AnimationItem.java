@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.render;
 
@@ -12,6 +12,6 @@ package com.captainsoft.spark.render;
  */
 public interface AnimationItem {
 
-	public int play(); 
-	
+    public int play();
+
 }

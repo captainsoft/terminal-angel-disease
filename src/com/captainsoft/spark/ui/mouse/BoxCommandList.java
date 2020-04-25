@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.ui.mouse;
 
@@ -20,19 +20,19 @@ public final class BoxCommandList {
 
     // fields
 
-	private final Map<UiBox, ClickCommand> leftCommands = new HashMap<UiBox, ClickCommand>(10);
-	private final Map<UiBox, ClickCommand> rightCommands = new HashMap<UiBox, ClickCommand>(10);
+    private final Map<UiBox, ClickCommand> leftCommands = new HashMap<UiBox, ClickCommand>(10);
+    private final Map<UiBox, ClickCommand> rightCommands = new HashMap<UiBox, ClickCommand>(10);
     private final Map<UiBox, ClickCommand> doubleClickCommands = new HashMap<UiBox, ClickCommand>(0);
 
     public final Map<Integer, Command> keyCommands = new HashMap<Integer, Command>(0);
 
     // constructors
 
-	public BoxCommandList() {
-		super();
-	}
-	
-	// accessors
+    public BoxCommandList() {
+        super();
+    }
+
+    // accessors
 
     /**
      * Sets the click command for a box.
@@ -40,20 +40,20 @@ public final class BoxCommandList {
      * @param box
      * @param command
      */
-	public void setClickCmd(UiBox box, ClickCommand command) {
-		leftCommands.put(box, command);
-		rightCommands.put(box, command);		
-	}	
-	
-	/**
-	 * Sets the command for this box. Is by default always only left click!
-	 * 
-	 * @param box
-	 * @param command
-	 */
-	public void setCmd(UiBox box, Command command) {		
-		leftCommands.put(box, new ClickCommandAdapter(command));		
-	}
+    public void setClickCmd(UiBox box, ClickCommand command) {
+        leftCommands.put(box, command);
+        rightCommands.put(box, command);
+    }
+
+    /**
+     * Sets the command for this box. Is by default always only left click!
+     *
+     * @param box
+     * @param command
+     */
+    public void setCmd(UiBox box, Command command) {
+        leftCommands.put(box, new ClickCommandAdapter(command));
+    }
 
     public void setCmd(UiBox box, Integer key, Command command) {
         setCmd(box, command);
@@ -74,10 +74,10 @@ public final class BoxCommandList {
      * @param leftCommand
      * @param rightCommand
      */
-	public void setCmds(UiBox box, Command leftCommand, Command rightCommand) {		
-		setCmd(box, leftCommand);
-		setRightCmd(box, rightCommand);
-	}
+    public void setCmds(UiBox box, Command leftCommand, Command rightCommand) {
+        setCmd(box, leftCommand);
+        setRightCmd(box, rightCommand);
+    }
 
     public void setDoubleClickCmd(UiBox box, Command command) {
         doubleClickCommands.put(box, new ClickCommandAdapter(command));
@@ -89,9 +89,9 @@ public final class BoxCommandList {
      * @param box
      * @param command
      */
-	public void setRightCmd(UiBox box, Command command) {		
-		rightCommands.put(box, new ClickCommandAdapter(command));
-	}
+    public void setRightCmd(UiBox box, Command command) {
+        rightCommands.put(box, new ClickCommandAdapter(command));
+    }
 
     public ClickCommand getCommand(UiBox box, MouseButton button) {
         return getCommand(box, button, false);
@@ -104,9 +104,9 @@ public final class BoxCommandList {
      * @param button
      * @return
      */
-	public ClickCommand getCommand(UiBox box, MouseButton button, boolean doubleClick) {
-		switch(button) {
-			case Left:
+    public ClickCommand getCommand(UiBox box, MouseButton button, boolean doubleClick) {
+        switch (button) {
+            case Left:
                 ClickCommand command = null;
                 if (doubleClick) {
                     command = doubleClickCommands.get(box);
@@ -115,30 +115,30 @@ public final class BoxCommandList {
                     command = leftCommands.get(box);
                 }
                 return command;
-			case Right:
-			case Unknown:
-				return rightCommands.get(box);
-			default:
-				return null;				
-		} 				
-	}
-	
-	//
-	// nested classes
-	
-	private static class ClickCommandAdapter implements ClickCommand {
-	
-		private final Command command;
+            case Right:
+            case Unknown:
+                return rightCommands.get(box);
+            default:
+                return null;
+        }
+    }
 
-		public ClickCommandAdapter(Command command) {
-			super();
-			this.command = command;
-		}
+    //
+    // nested classes
 
-		public void click(UiBox box, int x, int y, MouseButton button) {
-			command.execute();
-		}
+    private static class ClickCommandAdapter implements ClickCommand {
 
-	}
+        private final Command command;
+
+        public ClickCommandAdapter(Command command) {
+            super();
+            this.command = command;
+        }
+
+        public void click(UiBox box, int x, int y, MouseButton button) {
+            command.execute();
+        }
+
+    }
 
 }

@@ -44,7 +44,7 @@ public final class ActionWorldKeyInputController extends KeyInputRespChain {
             case 50:
             case 51:
             case 52:
-                gameEngine.mainViewer().switchMember(keyCode-48);
+                gameEngine.mainViewer().switchMember(keyCode - 48);
                 break;
 
             case KeyCodes.Space:
@@ -53,10 +53,10 @@ public final class ActionWorldKeyInputController extends KeyInputRespChain {
 
             case KeyCodes.Shift:
                 gameEngine.nextCommand(new Command() {
-                       public void execute() {
-                           gameEngine.meeeehParty();
-                       }
-                   });
+                    public void execute() {
+                        gameEngine.meeeehParty();
+                    }
+                });
                 break;
 
             case KeyCodes.B:

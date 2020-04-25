@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.engine.loop;
 
@@ -18,7 +18,7 @@ import com.captainsoft.spark.utils.Log;
 /**
  * The render loop. Plays the animations. User interaction has to go through
  * here via commands.
- * 
+ *
  * @author mathias fringes
  */
 public final class RenderLoop {
@@ -26,37 +26,37 @@ public final class RenderLoop {
     // fields
 
     private final GameEngine gameEngine;
-	
-	private boolean accept = true;
-	private Collection<Animation> mapAnimations = new ArrayList<Animation>();	
-	private Command command;	
-	private Command nextCommand;	
-	private List<Animation> animations = new ArrayList<Animation>();
-	private long animationTimeCount;
-	private WalkAnimationStack walkAnimationsStack;
-	
-	// constructors
-	
-	public RenderLoop(GameEngine gameEngine) {
-		super();
+
+    private boolean accept = true;
+    private Collection<Animation> mapAnimations = new ArrayList<Animation>();
+    private Command command;
+    private Command nextCommand;
+    private List<Animation> animations = new ArrayList<Animation>();
+    private long animationTimeCount;
+    private WalkAnimationStack walkAnimationsStack;
+
+    // constructors
+
+    public RenderLoop(GameEngine gameEngine) {
+        super();
         this.gameEngine = gameEngine;
-		walkAnimationsStack = new WalkAnimationStack(gameEngine);
-	}
-		
-	// public
-	
-	public synchronized boolean accept() {
-		return accept;
-	}
-	
-	public synchronized void accept(boolean accept) {
-		this.accept = accept;
-		
-		if (!accept) {
-			command = null;
-			nextCommand = null;
-		}
-	}
+        walkAnimationsStack = new WalkAnimationStack(gameEngine);
+    }
+
+    // public
+
+    public synchronized boolean accept() {
+        return accept;
+    }
+
+    public synchronized void accept(boolean accept) {
+        this.accept = accept;
+
+        if (!accept) {
+            command = null;
+            nextCommand = null;
+        }
+    }
 
     /**
      * Sets the command that need to be executed immediately (mainly input by user
@@ -64,13 +64,13 @@ public final class RenderLoop {
      *
      * @param command
      */
-	public synchronized void command(Command command) {
-		if (!accept) {
-			return;
-		}
-		this.command = command;
-		nextCommand = null;	
-	}
+    public synchronized void command(Command command) {
+        if (!accept) {
+            return;
+        }
+        this.command = command;
+        nextCommand = null;
+    }
 
     /**
      * Sets the command that needs to be executed *after* the party has finished her walk
@@ -78,112 +78,112 @@ public final class RenderLoop {
      *
      * @param nextCommand
      */
-	public synchronized void nextCommand(Command nextCommand) {			
-		if (!accept) {
-			return;
-		}
+    public synchronized void nextCommand(Command nextCommand) {
+        if (!accept) {
+            return;
+        }
 
-		Log.info("ADDING next command " + nextCommand);
-		if (walkAnimationsStack.over()) {
-			command = nextCommand;
-		} else {			
-			this.nextCommand = nextCommand;
-			command = null;
-		}
-		walkAnimationsStack.stop();
-		
-	}
-	
-	public void playPartyAnimation(Animation animation) {
-		walkAnimationsStack.setAnimation(animation);
-	}
-	
-	public void walkTo(List<Position> positions) {
-		walkAnimationsStack.stop();
-		walkAnimationsStack.goTo(positions);	
-	}
+        Log.info("ADDING next command " + nextCommand);
+        if (walkAnimationsStack.over()) {
+            command = nextCommand;
+        } else {
+            this.nextCommand = nextCommand;
+            command = null;
+        }
+        walkAnimationsStack.stop();
+
+    }
+
+    public void playPartyAnimation(Animation animation) {
+        walkAnimationsStack.setAnimation(animation);
+    }
+
+    public void walkTo(List<Position> positions) {
+        walkAnimationsStack.stop();
+        walkAnimationsStack.goTo(positions);
+    }
 
     public void walkToAndThen(List<Position> positions, Command destinationCommand) {
         walkTo(positions);
         walkAnimationsStack.setDestinationCommand(destinationCommand);
     }
 
-	public void setMapAnimations(Collection<Animation> mapAnimations) {
-		this.mapAnimations = mapAnimations;
-	}
-	
-	public void addAnimation(Animation a) {
-		animations.add(a);
-	}
-	
-	public synchronized void clear() {
-		command = null;
-		nextCommand = null;
-		walkAnimationsStack.stop();
-		animationTimeCount = 0;
-		animations.clear();
-		mapAnimations.clear();
-	}
-	
-	// animate!!
-	
-	public void update(long elapsedMillis) {
-				
-		boolean executedCommand = false;		
-		
-		// -----------------------------------------------------
-		// *** COMMANDS (input by user) ***
-		// -----------------------------------------------------
-		
-		if (command != null) {
-			Command alias = command;
-			Log.force("Executing: " + command);
-			command = null;
-			alias.execute();
-			executedCommand = true;
-		}
-		
-		// -----------------------------------------------------
-		// *** ANIMATIONS ****
-		// -----------------------------------------------------
-		 		
-		if (elapsedMillis <= 0) {
-			return;
-		}
-		
-		// -----------------------------------------------------
-		// walking 
-		
-		if (!walkAnimationsStack.over()) {
+    public void setMapAnimations(Collection<Animation> mapAnimations) {
+        this.mapAnimations = mapAnimations;
+    }
 
-			walkAnimationsStack.count(elapsedMillis);
-			if (walkAnimationsStack.over()) {		
-				Log.info("Walking is over!");
-				if (nextCommand == null) {
+    public void addAnimation(Animation a) {
+        animations.add(a);
+    }
+
+    public synchronized void clear() {
+        command = null;
+        nextCommand = null;
+        walkAnimationsStack.stop();
+        animationTimeCount = 0;
+        animations.clear();
+        mapAnimations.clear();
+    }
+
+    // animate!!
+
+    public void update(long elapsedMillis) {
+
+        boolean executedCommand = false;
+
+        // -----------------------------------------------------
+        // *** COMMANDS (input by user) ***
+        // -----------------------------------------------------
+
+        if (command != null) {
+            Command alias = command;
+            Log.force("Executing: " + command);
+            command = null;
+            alias.execute();
+            executedCommand = true;
+        }
+
+        // -----------------------------------------------------
+        // *** ANIMATIONS ****
+        // -----------------------------------------------------
+
+        if (elapsedMillis <= 0) {
+            return;
+        }
+
+        // -----------------------------------------------------
+        // walking
+
+        if (!walkAnimationsStack.over()) {
+
+            walkAnimationsStack.count(elapsedMillis);
+            if (walkAnimationsStack.over()) {
+                Log.info("Walking is over!");
+                if (nextCommand == null) {
                     command = walkAnimationsStack.pullDestinationCommand();
                 } else {
-					if (!executedCommand) {
-						nextCommand.execute();
-						nextCommand = null;
-					}
-				}				
-			}
-		} else {
+                    if (!executedCommand) {
+                        nextCommand.execute();
+                        nextCommand = null;
+                    }
+                }
+            }
+        } else {
             gameEngine.pollMoveKeys();
         }
-			
-		// -----------------------------------------------------
-		// others
-		
-		animationTimeCount += elapsedMillis;
 
-		if (animationTimeCount > 10) {	
-			
-			if (mapAnimations.size() > 0) {
-				for (Animation a : mapAnimations) {
-					a.count(animationTimeCount);						
-				}								
-			}
+        // -----------------------------------------------------
+        // others
+
+        animationTimeCount += elapsedMillis;
+
+        if (animationTimeCount > 10) {
+
+            if (mapAnimations.size() > 0) {
+                for (Animation a : mapAnimations) {
+                    a.count(animationTimeCount);
+                }
+            }
 
 
             playOtherAnimations();

@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.model.map;
 
@@ -19,51 +19,51 @@ import com.captainsoft.TADr.model.Position;
  */
 public final class LevelMapBorderPositionEnumeration implements Enumeration<Position> {
 
-	// fields
-	
-	private boolean hasMore = true;
+    // fields
 
-	private int x = 1;
+    private boolean hasMore = true;
 
-	private int y = 1;	
-	
-	// constructors
-	
-	public LevelMapBorderPositionEnumeration() {
-		super();	
-	}
-	
-	// Enumeration
+    private int x = 1;
 
-	public boolean hasMoreElements() {
+    private int y = 1;
+
+    // constructors
+
+    public LevelMapBorderPositionEnumeration() {
+        super();
+    }
+
+    // Enumeration
+
+    public boolean hasMoreElements() {
         return hasMore;
     }
 
-	public Position nextElement() {
-		if (!hasMoreElements()) {
-			throw new NoSuchElementException("No more tiles, map is over!");	
-		}
-		//
-		Position p = new Position(x, y);
-		//
-		if (y == 1 || y == X_LEN) {
-			x++;
-			if (x == X_LEN + 1) {
-				y++;
-				x = 1;
-			}
-		} else {
-			if (x == 1) {
-				x = X_LEN;
-			} else {
-				x = 1;
-				y++;
-			}
-		}			
-		//
-		hasMore = !(x == 1 && y == Y_LEN + 1);
-		//
-		return p;
-	}
+    public Position nextElement() {
+        if (!hasMoreElements()) {
+            throw new NoSuchElementException("No more tiles, map is over!");
+        }
+        //
+        Position p = new Position(x, y);
+        //
+        if (y == 1 || y == X_LEN) {
+            x++;
+            if (x == X_LEN + 1) {
+                y++;
+                x = 1;
+            }
+        } else {
+            if (x == 1) {
+                x = X_LEN;
+            } else {
+                x = 1;
+                y++;
+            }
+        }
+        //
+        hasMore = !(x == 1 && y == Y_LEN + 1);
+        //
+        return p;
+    }
 
 }

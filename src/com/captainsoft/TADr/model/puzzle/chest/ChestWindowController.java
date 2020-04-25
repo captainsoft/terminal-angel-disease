@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.model.puzzle.chest;
 
@@ -16,52 +16,52 @@ import com.captainsoft.spark.ui.mouse.BoxCommandList;
  * @author mathias fringes
  */
 public final class ChestWindowController extends CloseWindowController {
-	
-	// fields	
-	
-	boolean leftDisplay = false;
-	
-	private final Chest chest;
 
-	// constructors
-	
-	public ChestWindowController(Chest chest) {
-		super();		
-		this.chest = chest;
-	}	
-	
+    // fields	
+
+    boolean leftDisplay = false;
+
+    private final Chest chest;
+
+    // constructors
+
+    public ChestWindowController(Chest chest) {
+        super();
+        this.chest = chest;
+    }
+
     // WindowController
 
-	public UiBoxContainer createWindow(BoxCommandList mg) {
-		
-		final ChestWindow cw = new ChestWindow(chest);
-		cw.pos(leftDisplay ? 350 : 65, 30);
-		
-		for (int i = 0; i < 6; i++) {
-			
-			final ItemBox b = cw.itemBox[i];
-			if (b == null) {
-				continue;
-			}
-			
-			mg.setRightCmd(b, new GameEngineCommand("take item from chest") {
+    public UiBoxContainer createWindow(BoxCommandList mg) {
 
-				public void execute() {
-					if (gameEngine.mainViewer().hasItemInHand()) {
-						return;
-					}
-					gameEngine.takeItem(b.item());
-					b.item(null);
-					gameEngine.mainViewer().updateBox(b);
-					if (cw.allTaken()) {							
-						gameEngine.closeWindows();
-						executeCloseCommand();					
-					}
-				}
-			});
-						
-		}
-		return cw;
-	}	
+        final ChestWindow cw = new ChestWindow(chest);
+        cw.pos(leftDisplay ? 350 : 65, 30);
+
+        for (int i = 0; i < 6; i++) {
+
+            final ItemBox b = cw.itemBox[i];
+            if (b == null) {
+                continue;
+            }
+
+            mg.setRightCmd(b, new GameEngineCommand("take item from chest") {
+
+                public void execute() {
+                    if (gameEngine.mainViewer().hasItemInHand()) {
+                        return;
+                    }
+                    gameEngine.takeItem(b.item());
+                    b.item(null);
+                    gameEngine.mainViewer().updateBox(b);
+                    if (cw.allTaken()) {
+                        gameEngine.closeWindows();
+                        executeCloseCommand();
+                    }
+                }
+            });
+
+        }
+        return cw;
+    }
 
 }

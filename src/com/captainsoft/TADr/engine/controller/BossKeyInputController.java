@@ -18,7 +18,7 @@ public final class BossKeyInputController implements KeyInput {
     // KeyInput
 
     public boolean keyPress(int keyCode) {
-        switch(keyCode) {
+        switch (keyCode) {
             case KeyCodes.F12:
                 System.exit(0);
             default:

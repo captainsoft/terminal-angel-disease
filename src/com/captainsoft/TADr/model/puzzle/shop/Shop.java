@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.model.puzzle.shop;
 
@@ -15,20 +15,20 @@ import com.captainsoft.TADr.model.puzzle.PuzzleFileData;
  */
 final class Shop {
 
-	private Item[] items = new Item[9];
-	
-	public Shop() {
-		super();
-	}
-	
-	public Shop(PuzzleFileData fileData) {
-		for(int i = 0; i < items.length; i++) {
-			items[i] = TadRepo.inst().ItemRepo().item(fileData.value(i + 1));
-		}
-	}
+    private Item[] items = new Item[9];
 
-	public Item item(int index) {
-		return items[index];
-	}
-	
+    public Shop() {
+        super();
+    }
+
+    public Shop(PuzzleFileData fileData) {
+        for (int i = 0; i < items.length; i++) {
+            items[i] = TadRepo.inst().ItemRepo().item(fileData.value(i + 1));
+        }
+    }
+
+    public Item item(int index) {
+        return items[index];
+    }
+
 }

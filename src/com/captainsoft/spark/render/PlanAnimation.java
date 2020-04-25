@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.render;
 
@@ -17,29 +17,29 @@ public final class PlanAnimation extends Animation {
 
     // fields
 
-	private List<AnimationItem> items;
-	private int step = 0;
+    private List<AnimationItem> items;
+    private int step = 0;
 
     // constructors
-	
-	public PlanAnimation() {
-		this.items = new ArrayList<AnimationItem>();
-	}
+
+    public PlanAnimation() {
+        this.items = new ArrayList<AnimationItem>();
+    }
 
     // public
 
-	public void add(AnimationItem item) {
-		items.add(item);
-	}
-	
-	public void gap(final int length) {
-		items.add(new AnimationItem() {			
+    public void add(AnimationItem item) {
+        items.add(item);
+    }
 
-			public int play() {
-				return length;
-			}
-		});
-	}
+    public void gap(final int length) {
+        items.add(new AnimationItem() {
+
+            public int play() {
+                return length;
+            }
+        });
+    }
 
     // Animation
 

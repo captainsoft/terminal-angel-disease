@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.gui;
 
@@ -57,189 +57,189 @@ import static com.captainsoft.spark.utils.Truth.*;
 
 /**
  * The main viewer. Handles the main GUI.
- * 
+ *
  * @author mathias fringes
  */
 public final class MainViewer {
 
-	// fields
-	
-	public final GameLevelMapDrawer mapDrawer;
+    // fields
+
+    public final GameLevelMapDrawer mapDrawer;
     public final MovementKeyState keyState = new MovementKeyState();
 
-	private final GameEngine gameEngine;
-	private final ImageLoader imageLoader;
-	private final MainWindowSwing mw;	
-	private final ScrollText scrollText;
+    private final GameEngine gameEngine;
+    private final ImageLoader imageLoader;
+    private final MainWindowSwing mw;
+    private final ScrollText scrollText;
 
     public BackpanelWindowController backpanelWindowController;
 
-	private boolean setup = false;
-	private BoxCommandManager backgroundBoxCommandManager;
-	private BoxCommandManager overviewBoxCommanderManager;
-	private BoxCommandManager mapBoxCommanderManager;
-	private Game game;
-	private ItemCursor itemCursor;
+    private boolean setup = false;
+    private BoxCommandManager backgroundBoxCommandManager;
+    private BoxCommandManager overviewBoxCommanderManager;
+    private BoxCommandManager mapBoxCommanderManager;
+    private Game game;
+    private ItemCursor itemCursor;
     private KeyInputRespChain keyInputChain;
-	private MainViewerWindowManager mainWindowManager;
-	private PartyWindowController partyWindowController;
-	private PartyMember displayedPartyMember;
-	private PartyMoveAnimationCreator partyAnimationCreator;
-	private ScrollBox scrollBox;	
-	private SwingBoxPanel backgroundPanel;
-	private SwingBoxUpdater boxUpdateManager;
-	private UiBoxContainer backpanelBox;
-	private UiBoxContainer mapBox;
-	private UiBoxContainer partyViewBox;
+    private MainViewerWindowManager mainWindowManager;
+    private PartyWindowController partyWindowController;
+    private PartyMember displayedPartyMember;
+    private PartyMoveAnimationCreator partyAnimationCreator;
+    private ScrollBox scrollBox;
+    private SwingBoxPanel backgroundPanel;
+    private SwingBoxUpdater boxUpdateManager;
+    private UiBoxContainer backpanelBox;
+    private UiBoxContainer mapBox;
+    private UiBoxContainer partyViewBox;
     private Updater mapBoxUpdater;
 
     // constructors
 
-	public MainViewer(GameEngine gameEngine) {
-		super();
-		this.gameEngine = gameEngine;
+    public MainViewer(GameEngine gameEngine) {
+        super();
+        this.gameEngine = gameEngine;
         this.keyInputChain = new KeyInputRespChain();
         //
         KeyInputRespChain surroundKeyInput = new KeyInputRespChain();
         surroundKeyInput.add(new BossKeyInputController());
         surroundKeyInput.add(keyInputChain);
-		this.mw = new MainWindowSwing(surroundKeyInput, keyState);
-		//
-		this.imageLoader = TadRepo.inst().ImageLoader();						
-		this.scrollText = new ScrollText();	
-		this.mapDrawer = new GameLevelMapDrawer(TadRepo.inst().ItemRepo());
-	}
+        this.mw = new MainWindowSwing(surroundKeyInput, keyState);
+        //
+        this.imageLoader = TadRepo.inst().ImageLoader();
+        this.scrollText = new ScrollText();
+        this.mapDrawer = new GameLevelMapDrawer(TadRepo.inst().ItemRepo());
+    }
 
-	// accessors
+    // accessors
 
-	public PartyMember currentMember() {
-		return displayedPartyMember;
-	}
+    public PartyMember currentMember() {
+        return displayedPartyMember;
+    }
 
-	public void setLevelMap(LevelMap map) {
-		mapDrawer.setLevelMap(map);
-	}
+    public void setLevelMap(LevelMap map) {
+        mapDrawer.setLevelMap(map);
+    }
 
-	public Animation vorhangzu() {
-		return mapDrawer.vorhangZu(new SingleBoxUpdater(mapBox, boxUpdateManager));		
-	}
-	
-	public Set<Animation> currentAnimations() {
-		return (mapDrawer.getCurrentMapAnimation());		
-	}
+    public Animation vorhangzu() {
+        return mapDrawer.vorhangZu(new SingleBoxUpdater(mapBox, boxUpdateManager));
+    }
+
+    public Set<Animation> currentAnimations() {
+        return (mapDrawer.getCurrentMapAnimation());
+    }
 
     public Updater MapUpdater() {
         return mapBoxUpdater;
     }
-		
-	// public
 
-	public void close() {
-		mw.setVisible(false);
-	}
-	
-	public void switchGame(Game game) {		
-		Log.begin("MainViewer:switchGame " + game);
+    // public
 
-		this.game = game;
-		setLevelMap(game.LevelMap());
+    public void close() {
+        mw.setVisible(false);
+    }
 
-		setup();
+    public void switchGame(Game game) {
+        Log.begin("MainViewer:switchGame " + game);
 
-		if (game.isNewGame() || displayedPartyMember == null) {
-			displayedPartyMember = game.party().blob();
-		} 
+        this.game = game;
+        setLevelMap(game.LevelMap());
 
-		partyWindowController.setParty(game.party());
-		
-		updateCoins();
-		scrollText.clear();
-		updateBox(scrollBox);
+        setup();
 
-		partyWindowController.showPartyView();
+        if (game.isNewGame() || displayedPartyMember == null) {
+            displayedPartyMember = game.party().blob();
+        }
 
-		backpanelBox.update();
-		mw.repaint();
-		keyInputChain.set(new ActionWorldKeyInputController(gameEngine));
-		
-		Log.end("MainViewer:switchGame " + game);
-	}
+        partyWindowController.setParty(game.party());
 
-	private void setup() {			
-		mw.setMainComponent(backgroundPanel);
-		if (setup) {
-			return;
-		}
-		Log.info("setting up main viewer.");
+        updateCoins();
+        scrollText.clear();
+        updateBox(scrollBox);
 
-		boxUpdateManager = new SwingBoxUpdater();
-		setUpBoxes();	
+        partyWindowController.showPartyView();
 
-		// swing final box stuff...
-		
-		MainViewerSwingBoxCreator gb = new MainViewerSwingBoxCreator();
-		backgroundPanel = gb.createSwingPanel(backpanelBox, scrollBox, mapBox, partyViewBox);
-		backgroundPanel.setBackground(Color.BLACK);
-		gb.registerCommands(backgroundBoxCommandManager, mapBoxCommanderManager, overviewBoxCommanderManager);
-		gb.registerUpdateManager(boxUpdateManager);
+        backpanelBox.update();
+        mw.repaint();
+        keyInputChain.set(new ActionWorldKeyInputController(gameEngine));
 
-		itemCursor = new ItemCursor(backgroundPanel, TadRepo.inst().ItemRepo());
-		mw.setMainComponent(backgroundPanel);
-		mainWindowManager = new MainViewerWindowManager(boxUpdateManager, mapBox, mapBoxCommanderManager, keyInputChain);
-		setup = true;
-	}
+        Log.end("MainViewer:switchGame " + game);
+    }
 
-	private void addDefaultDebugClickListener(BoxCommandManager bd) {
-		bd.addBoxClickObserver(new BoxMouseClickListener() {
+    private void setup() {
+        mw.setMainComponent(backgroundPanel);
+        if (setup) {
+            return;
+        }
+        Log.info("setting up main viewer.");
 
-			public void mouseClick(UiBox box, int x, int y, MouseButton button) {
-				Log.trace("DEBUGCLICK: " + box + " | " + x + " " + y);
-			}
-		});
-	}
+        boxUpdateManager = new SwingBoxUpdater();
+        setUpBoxes();
 
-	// ____________________________________________________________________________________________________
-	// private build up boxes!	
+        // swing final box stuff...
 
-	/**
-	 * Creates the UiBoxes.
-	 */
-	private void setUpBoxes() {
-		//
-		// background
-		final Surface interfaceBackgroundSurface = imageLoader.load("ifc", 28);
-		// 
-		BoxCommandList backCommandList = new BoxCommandList();
-		backpanelWindowController = new BackpanelWindowController(boxUpdateManager, interfaceBackgroundSurface);
-		backpanelBox = backpanelWindowController.createWindow(backCommandList);		
-		backgroundBoxCommandManager = new BoxCommandManager(backpanelBox, new GameEngineCommandExecutor(), backCommandList);
-		addDefaultDebugClickListener(backgroundBoxCommandManager);		
-		
-		//
-		// overview interface
-		
-		partyWindowController = new PartyWindowController(gameEngine, interfaceBackgroundSurface);
-		BoxCommandList pcl = new BoxCommandList(); 
-		partyViewBox = partyWindowController.createWindow(pcl);
-		
-		overviewBoxCommanderManager = new BoxCommandManager(partyViewBox, new GameEngineCommandExecutor(), pcl);
-		addDefaultDebugClickListener(overviewBoxCommanderManager);
-		
-		//
-		// map		
-		BoxCommandList mapCommandList = new BoxCommandList();
-		MapWindowController mw = new MapWindowController(gameEngine, mapDrawer);				
-		mapBox = mw.createWindow(mapCommandList);
-		mapBoxCommanderManager = new BoxCommandManager(mapBox, new GameEngineCommandExecutor(), mapCommandList);
-		addDefaultDebugClickListener(mapBoxCommanderManager);
+        MainViewerSwingBoxCreator gb = new MainViewerSwingBoxCreator();
+        backgroundPanel = gb.createSwingPanel(backpanelBox, scrollBox, mapBox, partyViewBox);
+        backgroundPanel.setBackground(Color.BLACK);
+        gb.registerCommands(backgroundBoxCommandManager, mapBoxCommanderManager, overviewBoxCommanderManager);
+        gb.registerUpdateManager(boxUpdateManager);
+
+        itemCursor = new ItemCursor(backgroundPanel, TadRepo.inst().ItemRepo());
+        mw.setMainComponent(backgroundPanel);
+        mainWindowManager = new MainViewerWindowManager(boxUpdateManager, mapBox, mapBoxCommanderManager, keyInputChain);
+        setup = true;
+    }
+
+    private void addDefaultDebugClickListener(BoxCommandManager bd) {
+        bd.addBoxClickObserver(new BoxMouseClickListener() {
+
+            public void mouseClick(UiBox box, int x, int y, MouseButton button) {
+                Log.trace("DEBUGCLICK: " + box + " | " + x + " " + y);
+            }
+        });
+    }
+
+    // ____________________________________________________________________________________________________
+    // private build up boxes!
+
+    /**
+     * Creates the UiBoxes.
+     */
+    private void setUpBoxes() {
+        //
+        // background
+        final Surface interfaceBackgroundSurface = imageLoader.load("ifc", 28);
+        //
+        BoxCommandList backCommandList = new BoxCommandList();
+        backpanelWindowController = new BackpanelWindowController(boxUpdateManager, interfaceBackgroundSurface);
+        backpanelBox = backpanelWindowController.createWindow(backCommandList);
+        backgroundBoxCommandManager = new BoxCommandManager(backpanelBox, new GameEngineCommandExecutor(), backCommandList);
+        addDefaultDebugClickListener(backgroundBoxCommandManager);
+
+        //
+        // overview interface
+
+        partyWindowController = new PartyWindowController(gameEngine, interfaceBackgroundSurface);
+        BoxCommandList pcl = new BoxCommandList();
+        partyViewBox = partyWindowController.createWindow(pcl);
+
+        overviewBoxCommanderManager = new BoxCommandManager(partyViewBox, new GameEngineCommandExecutor(), pcl);
+        addDefaultDebugClickListener(overviewBoxCommanderManager);
+
+        //
+        // map
+        BoxCommandList mapCommandList = new BoxCommandList();
+        MapWindowController mw = new MapWindowController(gameEngine, mapDrawer);
+        mapBox = mw.createWindow(mapCommandList);
+        mapBoxCommanderManager = new BoxCommandManager(mapBox, new GameEngineCommandExecutor(), mapCommandList);
+        addDefaultDebugClickListener(mapBoxCommanderManager);
 
         mapBoxUpdater = new SingleBoxUpdater(mapBox, boxUpdateManager);
-		partyAnimationCreator = new PartyMoveAnimationCreator(gameEngine, mapDrawer, mapBoxUpdater);
-		//
-		// text scroller
-		Surface scrollBackImage = interfaceBackgroundSurface.stamp(15, 512, 681, 91);
-		scrollBox = new ScrollBox(scrollBackImage, scrollText);		
-	}
+        partyAnimationCreator = new PartyMoveAnimationCreator(gameEngine, mapDrawer, mapBoxUpdater);
+        //
+        // text scroller
+        Surface scrollBackImage = interfaceBackgroundSurface.stamp(15, 512, 681, 91);
+        scrollBox = new ScrollBox(scrollBackImage, scrollText);
+    }
 
     // other private methods
 
@@ -250,170 +250,170 @@ public final class MainViewer {
     }
 
     // __________________________________________________________________________________________________
-	// update actions
+    // update actions
 
-	public void showWindow() {
-		if (!(mw.isVisible())) {
-			TADGuiToolkit.centerFrame(mw);
-			mw.setVisible(true);
-		}
-	}
+    public void showWindow() {
+        if (!(mw.isVisible())) {
+            TADGuiToolkit.centerFrame(mw);
+            mw.setVisible(true);
+        }
+    }
 
-	public void addItem(int id) {
-		Item item = TadRepo.inst().ItemRepo().item(id);
-		itemCursor.add(item);
-	}
-	
-	public void itemCursor(Item item) {
-		if (itemCursor == null) {
-			return;
-		}
-		itemCursor.item(item);	
-	}
+    public void addItem(int id) {
+        Item item = TadRepo.inst().ItemRepo().item(id);
+        itemCursor.add(item);
+    }
 
-	public void toInventory(ItemPosition pos, Item item) {
-		partyWindowController.toInventory(pos, item);
-	}
+    public void itemCursor(Item item) {
+        if (itemCursor == null) {
+            return;
+        }
+        itemCursor.item(item);
+    }
 
-	public void switchMember(int memberNo) {
-		switchMember(game.party().member(memberNo));
-	}
+    public void toInventory(ItemPosition pos, Item item) {
+        partyWindowController.toInventory(pos, item);
+    }
 
-	public void switchMember(PartyMember member) {
-		if (mainWindowManager.lenientShown()) {
-			return;
-		}
-		if (partyWindowController.inventoryShownFor(member)) {
-			return;
-		}
+    public void switchMember(int memberNo) {
+        switchMember(game.party().member(memberNo));
+    }
 
-		Log.call("switchMember");
-		displayedPartyMember = member;
-		partyWindowController.displayPartyMember(displayedPartyMember);
-		//
-		// switch member on map
-		mapDrawer.paintingInfo.setPartyMemberPic(member.nr());
-		mapDrawer.retileParty();
-		boxUpdateManager.update(mapBox);
-		Log.end("switchMember");
-	}
+    public void switchMember(PartyMember member) {
+        if (mainWindowManager.lenientShown()) {
+            return;
+        }
+        if (partyWindowController.inventoryShownFor(member)) {
+            return;
+        }
 
-	public void setPartyTo(Direction d, Position position) {
-		mapDrawer.paintingInfo.setFaceDirection(d);
-		mapDrawer.setTo(position);
-		updateBox(mapBox);
-	}
+        Log.call("switchMember");
+        displayedPartyMember = member;
+        partyWindowController.displayPartyMember(displayedPartyMember);
+        //
+        // switch member on map
+        mapDrawer.paintingInfo.setPartyMemberPic(member.nr());
+        mapDrawer.retileParty();
+        boxUpdateManager.update(mapBox);
+        Log.end("switchMember");
+    }
 
-	public Animation scrollParty(Position p) {
-		return partyAnimationCreator.createScrollAnimation(p);
-	}
-	
-	public Animation createCannotWalkAnimation() {
-		return partyAnimationCreator.createCannotWalkAnimation();		
-	}
+    public void setPartyTo(Direction d, Position position) {
+        mapDrawer.paintingInfo.setFaceDirection(d);
+        mapDrawer.setTo(position);
+        updateBox(mapBox);
+    }
 
-	public void scrollCurrent(String text) {
-		scroll(displayedPartyMember.nr(), text);		
-	}
-	
-	public void scroll(Object text) {
-		scroll(0, text);
-	}	
+    public Animation scrollParty(Position p) {
+        return partyAnimationCreator.createScrollAnimation(p);
+    }
 
-	public void scroll(int type, Object text) {
-		scrollText.scroll(type, text.toString());
-		updateBox(scrollBox);
-	}
+    public Animation createCannotWalkAnimation() {
+        return partyAnimationCreator.createCannotWalkAnimation();
+    }
 
-	public void updateCoins() {
-		this.backpanelWindowController.coins(game.party().coins());
-	}
+    public void scrollCurrent(String text) {
+        scroll(displayedPartyMember.nr(), text);
+    }
 
-	public void updateWeight() {
-		this.partyWindowController.updateWeight();
-	}
+    public void scroll(Object text) {
+        scroll(0, text);
+    }
 
-	public void updateProtect() {		
-		partyWindowController.updateProtect();
-	}
+    public void scroll(int type, Object text) {
+        scrollText.scroll(type, text.toString());
+        updateBox(scrollBox);
+    }
 
-	public void showWindow(WindowController wc) {
-		if (wc.isLenientModal()) {
-			partyWindowController.showPartyView();
-		}
-		mainWindowManager.showWindow(wc);
-	}
+    public void updateCoins() {
+        this.backpanelWindowController.coins(game.party().coins());
+    }
 
-	public void closeWindows() {
-		if (mw.isVisible() && is(mainWindowManager)) {
-			mainWindowManager.closeWindows();
-		}
-	}
+    public void updateWeight() {
+        this.partyWindowController.updateWeight();
+    }
 
-	public boolean windowShown() {
-		return is(mainWindowManager) && mainWindowManager.windowShown();
-	}
+    public void updateProtect() {
+        partyWindowController.updateProtect();
+    }
 
-	public void updatePartyName(String name) {
-		partyWindowController.updatePartyName(name);
-	}
+    public void showWindow(WindowController wc) {
+        if (wc.isLenientModal()) {
+            partyWindowController.showPartyView();
+        }
+        mainWindowManager.showWindow(wc);
+    }
 
-	public void updateBox(UiBox b) {
-		boxUpdateManager.updateBoxDrawing(b);
-	}
+    public void closeWindows() {
+        if (mw.isVisible() && is(mainWindowManager)) {
+            mainWindowManager.closeWindows();
+        }
+    }
 
-	public void updateBox(UiBox ... boxes) {
-		boxUpdateManager.updateBoxDrawing(boxes);
-	}
+    public boolean windowShown() {
+        return is(mainWindowManager) && mainWindowManager.windowShown();
+    }
 
-	public Item itemInHand() {
+    public void updatePartyName(String name) {
+        partyWindowController.updatePartyName(name);
+    }
+
+    public void updateBox(UiBox b) {
+        boxUpdateManager.updateBoxDrawing(b);
+    }
+
+    public void updateBox(UiBox... boxes) {
+        boxUpdateManager.updateBoxDrawing(boxes);
+    }
+
+    public Item itemInHand() {
         if (not(itemCursor)) {
             return null;
         }
-		return itemCursor.item();
-	}
+        return itemCursor.item();
+    }
 
-	public boolean hasItemInHand() {
-		return itemCursor.hasItem();
-	}
-	
-	public void updatePosition(Position ... positions) {					
-		boolean didUpdate = mapDrawer.retile(positions);		
-		if (didUpdate) {
-			boxUpdateManager.updateBoxDrawing(mapBox);
-		}
-	}
+    public boolean hasItemInHand() {
+        return itemCursor.hasItem();
+    }
 
-	public void updateFunBars(PartyMember member) {
-		partyWindowController.updateFunBars(member);
-	}
+    public void updatePosition(Position... positions) {
+        boolean didUpdate = mapDrawer.retile(positions);
+        if (didUpdate) {
+            boxUpdateManager.updateBoxDrawing(mapBox);
+        }
+    }
 
-	public void updateSkillView(PartyMember member) {
-		partyWindowController.updateSkillView(member);
-	}
+    public void updateFunBars(PartyMember member) {
+        partyWindowController.updateFunBars(member);
+    }
 
-	public void updateItemBox(ItemPosition itemPosition, Item item) {
-		partyWindowController.updateItemBox(itemPosition, item);
-	}
-	
-	public void updateFightTile(Position position) {
-		mapDrawer.removeDanger(position);		
-	}
+    public void updateSkillView(PartyMember member) {
+        partyWindowController.updateSkillView(member);
+    }
 
-	public void removeParty() {
-		this.mapDrawer.centerPartyPosition(null);
-	}
+    public void updateItemBox(ItemPosition itemPosition, Item item) {
+        partyWindowController.updateItemBox(itemPosition, item);
+    }
 
-	public void showIntro() {
-		showCutScene(new ShowIntroCommand(this));
-	}
-	
-	public void showOutro() {
-		showCutScene(new ShowOutroCommand(this));
-	}
+    public void updateFightTile(Position position) {
+        mapDrawer.removeDanger(position);
+    }
 
-	public void setBackgroundPanel(Component c) {
-		mw.setMainComponent(c);
-	}
+    public void removeParty() {
+        this.mapDrawer.centerPartyPosition(null);
+    }
+
+    public void showIntro() {
+        showCutScene(new ShowIntroCommand(this));
+    }
+
+    public void showOutro() {
+        showCutScene(new ShowOutroCommand(this));
+    }
+
+    public void setBackgroundPanel(Component c) {
+        mw.setMainComponent(c);
+    }
 
 }

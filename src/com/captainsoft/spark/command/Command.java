@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.command;
 
@@ -10,7 +10,7 @@ package com.captainsoft.spark.command;
  * @author mathias fringes
  */
 public interface Command {
-	
-	public void execute();
+
+    public void execute();
 
 }

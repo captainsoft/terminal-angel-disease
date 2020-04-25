@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.utils.sys;
 
@@ -13,17 +13,17 @@ package com.captainsoft.spark.utils.sys;
 final class Arg {
 
     // fields
-	
-	public final String parameter;	
-	
-	public final String helpText;
+
+    public final String parameter;
+
+    public final String helpText;
 
     // constructors
-	
-	public Arg(String parameter, String helpText) {
-		super();
-		this.parameter = parameter;		
-		this.helpText = helpText;
-	}
+
+    public Arg(String parameter, String helpText) {
+        super();
+        this.parameter = parameter;
+        this.helpText = helpText;
+    }
 
 }

@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.gui.windows;
 
@@ -26,59 +26,59 @@ public final class HelpWindow implements WindowController {
 
     // WindowController
 
-	public UiBoxContainer createWindow(BoxCommandList mg) {
+    public UiBoxContainer createWindow(BoxCommandList mg) {
 
-		final HelpWindowBox w = new HelpWindowBox();
-		
-		mg.setCmd(w, new Integer[] {KeyCodes.F1, KeyCodes.Space, KeyCodes.Enter}, new Command() {
-			int page = 1;
+        final HelpWindowBox w = new HelpWindowBox();
 
-			public void execute() {
-				page++;
-				
-				if (page == 3) {
-					TadRepo.inst().GameEngine().closeWindows();
-				} else {
-					w.b.text = TadRepo.inst().Trans().word("helpWindow." + page);
-					GameEngine.instance().mainViewer().updateBox(w);
-				}
-			}
-		});
-		
-		return w;
-	}
+        mg.setCmd(w, new Integer[]{KeyCodes.F1, KeyCodes.Space, KeyCodes.Enter}, new Command() {
+            int page = 1;
 
-	public boolean isLenientModal() {
-		return true;
-	}
+            public void execute() {
+                page++;
 
-	public void onShow() {
-	}
+                if (page == 3) {
+                    TadRepo.inst().GameEngine().closeWindows();
+                } else {
+                    w.b.text = TadRepo.inst().Trans().word("helpWindow." + page);
+                    GameEngine.instance().mainViewer().updateBox(w);
+                }
+            }
+        });
+
+        return w;
+    }
+
+    public boolean isLenientModal() {
+        return true;
+    }
+
+    public void onShow() {
+    }
 
     //
-	// nested classes
-	
-	private final class HelpWindowBox extends MxWindow {
-		
-		TextBox b;
+    // nested classes
 
-		public HelpWindowBox() {
-			super();
-			title = TadRepo.inst().Trans().word("helpWindow.title");
-			set(30, 35, 550, 370);
-			createSurface();			
-								
-			b = new TextBox();
+    private final class HelpWindowBox extends MxWindow {
+
+        TextBox b;
+
+        public HelpWindowBox() {
+            super();
+            title = TadRepo.inst().Trans().word("helpWindow.title");
+            set(30, 35, 550, 370);
+            createSurface();
+
+            b = new TextBox();
             b.font = new Font(Fonts.Verdana, Font.PLAIN, 12);
 
             b.alignLeft();
-			b.pos(10, 30);
-			b.size(width - 20, height - 40);
-			add(b);
-					
-			b.text = TadRepo.inst().Trans().word("helpWindow.1");														
-		}
+            b.pos(10, 30);
+            b.size(width - 20, height - 40);
+            add(b);
 
-	}
+            b.text = TadRepo.inst().Trans().word("helpWindow.1");
+        }
+
+    }
 
 }

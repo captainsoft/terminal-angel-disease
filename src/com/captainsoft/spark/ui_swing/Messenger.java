@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.ui_swing;
 
@@ -15,14 +15,14 @@ public final class Messenger {
 
     // constructors
 
-	private Messenger() {
-		super();
-	}
+    private Messenger() {
+        super();
+    }
 
     // public
-	
-	public static void msg(String text) {
-		JOptionPane.showMessageDialog(null, text);
-	}
-	
+
+    public static void msg(String text) {
+        JOptionPane.showMessageDialog(null, text);
+    }
+
 }

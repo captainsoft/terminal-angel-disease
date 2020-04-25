@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.engine.debug;
 
@@ -26,23 +26,23 @@ import static com.captainsoft.spark.utils.Truth.isEqual;
  * @author mathias fringes
  */
 public final class DebugKeysController implements KeyInput {
-	
-	// fields
-	
-	private final GameEngine gameEngine;
-	private final DigitKeyInputCollector mapTeleportHandler = new DigitKeyInputCollector("m", 2);
+
+    // fields
+
+    private final GameEngine gameEngine;
+    private final DigitKeyInputCollector mapTeleportHandler = new DigitKeyInputCollector("m", 2);
     private final DigitKeyInputCollector debuggerSwitch = new DigitKeyInputCollector("c", 1);
-	
-	// constructors
-	
-	public DebugKeysController(GameEngine gameEngine) {
-		super();
-		this.gameEngine = gameEngine;	
-	}
-	
-	// public
-	
-	public boolean keyPress(int keyCode) {
+
+    // constructors
+
+    public DebugKeysController(GameEngine gameEngine) {
+        super();
+        this.gameEngine = gameEngine;
+    }
+
+    // public
+
+    public boolean keyPress(int keyCode) {
 
         Integer debuggerOn = debuggerSwitch.collect(keyCode);
         if (isEqual(debuggerOn, 1)) {
@@ -56,9 +56,9 @@ public final class DebugKeysController implements KeyInput {
             return true;
         }
 
-		if (!Debugger.Inst.on) {
-			return false;
-		}
+        if (!Debugger.Inst.on) {
+            return false;
+        }
 
         Integer mapNr = mapTeleportHandler.collect(keyCode);
         if (mapNr != null) {
@@ -66,7 +66,7 @@ public final class DebugKeysController implements KeyInput {
             return true;
         }
 
-		switch (keyCode) {
+        switch (keyCode) {
 
             case KeyCodes.F:
                 // OggPlayer.play();
@@ -83,7 +83,7 @@ public final class DebugKeysController implements KeyInput {
                 rm = party.member(party.randomMemberNr());
                 rm.setPtsFox(rm.getPtsFox() + 1);
 
-                for(PartyMember m : party.members) {
+                for (PartyMember m : party.members) {
                     m.fun.addMax(m.fun.max() / 25);
                     m.specialAttackSkill.learn(m.specialAttackSkill.value() / 10);
                     m.defenseSkill.learn(m.defenseSkill.value() / 10);
@@ -98,65 +98,65 @@ public final class DebugKeysController implements KeyInput {
             case KeyCodes.F6:
                 gameEngine.sayAsIs("causing an exception");
                 throw new RuntimeException("debug exception raised!");
-		
-			case KeyCodes.F7:
-				gameEngine.sayAsIs("Starting dummy fight");
-				startDummyFight();				
-				break;
 
-			case KeyCodes.F8:
+            case KeyCodes.F7:
+                gameEngine.sayAsIs("Starting dummy fight");
+                startDummyFight();
+                break;
+
+            case KeyCodes.F8:
                 gameEngine.mainViewer().backpanelWindowController.playChickenAnimation(1);
                 //
-				Runtime runtime = Runtime.getRuntime();
-			    System.out.println("Free memory: " +runtime.freeMemory());         
-			    System.out.println("Max. memory: " + runtime.maxMemory());
-			    System.out.println("Total memory: " + runtime.totalMemory());
-				break;
+                Runtime runtime = Runtime.getRuntime();
+                System.out.println("Free memory: " + runtime.freeMemory());
+                System.out.println("Max. memory: " + runtime.maxMemory());
+                System.out.println("Total memory: " + runtime.totalMemory());
+                break;
 
-			case KeyCodes.F9:
-				gameEngine.addCoins(10000);
-				break;
+            case KeyCodes.F9:
+                gameEngine.addCoins(10000);
+                break;
 
-			case KeyCodes.F10:
-				gameEngine.sayAsIs("Reloading tiles");
-				mapNr = gameEngine.party().mapNumber();
-				gameEngine.party().mapNumber(-1);
-				gameEngine.teleportParty(mapNr, gameEngine.party().position());
-				break;
+            case KeyCodes.F10:
+                gameEngine.sayAsIs("Reloading tiles");
+                mapNr = gameEngine.party().mapNumber();
+                gameEngine.party().mapNumber(-1);
+                gameEngine.teleportParty(mapNr, gameEngine.party().position());
+                break;
 
-			case KeyCodes.F11:
-				Debugger.Inst.noMonsters = !Debugger.Inst.noMonsters;
-				gameEngine.sayAsIs("No Monsters is now: " + Debugger.Inst.noMonsters);
-				break;
+            case KeyCodes.F11:
+                Debugger.Inst.noMonsters = !Debugger.Inst.noMonsters;
+                gameEngine.sayAsIs("No Monsters is now: " + Debugger.Inst.noMonsters);
+                break;
 
             default:
                 return false;
-		}
+        }
 
         return true;
-	}
-	
-	// private
+    }
 
-	private void startDummyFight() {
-		List<Integer> ml = Arrays.asList(2, 2, 2, 2, 5);
-		Collections.shuffle(ml);
-		
-		FightWindowController fw = new FightWindowController(
-				gameEngine, 
-				new Fight(gameEngine.party(), gameEngine.party().position(),
-						ml.get(0),
-						ml.get(1),
-						ml.get(2),
-						ml.get(3),
-						ml.get(4)					
-					));
-		gameEngine.showWindow(fw);
-		try {
-			fw.beginFight();
-		} catch (Exception e) {			
-			e.printStackTrace();
-		}
-	}	
+    // private
+
+    private void startDummyFight() {
+        List<Integer> ml = Arrays.asList(2, 2, 2, 2, 5);
+        Collections.shuffle(ml);
+
+        FightWindowController fw = new FightWindowController(
+                gameEngine,
+                new Fight(gameEngine.party(), gameEngine.party().position(),
+                        ml.get(0),
+                        ml.get(1),
+                        ml.get(2),
+                        ml.get(3),
+                        ml.get(4)
+                ));
+        gameEngine.showWindow(fw);
+        try {
+            fw.beginFight();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

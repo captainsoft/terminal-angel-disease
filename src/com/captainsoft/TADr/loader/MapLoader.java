@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.loader;
 
@@ -13,8 +13,8 @@ import com.captainsoft.TADr.model.map.LevelMap;
  */
 public interface MapLoader {
 
-	public LevelMap load(int number);
+    public LevelMap load(int number);
 
-	public void save(LevelMap map);
+    public void save(LevelMap map);
 
 }

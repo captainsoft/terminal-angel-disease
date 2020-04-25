@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.spark.ui.mouse;
 
@@ -14,6 +14,6 @@ import com.captainsoft.spark.ui.box.UiBox;
  */
 public interface ClickCommand {
 
-	public void click(UiBox box, int x, int y, MouseButton button);	
-	
+    public void click(UiBox box, int x, int y, MouseButton button);
+
 }

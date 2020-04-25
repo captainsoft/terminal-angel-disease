@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.model.fight;
 
@@ -20,38 +20,38 @@ import com.captainsoft.spark.utils.Log;
 final class DirtyUpdater {
 
     // fields
-	
-	private MainViewer mainViewer;
 
-	private Set<UiBox> dirtyBoxes = new HashSet<UiBox>();
+    private MainViewer mainViewer;
+
+    private Set<UiBox> dirtyBoxes = new HashSet<UiBox>();
 
     // constructors
 
-	public DirtyUpdater(MainViewer mainViewer) {
-		super();
-		this.mainViewer = mainViewer;
-	}
+    public DirtyUpdater(MainViewer mainViewer) {
+        super();
+        this.mainViewer = mainViewer;
+    }
 
     // public
 
-	public void dirty(UiBox ... boxes) {
+    public void dirty(UiBox... boxes) {
         Collections.addAll(dirtyBoxes, boxes);
     }
-	
-	public void dirtyUpdate(UiBox ... boxes) {
-		dirty(boxes);
-		dirtyUpdate();
-	}
-	
-	public void dirtyUpdate() {		
-		if (dirtyBoxes.size() == 0) {
-			Log.warn("Dirty update with no boxes!");
-			return;
-		}
-		UiBox[] boxes = new UiBox[dirtyBoxes.size()];
-		dirtyBoxes.toArray(boxes);	
-		mainViewer.updateBox(boxes);
-		dirtyBoxes.clear();	
-	}
+
+    public void dirtyUpdate(UiBox... boxes) {
+        dirty(boxes);
+        dirtyUpdate();
+    }
+
+    public void dirtyUpdate() {
+        if (dirtyBoxes.size() == 0) {
+            Log.warn("Dirty update with no boxes!");
+            return;
+        }
+        UiBox[] boxes = new UiBox[dirtyBoxes.size()];
+        dirtyBoxes.toArray(boxes);
+        mainViewer.updateBox(boxes);
+        dirtyBoxes.clear();
+    }
 
 }

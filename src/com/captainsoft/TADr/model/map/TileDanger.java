@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.model.map;
 
@@ -10,20 +10,20 @@ package com.captainsoft.TADr.model.map;
  * @author mathias fringes
  */
 public enum TileDanger {
-	
-	/**
-	 * No danger.
-	 */
-	None,
-	
-	/**
-	 * Low, but present danger.
-	 */
-	Low,
-	
-	/**
-	 * High danger. Most likely to be attacked on this tile.
-	 */
-	High
+
+    /**
+     * No danger.
+     */
+    None,
+
+    /**
+     * Low, but present danger.
+     */
+    Low,
+
+    /**
+     * High danger. Most likely to be attacked on this tile.
+     */
+    High
 
 }

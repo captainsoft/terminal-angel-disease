@@ -6,24 +6,24 @@ import com.captainsoft.spark.command.AbstractCommand;
 
 /**
  * Base class for commands with the game engine as a fields.
- * 
+ *
  * @author mathias fringes
  */
 public abstract class GameEngineCommand extends AbstractCommand {
 
     // fields
 
-	protected final GameEngine gameEngine;
+    protected final GameEngine gameEngine;
 
     // constructors
 
-	GameEngineCommand() {
-		this("");
-	}
-	
-	protected GameEngineCommand(String name) {
-		super(name);
-		this.gameEngine = TadRepo.inst().GameEngine();
-	}
-	
+    GameEngineCommand() {
+        this("");
+    }
+
+    protected GameEngineCommand(String name) {
+        super(name);
+        this.gameEngine = TadRepo.inst().GameEngine();
+    }
+
 }

@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.model.fight.attack.party;
 
@@ -19,51 +19,51 @@ import com.captainsoft.spark.utils.Utils;
  * @author mathias fringes
  */
 public final class SlimeBombAttack implements PartyAttack {
-	
-	// fields
-	
-	private final MonsterParty monsterParty;
-	private final PartyFighter fighter;
-	
-	// constructors
-	
-	public SlimeBombAttack(PartyFighter fighter, MonsterParty monsterParty) {
-		this.fighter = fighter;
-		this.monsterParty = monsterParty;
-	}
-	
-	// PartyAttack
 
-	public Attack attack() {
-		Attack attack = new Attack();
-		attack.sound = 7;
-		
-		// attacks every monster
-		for (Monster monster : monsterParty) {
-			AttackBash ar = new AttackBash(monster);
-			if ((monster.resist & 32) != 32) {
-                monster.halfSpeed();              
+    // fields
+
+    private final MonsterParty monsterParty;
+    private final PartyFighter fighter;
+
+    // constructors
+
+    public SlimeBombAttack(PartyFighter fighter, MonsterParty monsterParty) {
+        this.fighter = fighter;
+        this.monsterParty = monsterParty;
+    }
+
+    // PartyAttack
+
+    public Attack attack() {
+        Attack attack = new Attack();
+        attack.sound = 7;
+
+        // attacks every monster
+        for (Monster monster : monsterParty) {
+            AttackBash ar = new AttackBash(monster);
+            if ((monster.resist & 32) != 32) {
+                monster.halfSpeed();
             }
             if ((monster.nonresist & 32) == 32) {
-                monster.speed = 1;                 
+                monster.speed = 1;
             }
-            ar.hit = true;  
+            ar.hit = true;
             ar.image = Utils.rndPlus(12, 2);
-            attack.add(ar);            
-		}		
-		
-		// attack text			
-		if (attack.hitCount() > 0) {
-			attack.text = new TrKey("fight.attack.slime.hit", fighter.name(), attack.hitCount());
-		} else {
-			attack.text = new TrKey("fight.attack.slime.fail", fighter.name());
-		}
-		
-		// resting time
-		int restingTime = PartyAttackUtils.calcRestingTime(fighter, 30, 5);
-		attack.restingTime(restingTime);
-				
-		return attack;
-	}	
+            attack.add(ar);
+        }
+
+        // attack text			
+        if (attack.hitCount() > 0) {
+            attack.text = new TrKey("fight.attack.slime.hit", fighter.name(), attack.hitCount());
+        } else {
+            attack.text = new TrKey("fight.attack.slime.fail", fighter.name());
+        }
+
+        // resting time
+        int restingTime = PartyAttackUtils.calcRestingTime(fighter, 30, 5);
+        attack.restingTime(restingTime);
+
+        return attack;
+    }
 
 }

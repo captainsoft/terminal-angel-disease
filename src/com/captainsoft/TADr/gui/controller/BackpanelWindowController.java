@@ -17,42 +17,42 @@ import com.captainsoft.spark.ui.mouse.BoxCommandList;
 
 /**
  * Overall backdrop box.
- * 
+ *
  * @author mathias
  */
 public final class BackpanelWindowController extends BaseWindowController {
 
-	// fields
-	
-	private BackdropBox backdropBox;
-	private BoxUpdater updater;
+    // fields
 
-	// constructors
-	
-	public BackpanelWindowController(BoxUpdater updater, Surface interfaceBackgroundSurface) {
-		super();
-		this.updater = updater;
-		backdropBox = new BackdropBox(interfaceBackgroundSurface);
-	}
+    private BackdropBox backdropBox;
+    private BoxUpdater updater;
 
-	// public
-	
-	public void coins(long coins) {
-		backdropBox.moneyBox.text = coins + "";
+    // constructors
+
+    public BackpanelWindowController(BoxUpdater updater, Surface interfaceBackgroundSurface) {
+        super();
+        this.updater = updater;
+        backdropBox = new BackdropBox(interfaceBackgroundSurface);
+    }
+
+    // public
+
+    public void coins(long coins) {
+        backdropBox.moneyBox.text = coins + "";
         updater.update(backdropBox.moneyBox);
-	}
+    }
 
     public void playChickenAnimation(int mode) {
         GameEngine.instance().addAnimation(
                 new QuestChickenAnimation(backdropBox.questChicken, updater, mode)
         );
     }
-	
-	// WindowController
 
-	public UiBoxContainer createWindow(BoxCommandList commandList) {
+    // WindowController
 
-		commandList.setCmd(backdropBox.helpWindowBox, new NextCommand(new ShowWindowCommand(
+    public UiBoxContainer createWindow(BoxCommandList commandList) {
+
+        commandList.setCmd(backdropBox.helpWindowBox, new NextCommand(new ShowWindowCommand(
                 new HelpWindow()
         )));
 
@@ -68,7 +68,7 @@ public final class BackpanelWindowController extends BaseWindowController {
                 new ShowDiskCommand()
         ));
 
-		return backdropBox;
-	}
+        return backdropBox;
+    }
 
 }

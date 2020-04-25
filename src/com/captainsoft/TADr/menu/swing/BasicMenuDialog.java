@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.menu.swing;
 
@@ -15,13 +15,13 @@ import javax.swing.JDialog;
  */
 @SuppressWarnings("serial")
 class BasicMenuDialog extends JDialog {
-    
+
     // constructors   
 
     BasicMenuDialog(Window owner, String title) {
         super(owner, title);
         setResizable(false);
-        setIconImages(TADGuiToolkit.getIconImages());           
-    }    
+        setIconImages(TADGuiToolkit.getIconImages());
+    }
 
 }

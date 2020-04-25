@@ -5,7 +5,6 @@
 package com.captainsoft.TADr.engine.controller;
 
 /**
- *
  * @author mathias fringes
  */
 public final class MovementKeyState {

@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.engine;
 
@@ -18,52 +18,52 @@ final class StatusInfoEngine {
 
     //fields
 
-	private final GameEngine gameEngine;
+    private final GameEngine gameEngine;
 
     // constructors
 
-	public StatusInfoEngine(GameEngine gameEngine) {
-		super();
-		this.gameEngine = gameEngine;
-	}	
+    public StatusInfoEngine(GameEngine gameEngine) {
+        super();
+        this.gameEngine = gameEngine;
+    }
 
     // public
 
-	public void statusInfor() {
-		Party party = gameEngine.party();	
-		switch (Utils.random(30)) {
-			case 12:			
-				PartyMember member = getRandomMember(party);
-				if (member.isOverweight()) {
-					gameEngine.say(member, "member.info.overweight");
-				}
-				break;
-			case 13:
-				member = getRandomMember(party);
-				if (member.fun.cur() < 10) {
-					gameEngine.say(member, "member.info.littleFun");
-				}
-				break;
-			case 14:				
-				member = getRandomMember(party);
-				if (member != party.blob()) {
-					if (member.inventory().item(InventoryPlace.Feet) == null) {
-						if (member == party.ritter()) {
-							member = party.blob();
-						}
-						gameEngine.say(member, "member.info.noHouse");	
-					}				
-				}					
-				break;
-			default:
-				break;
-		}
-	}
+    public void statusInfor() {
+        Party party = gameEngine.party();
+        switch (Utils.random(30)) {
+            case 12:
+                PartyMember member = getRandomMember(party);
+                if (member.isOverweight()) {
+                    gameEngine.say(member, "member.info.overweight");
+                }
+                break;
+            case 13:
+                member = getRandomMember(party);
+                if (member.fun.cur() < 10) {
+                    gameEngine.say(member, "member.info.littleFun");
+                }
+                break;
+            case 14:
+                member = getRandomMember(party);
+                if (member != party.blob()) {
+                    if (member.inventory().item(InventoryPlace.Feet) == null) {
+                        if (member == party.ritter()) {
+                            member = party.blob();
+                        }
+                        gameEngine.say(member, "member.info.noHouse");
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+    }
 
     // private
 
-	private PartyMember getRandomMember(Party party) {			
-		return party.member(party.randomMemberNr());		
-	}
-	
+    private PartyMember getRandomMember(Party party) {
+        return party.member(party.randomMemberNr());
+    }
+
 }

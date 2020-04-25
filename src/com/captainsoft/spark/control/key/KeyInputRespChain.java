@@ -26,7 +26,7 @@ public class KeyInputRespChain implements KeyInput {
         super();
     }
 
-    public KeyInputRespChain(KeyInput ... input) {
+    public KeyInputRespChain(KeyInput... input) {
         super();
         for (KeyInput ki : input) {
             add(ki);
@@ -73,9 +73,9 @@ public class KeyInputRespChain implements KeyInput {
     public boolean keyPress(int keyCode) {
 
         for (KeyInput k : list) {
-           if (k.keyPress(keyCode)) {
-               return true;
-           }
+            if (k.keyPress(keyCode)) {
+                return true;
+            }
         }
         return false;
     }

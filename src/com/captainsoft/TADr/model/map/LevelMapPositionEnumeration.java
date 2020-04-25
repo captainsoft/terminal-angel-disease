@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.model.map;
 
@@ -16,9 +16,9 @@ import com.captainsoft.TADr.model.PositionBox;
  * @author mathias fringes
  */
 public final class LevelMapPositionEnumeration extends PositionBox {
-		
-	public LevelMapPositionEnumeration() {
-		super(new Position(1, 1), X_LEN, Y_LEN);
-	}
+
+    public LevelMapPositionEnumeration() {
+        super(new Position(1, 1), X_LEN, Y_LEN);
+    }
 
 }

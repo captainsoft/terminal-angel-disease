@@ -1,6 +1,6 @@
 /*
  * Copyright Captainsoft 2010 - 2015.
- * All rights reserved.  
+ * All rights reserved.
  */
 package com.captainsoft.TADr.loader;
 
@@ -16,12 +16,12 @@ import com.captainsoft.TADr.model.puzzle.talk.TalkPage;
  */
 public interface PuzzleLoader {
 
-	public Book loadBook(int id);
+    public Book loadBook(int id);
 
-	public Event loadEvent(int map, int id);
-	
-	public PuzzleFileData loadPuzzle(int map, int id);
+    public Event loadEvent(int map, int id);
 
-	public TalkPage loadTalkPage(int map, int id);
-	
+    public PuzzleFileData loadPuzzle(int map, int id);
+
+    public TalkPage loadTalkPage(int map, int id);
+
 }
