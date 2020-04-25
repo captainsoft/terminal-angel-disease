@@ -28,13 +28,10 @@ future, I plan to extract the framework as a project of its own.
 ---
 Licence: GNU GENERAL PUBLIC LICENSE
 
----
+
 Visit the Captainsoft website
 www.captainsoft.de
 
-
-
----
 Keep the underground alive!
 
 (c) 2020 Captainsoft Entertainment.
