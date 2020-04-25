@@ -1,11 +1,13 @@
 ###### Captainsoft's
 # The Terminal Angel Disease
 
+
 The "Terminal Angel Disease" is a classic top-down role 
 playing game which could have been published in the early 90s. 
 It was developed by one-man-hobby-indie company Captainsoft over the 
 course of twenty years.  
 You can play the game via Itch.io: https://captainsoft.itch.io/the-terminal-angel-disease
+
 ---
 Here you can stalk and enjoy the source code. 400+ classes of the finest object-oriented code
 and some elegant use of a variety of design patterns. 
